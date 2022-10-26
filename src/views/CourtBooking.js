@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getAllCities, getObjectsByCity } from "../Redux/store";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -31,7 +34,7 @@ const LocationForm = styled.form`
   font-size: 20px;
   button {
     margin-left: 70%;
-    background: ${({theme}) => theme.colors.detailGreen};
+    background: ${({ theme }) => theme.colors.detailGreen};
     border: none;
     border-radius: 10px;
     padding: 10px 15px;
@@ -56,6 +59,20 @@ margin-block: 10px;
 `;
 
 const CourtBooking = () => {
+  const cities = useSelector(getAllCities);
+  const [selectedCity, setSelectedCity] = useState(cities[0].toString());
+  const objects = useSelector(state => getObjectsByCity(state, selectedCity));
+  const [objectId, setObjectId] = useState(objects[0].id);
+
+  console.log('object id: ', objects[0].id);
+  const navigate = useNavigate();
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      navigate('/courts/' +  selectedCity + '/' + objectId);
+    }
+ 
+  console.log(selectedCity);
   return (
     <Wrapper>
       <HeaderBar>
@@ -63,22 +80,24 @@ const CourtBooking = () => {
       </HeaderBar>
       <LocationForm>
         <h4>Location:</h4>
-        <FormItem>
+        <FormItem >
           <label htmlFor="city">City: </label>
-          <select id="city" name="city">
-            <option value="Cracow">Cracow</option>
-            <option value="Warsaw">Warsaw</option>
+          <select id="city" name="city" onChange={e => setSelectedCity(e.target.value)}>
+            <option key={cities[0]}>{cities[0]}</option>
+            {cities.map(city => (
+              city !== cities[0] && <option key={city}>{city}</option>
+            ))}
           </select>
         </FormItem>
         <FormItem>
           <label htmlFor="object">Object: </label>
-          <select type="select" name="object">
-            <option value="example 1">Example 1</option>
-            <option value="example 2">Example 2</option>
-            <option value="example 3">Example 3</option>
+          <select type="select" name="object" onChange={e => setObjectId(e.target.value)}>
+            {objects.map(object => 
+            <option value={object.id} key={object.id}>{object.name} {object.address}</option>
+            )}
           </select>
         </FormItem>
-        <button>Submit</button>
+        <button onClick={handleSubmit}>Submit</button>
       </LocationForm>
     </Wrapper>
   );

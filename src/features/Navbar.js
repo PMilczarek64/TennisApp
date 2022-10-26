@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Ball from '../assets/images/Ball.png';
+import { Link, NavLink } from 'react-router-dom';
 
 const Wrapper = styled.div`
   height: 50px;
@@ -18,6 +19,7 @@ const Ul = styled.ul`
     display: flex;
     max-height: 100%;
     align-items: center;
+    justify-content: center;
     padding-inline: 20px;
     list-style: none;
     font-size: 21px;
@@ -25,8 +27,12 @@ const Ul = styled.ul`
     :last-child {
       margin-right: 80px;
     }
-    :first-child {
-      
+    a {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     img {
       object-fit: cover;
@@ -40,8 +46,8 @@ const Navbar = () => {
   return (
     <Wrapper>
       <Ul>
-        <li><img src={Ball}></img></li>
-        <li>Book a court</li>
+        <li><Link to="/" ><img src={Ball}></img></Link></li>
+        <li><NavLink to="/courts">Book a court</NavLink></li>
         <li>Trainers</li>
         <li>Find a partner</li>
         <li>Blog</li>
