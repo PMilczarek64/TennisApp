@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getAllCities, getObjectsByCity } from "../Redux/store";
+import { getAllCities, getObjectsByCity, getFirstCourtByCity } from "../Redux/store";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -58,18 +58,28 @@ margin-block: 10px;
   }
 `;
 
-const CourtBooking = () => {
+const CourtForm = () => {
   const cities = useSelector(getAllCities);
   const [selectedCity, setSelectedCity] = useState(cities[0].toString());
   const objects = useSelector(state => getObjectsByCity(state, selectedCity));
-  const [objectId, setObjectId] = useState(objects[0].id);
+  let objectId = objects[0].id;
 
-  console.log('object id: ', objects[0].id);
+  console.log('object id: ', objectId);
   const navigate = useNavigate();
 
+    const handleCityChange = (e) => {
+      setSelectedCity(e);
+    }
+
+    const handleObjectIdChange = (e) => {
+      console.log('e test',e)
+      objectId = e;
+    }
+
+    console.log('object test from city', useSelector(state => getFirstCourtByCity(state, selectedCity).id));
     const handleSubmit = (e) => {
       e.preventDefault();
-      navigate('/courts/' +  selectedCity + '/' + objectId);
+      navigate('/courts/' +  selectedCity + '/' + objectId + '/Info');
     }
  
   console.log(selectedCity);
@@ -82,16 +92,15 @@ const CourtBooking = () => {
         <h4>Location:</h4>
         <FormItem >
           <label htmlFor="city">City: </label>
-          <select id="city" name="city" onChange={e => setSelectedCity(e.target.value)}>
-            <option key={cities[0]}>{cities[0]}</option>
+          <select id="city" name="city" onChange={e => handleCityChange(e.target.value)}>
             {cities.map(city => (
-              city !== cities[0] && <option key={city}>{city}</option>
+             <option value={city} key={city}>{city}</option>
             ))}
           </select>
         </FormItem>
         <FormItem>
           <label htmlFor="object">Object: </label>
-          <select type="select" name="object" onChange={e => setObjectId(e.target.value)}>
+          <select type="select" name="object" onChange={e => handleObjectIdChange(e.target.value)}>
             {objects.map(object => 
             <option value={object.id} key={object.id}>{object.name} {object.address}</option>
             )}
@@ -103,4 +112,4 @@ const CourtBooking = () => {
   );
 };
 
-export default CourtBooking;
+export default CourtForm;

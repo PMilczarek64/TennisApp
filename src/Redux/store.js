@@ -5,6 +5,7 @@ import initialState from './initialState';
 export const getAllCities = state => state.cities;
 export const getObjectsByCity = ({ objects }, city) => objects.filter(object => object.city === city);
 export const getObjectById = ({ objects }, objectId ) => objects.find(object => object.id === objectId);
+export const getFirstCourtByCity = ({ objects }, city) => objects.find(object => object.city === city);
 ////export const getAllourWorkCards = state => state.ourWorkCards;
 ////export const getAllAboutUsCards = state => state.aboutUsCards;
 ////export const getAllGridItems = state => state.contentGridItems;
