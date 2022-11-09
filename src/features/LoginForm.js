@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { ButtonGreen } from "../common/Button";
 import { Input, Label } from "../common/Inputs.styles";
-import { getLoggingInInfo, getUserName } from "../Redux/store";
-import { useSelector } from "react-redux";
+import { getUserName } from "../Redux/store";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setLoggedIn } from "../Redux/store";
 
 const Wrapper = styled.div`
   padding: 50px 100px;
@@ -43,14 +44,13 @@ const LoginForm = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const checkUser = useSelector(state => getUserName(state, userName, password));
-  const checkIfLoggedIn = useSelector(getLoggingInInfo);
-  console.log("Login info: ", checkIfLoggedIn);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const loginAction = () => {
     if (checkUser !== undefined) {
-      navigate('/');
+      navigate('/')
+      dispatch(setLoggedIn({setLogged: true, name: userName}));
     } else {
       setError(true);
     }

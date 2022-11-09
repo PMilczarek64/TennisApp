@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getAllCities, getObjectsByCity, getFirstCourtByCity } from "../Redux/store";
+import { getAllCities, getObjectsByCity, getFirstCourtByCity, getLoggingInInfo } from "../Redux/store";
 import { Select } from "../common/Inputs.styles";
 
 const Wrapper = styled.div`
@@ -51,12 +51,6 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 margin-block: 10px;
-  select {
-    padding: 7px;
-    width: 180px;
-    border-radius: 5px;
-    font-size: 18px;
-  }
 `;
 
 const CourtForm = () => {
@@ -64,10 +58,10 @@ const CourtForm = () => {
   const [selectedCity, setSelectedCity] = useState(cities[0].toString());
   const objects = useSelector(state => getObjectsByCity(state, selectedCity));
   let objectId = objects[0].id;
+  console.log(useSelector(getLoggingInInfo));
 
   console.log('object id: ', objectId);
   const navigate = useNavigate();
-
     const handleCityChange = (e) => {
       setSelectedCity(e);
     }

@@ -1,10 +1,16 @@
 const initialState = {
   users: [
-    { userLogged: false },
     {
       id: 1,
       userName: 'user',
       password: 'user',
+      loggedInfo: false,
+    },
+    {
+      id: 2,
+      userName: 'user2',
+      password: 'user2',
+      loggedInfo: false,
     }
   ],
   cities: ['Cracow', 'Warsaw', 'Katowice', 'Gdansk'],

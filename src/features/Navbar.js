@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Ball from '../assets/images/Ball.png';
 import { Link, NavLink } from 'react-router-dom';
+import { getLoggingInInfo } from "../Redux/store";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
   height: 50px;
@@ -43,6 +45,8 @@ const Ul = styled.ul`
 `;
 
 const Navbar = () => {
+  const userIsLogged = useSelector(getLoggingInInfo);
+  console.log('test in nav',userIsLogged);
   return (
     <Wrapper>
       <Ul>
@@ -51,7 +55,10 @@ const Navbar = () => {
         <li>Find a partner</li>
         <li>Blog</li>
         <li>Contact</li>
+        {userIsLogged === undefined  ? 
         <li><NavLink to="/login">Login</NavLink></li>
+        : <li><NavLink to="/logout">Log Out</NavLink></li>
+        }
       </Ul>
     </Wrapper>
   );
