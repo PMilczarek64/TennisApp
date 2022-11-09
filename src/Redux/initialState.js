@@ -1,4 +1,12 @@
 const initialState = {
+  users: [
+    { userLogged: false },
+    {
+      id: 1,
+      userName: 'user',
+      password: 'user',
+    }
+  ],
   cities: ['Cracow', 'Warsaw', 'Katowice', 'Gdansk'],
   objects: [
     {
@@ -29,7 +37,7 @@ const initialState = {
           ],
           weekend: [
             {
-              id:3,
+              id: 3,
               time: 'whole-day',
               hours: '07:00-22:00',
               price: '110'

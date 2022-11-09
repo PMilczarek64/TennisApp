@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import shortid from "shortid";
 
 const Table = styled.div`
   min-height: 300px;
@@ -66,10 +67,10 @@ const PriceListTable = (priceList) => {
       </GridItem>
       {weekdaysPrices.map(item =>
         <>
-          <GridItem className={"grid-item " + "hours" + item.id}>
+          <GridItem key={shortid()} className={"grid-item " + "hours" + item.id}>
             <p>{item.hours}</p>
           </GridItem>
-          <GridItem className={"grid-item " + "price" + item.id}>
+          <GridItem key={shortid()} className={"grid-item " + "price" + item.id}>
             <p>{item.price}</p>
           </GridItem>
         </>
@@ -79,11 +80,11 @@ const PriceListTable = (priceList) => {
       </GridItem>
       {weekendPrices.map(item =>
         <>
-          <GridItem className={"grid-item " + "hours" + item.id}>
+          <GridItem key={shortid()} className={"grid-item " + "hours" + item.id}>
             <p>{item.hours}</p>
           </GridItem>
-          <GridItem className={"grid-item " + "price" + item.id}>
-            <p>{item.price}</p>
+          <GridItem key={shortid()} className={"grid-item " + "price" + item.id}>
+            <p key={shortid()}>{item.price}</p>
           </GridItem>
         </>
       )}

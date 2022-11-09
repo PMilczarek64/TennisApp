@@ -48,10 +48,10 @@ const Navbar = () => {
       <Ul>
         <li><Link to="/" ><img src={Ball}></img></Link></li>
         <li><NavLink to="/courts">Book a court</NavLink></li>
-        <li>Trainers</li>
         <li>Find a partner</li>
         <li>Blog</li>
         <li>Contact</li>
+        <li><NavLink to="/login">Login</NavLink></li>
       </Ul>
     </Wrapper>
   );

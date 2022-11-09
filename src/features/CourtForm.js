@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getAllCities, getObjectsByCity, getFirstCourtByCity } from "../Redux/store";
+import { Select } from "../common/Inputs.styles";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -92,19 +93,19 @@ const CourtForm = () => {
         <h4>Location:</h4>
         <FormItem >
           <label htmlFor="city">City: </label>
-          <select id="city" name="city" onChange={e => handleCityChange(e.target.value)}>
+          <Select id="city" name="city" onChange={e => handleCityChange(e.target.value)}>
             {cities.map(city => (
              <option value={city} key={city}>{city}</option>
             ))}
-          </select>
+          </Select>
         </FormItem>
         <FormItem>
           <label htmlFor="object">Object: </label>
-          <select type="select" name="object" onChange={e => handleObjectIdChange(e.target.value)}>
+          <Select type="select" name="object" onChange={e => handleObjectIdChange(e.target.value)}>
             {objects.map(object => 
             <option value={object.id} key={object.id}>{object.name} {object.address}</option>
             )}
-          </select>
+          </Select>
         </FormItem>
         <button onClick={handleSubmit}>Submit</button>
       </LocationForm>

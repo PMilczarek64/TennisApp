@@ -3,6 +3,7 @@ import styled from "styled-components";
 import HeaderImg from '../assets/images/Header.jpg';
 import LogoImage from '../assets/images/Tennis.png';
 import Navbar from "../features/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   max-width: 100%;
@@ -62,6 +63,7 @@ const Logo = styled.div`
   object-fit: cover;
   width: 220px;
   height: 200px;
+  cursor: pointer;
   img {
     max-height: 100%;
     transform: translate(-40%, -15%);
@@ -69,11 +71,12 @@ const Logo = styled.div`
 `;
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <Container>
       <Header>
         <TopHeader>
-          <Logo>
+          <Logo onClick={() => navigate('/')}>
             <h3>TENNIS MOTION</h3>
             <img src={LogoImage} alt="logo"></img>
           </Logo>
