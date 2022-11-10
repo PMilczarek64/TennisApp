@@ -8,6 +8,7 @@ export const getObjectById = ({ objects }, objectId ) => objects.find(object => 
 export const getFirstCourtByCity = ({ objects }, city) => objects.find(object => object.city === city);
 export const getUserName = ({ users }, userName, password) => users.find(user => user.userName === userName && user.password === password);
 export const getLoggingInInfo = ({ users }) => users.find(item => item.loggedInfo !== false );
+export const getUserObjectsByUserId = ({ objects }, userId) => objects.filter(object => object.propertyOfUser === userId);
 ////export const getAllourWorkCards = state => state.ourWorkCards;
 ////export const getAllAboutUsCards = state => state.aboutUsCards;
 ////export const getAllGridItems = state => state.contentGridItems;

@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import Courts from './views/Courts';
 import ShowObject from './features/ShowObject';
 import LoginForm from './features/LoginForm';
+import MyAccount from './features/MyAccount';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/courts/:city" element={<Courts />} />
         <Route path="/courts/:city/:objectId/*" element={<ShowObject /> } />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/myaccount/:userId" element={<MyAccount />} />
       </Routes>
     </div>
   );

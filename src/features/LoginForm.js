@@ -49,7 +49,8 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const loginAction = () => {
     if (checkUser !== undefined) {
-      navigate('/')
+      navigate(`/myaccount/${checkUser.id}`);
+      console.log('check user id in my account ', checkUser.id);
       dispatch(setLoggedIn({setLogged: true, name: userName}));
     } else {
       setError(true);

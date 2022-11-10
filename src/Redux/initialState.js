@@ -17,6 +17,7 @@ const initialState = {
   objects: [
     {
       id: 1,
+      propertyOfUser: 2,
       name: 'SPORT Center',
       city: 'Cracow',
       address: 'Adama Mickiewicza 12',
@@ -85,6 +86,7 @@ const initialState = {
     },
     {
       id: 2,
+      propertyOfUser: 1,
       name: 'TENNIS MAX',
       city: 'Warsaw',
       address: 'Adama Mickiewicza 12',
@@ -158,6 +160,7 @@ const initialState = {
     },
     {
       id: 3,
+      propertyOfUser: 1,
       name: 'TENNIS ACADEMY',
       city: 'Katowice',
       address: 'Adama Mickiewicza 12',
@@ -226,6 +229,7 @@ const initialState = {
     },
     {
       id: 4,
+      propertyOfUser: 2,
       name: 'SPORT CITY CENTER',
       city: 'Gdansk',
       address: 'Adama Mickiewicza 12',

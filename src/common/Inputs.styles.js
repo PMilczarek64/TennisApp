@@ -9,7 +9,7 @@ export const Input = styled.input`
 
 export const Select = styled.select`
     padding: 7px;
-    width: 180px;
+    width: 198px;
     border-radius: 5px;
     font-size: 18px;
 `;
