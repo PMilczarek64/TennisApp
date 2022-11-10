@@ -88,9 +88,37 @@ const initialState = {
       name: 'TENNIS MAX',
       city: 'Warsaw',
       address: 'Adama Mickiewicza 12',
+      phoneNumber: '456-354-065',
       email: 'court.example@example.com',
       website: 'sportcentercracow.com',
-      phoneNumber: '456-354-065',
+      priceListCourt: [
+        {
+          header: 'WINTER/SUMMER',
+          headerDescription: 'from October 1, 2022',
+          weekdays: [
+            {
+              id: 1,
+              time: 'Morning',
+              hours: '07:00-14:00',
+              price: '100'
+            },
+            {
+              id: 2,
+              time: 'afternoon',
+              hours: '14:00-22:00',
+              price: '120'
+            },
+          ],
+          weekend: [
+            {
+              id: 3,
+              time: 'whole-day',
+              hours: '07:00-22:00',
+              price: '110'
+            },
+          ],
+        },
+      ],
       contentData: [
         {
           id: 1,
@@ -133,9 +161,37 @@ const initialState = {
       name: 'TENNIS ACADEMY',
       city: 'Katowice',
       address: 'Adama Mickiewicza 12',
+      phoneNumber: '456-354-065',
       email: 'court.example@example.com',
       website: 'sportcentercracow.com',
-      phoneNumber: '456-354-065',
+      priceListCourt: [
+        {
+          header: 'WINTER/SUMMER',
+          headerDescription: 'from October 1, 2022',
+          weekdays: [
+            {
+              id: 1,
+              time: 'Morning',
+              hours: '07:00-14:00',
+              price: '100'
+            },
+            {
+              id: 2,
+              time: 'afternoon',
+              hours: '14:00-22:00',
+              price: '120'
+            },
+          ],
+          weekend: [
+            {
+              id: 3,
+              time: 'whole-day',
+              hours: '07:00-22:00',
+              price: '110'
+            },
+          ],
+        },
+      ],
       contentData: [
         {
           id: 1,
@@ -173,9 +229,37 @@ const initialState = {
       name: 'SPORT CITY CENTER',
       city: 'Gdansk',
       address: 'Adama Mickiewicza 12',
+      phoneNumber: '456-354-065',
       email: 'court.example@example.com',
       website: 'sportcentercracow.com',
-      phoneNumber: '456-354-065',
+      priceListCourt: [
+        {
+          header: 'WINTER/SUMMER',
+          headerDescription: 'from October 1, 2022',
+          weekdays: [
+            {
+              id: 1,
+              time: 'Morning',
+              hours: '07:00-14:00',
+              price: '100'
+            },
+            {
+              id: 2,
+              time: 'afternoon',
+              hours: '14:00-22:00',
+              price: '120'
+            },
+          ],
+          weekend: [
+            {
+              id: 3,
+              time: 'whole-day',
+              hours: '07:00-22:00',
+              price: '110'
+            },
+          ],
+        },
+      ],
       contentData: [
         {
           id: 1,
@@ -213,9 +297,37 @@ const initialState = {
       name: 'TENNIS COURTS',
       city: 'Cracow',
       address: 'Adama Mickiewicza 12',
+      phoneNumber: '456-354-065',
       email: 'court.example@example.com',
       website: 'sportcentercracow.com',
-      phoneNumber: '456-354-065',
+      priceListCourt: [
+        {
+          header: 'WINTER/SUMMER',
+          headerDescription: 'from October 1, 2022',
+          weekdays: [
+            {
+              id: 1,
+              time: 'Morning',
+              hours: '07:00-14:00',
+              price: '100'
+            },
+            {
+              id: 2,
+              time: 'afternoon',
+              hours: '14:00-22:00',
+              price: '120'
+            },
+          ],
+          weekend: [
+            {
+              id: 3,
+              time: 'whole-day',
+              hours: '07:00-22:00',
+              price: '110'
+            },
+          ],
+        },
+      ],
       contentData: [
         {
           id: 1,
@@ -253,9 +365,37 @@ const initialState = {
       name: 'CLAY ACADEMY',
       city: 'Warsaw',
       address: 'Adama Mickiewicza 12',
+      phoneNumber: '456-354-065',
       email: 'court.example@example.com',
       website: 'sportcentercracow.com',
-      phoneNumber: '456-354-065',
+      priceListCourt: [
+        {
+          header: 'WINTER/SUMMER',
+          headerDescription: 'from October 1, 2022',
+          weekdays: [
+            {
+              id: 1,
+              time: 'Morning',
+              hours: '07:00-14:00',
+              price: '100'
+            },
+            {
+              id: 2,
+              time: 'afternoon',
+              hours: '14:00-22:00',
+              price: '120'
+            },
+          ],
+          weekend: [
+            {
+              id: 3,
+              time: 'whole-day',
+              hours: '07:00-22:00',
+              price: '110'
+            },
+          ],
+        },
+      ],
       contentData: [
         {
           id: 1,
@@ -290,12 +430,40 @@ const initialState = {
     },
     {
       id: 7,
-      name: 'HARD COURTS',
       city: 'Katowice',
+      name: 'HARD COURTS',
       address: 'Adama Mickiewicza 12',
+      phoneNumber: '456-354-065',
       email: 'court.example@example.com',
       website: 'sportcentercracow.com',
-      phoneNumber: '456-354-065',
+      priceListCourt: [
+        {
+          header: 'WINTER/SUMMER',
+          headerDescription: 'from October 1, 2022',
+          weekdays: [
+            {
+              id: 1,
+              time: 'Morning',
+              hours: '07:00-14:00',
+              price: '100'
+            },
+            {
+              id: 2,
+              time: 'afternoon',
+              hours: '14:00-22:00',
+              price: '120'
+            },
+          ],
+          weekend: [
+            {
+              id: 3,
+              time: 'whole-day',
+              hours: '07:00-22:00',
+              price: '110'
+            },
+          ],
+        },
+      ],
       contentData: [
         {
           id: 1,
@@ -333,9 +501,37 @@ const initialState = {
       name: 'GRASS COURTS',
       city: 'Gdansk',
       address: 'Adama Mickiewicza 12',
+      phoneNumber: '456-354-065',
       email: 'court.example@example.com',
       website: 'sportcentercracow.com',
-      phoneNumber: '456-354-065',
+      priceListCourt: [
+        {
+          header: 'WINTER/SUMMER',
+          headerDescription: 'from October 1, 2022',
+          weekdays: [
+            {
+              id: 1,
+              time: 'Morning',
+              hours: '07:00-14:00',
+              price: '100'
+            },
+            {
+              id: 2,
+              time: 'afternoon',
+              hours: '14:00-22:00',
+              price: '120'
+            },
+          ],
+          weekend: [
+            {
+              id: 3,
+              time: 'whole-day',
+              hours: '07:00-22:00',
+              price: '110'
+            },
+          ],
+        },
+      ],
       contentData: [
         {
           id: 1,

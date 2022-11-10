@@ -3,7 +3,9 @@ import styled from "styled-components";
 import Ball from '../assets/images/Ball.png';
 import { Link, NavLink } from 'react-router-dom';
 import { getLoggingInInfo } from "../Redux/store";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setLoggedIn } from "../Redux/store";
 
 const Wrapper = styled.div`
   height: 50px;
@@ -46,7 +48,10 @@ const Ul = styled.ul`
 
 const Navbar = () => {
   const userIsLogged = useSelector(getLoggingInInfo);
-  console.log('test in nav',userIsLogged);
+  const dispatch = useDispatch();
+  const logOut = () => {
+    dispatch(setLoggedIn({setLogged: false, name: userIsLogged.userName}));
+  }
   return (
     <Wrapper>
       <Ul>
@@ -57,7 +62,7 @@ const Navbar = () => {
         <li>Contact</li>
         {userIsLogged === undefined  ? 
         <li><NavLink to="/login">Login</NavLink></li>
-        : <li><NavLink to="/logout">Log Out</NavLink></li>
+        : <li onClick={ logOut}><NavLink to="/">Log Out</NavLink></li>
         }
       </Ul>
     </Wrapper>
