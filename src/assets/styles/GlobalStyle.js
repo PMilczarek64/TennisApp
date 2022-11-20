@@ -45,6 +45,10 @@ a {
   text-decoration: none;
 }
 
+ul{
+  list-style: none;
+}
+
 @media only screen and (max-width: 500px) {
       p {
         font-size: 20px;

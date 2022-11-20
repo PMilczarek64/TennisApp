@@ -15,7 +15,7 @@ function App() {
       <Home />
       <Routes>
         <Route path="/" element={<CourtForm />} />
-        <Route path="/courts/:city" element={<Courts />} />
+        <Route path="/courts/:city/" element={<Courts />} />
         <Route path="/courts/:city/:objectId/*" element={<ShowObject /> } />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/myaccount/:userId" element={<MyAccount />} />

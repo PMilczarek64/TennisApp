@@ -56,7 +56,7 @@ const Navbar = () => {
     <Wrapper>
       <Ul>
         <li><Link to="/" ><img src={Ball}></img></Link></li>
-        <li><NavLink to="/courts">Book a court</NavLink></li>
+        <li><NavLink to="/courts/">Book a court</NavLink></li>
         <li>Find a partner</li>
         <li>Blog</li>
         <li>Contact</li>
