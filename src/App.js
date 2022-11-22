@@ -6,6 +6,7 @@ import Courts from './views/Courts';
 import ShowObject from './features/ShowObject';
 import LoginForm from './features/LoginForm';
 import MyAccount from './features/MyAccount';
+import CourtsBooking from './features/CourtsBooking';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/courts/:city/:objectId/*" element={<ShowObject /> } />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/myaccount/:userId" element={<MyAccount />} />
+        <Route path="/courts/:city/:objectId/booking" element={<CourtsBooking />} />
       </Routes>
     </div>
   );

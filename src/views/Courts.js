@@ -35,7 +35,7 @@ const ListItem = styled.li`
   background: linear-gradient(180deg, rgba(224,224,224,0.4962359943977591) 0%, rgba(250,250,250,0.8603816526610644) 50%, rgba(224,224,224,1) 100%);
   
   :hover {
-    background: linear-gradient(180deg, #a6ff00de 0%, #ddff00 50%, #a6ff00de 100%);
+    background: linear-gradient(90deg,#ddff00c3 0%, #ddff00b0 50%, #ddff00c3 100%);
   }
 `;
 
@@ -54,7 +54,7 @@ const Courts = () => {
     <List>
       {objects.map(object => 
         <ListItem key={object.id} onClick={() => handleClick(object.id)}>
-          <h3>{object.name} {object.address}</h3>
+          <h3><b>{object.name}</b> {object.address}</h3>
         </ListItem>  
       )}
     </List>

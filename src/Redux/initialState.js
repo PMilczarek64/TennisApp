@@ -83,6 +83,26 @@ const initialState = {
           doubles: 'yes'
         },
       ],
+      events : [
+        {
+          id: 1,
+          date: '2022/11/22',
+          fromHour: '12:30',
+          toHour: '13:30',
+          court: 1,
+          repeat: 'daily',
+          duration: 2,
+        },
+        {
+          id: 2,
+          date: '2022/11/22',
+          fromHour: '14:30',
+          toHour: '15:00',
+          court: 2,
+          repeat: 'daily',
+          duration: 2,
+        },
+      ]
     },
     {
       id: 2,
