@@ -76,7 +76,7 @@ const PriceListTable = (priceList) => {
         </>
       )}
       <GridItem className="grid-item weekdays2">
-        <h5>Sobota-niedziela</h5>
+        <h5>Saturday-Sunday</h5>
       </GridItem>
       {weekendPrices.map(item =>
         <>

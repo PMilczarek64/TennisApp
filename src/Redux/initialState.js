@@ -68,7 +68,7 @@ const initialState = {
         },
         {
           id: 3,
-          name: "booking",
+          name: "Booking",
           busyTerms: [],
         },
       ],
@@ -87,20 +87,30 @@ const initialState = {
       events: [
         {
           id: 1,
-          date: "2022/11/24",
+          date: "2022/11/22",
           fromHour: "12:30",
           toHour: "13:30",
           court: 1,
-          repeat: "daily",
+          daily: true,
           duration: 2,
+          alt: 'internal booking'
         },
         {
           id: 2,
-          date: "2022/11/24",
+          date: "2022/11/22",
           fromHour: "14:30",
           toHour: "15:00",
           court: 2,
-          repeat: "daily",
+          daily: false,
+          duration: 2,
+        },
+        {
+          id: 3,
+          date: "2022/11/22",
+          fromHour: "15:30",
+          toHour: "16:00",
+          court: 1,
+          daily: true,
           duration: 2,
         },
       ],

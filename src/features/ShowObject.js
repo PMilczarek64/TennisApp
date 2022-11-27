@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 import styled from "styled-components";
 import CourtInfo from "../pages/CourtInfo";
 import ContentNav from "./ContentNav";
+import CourtsBooking from "./CourtsBooking";
 
 
 const Wrapper = styled.div`
@@ -27,6 +28,7 @@ const ShowObject = () => {
         <Content>
           <Routes>
             <Route path="Info" element={<CourtInfo objectId={objectId} />} />
+            <Route path="Booking" element={<CourtsBooking objectId={objectId} />} />
           </Routes>
         </Content>
       </Wrapper>
