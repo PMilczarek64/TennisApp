@@ -1,7 +1,9 @@
-import React from "react";
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import shortid from "shortid";
+import BookingForm from "./BookingForm";
 
 const Table = styled.table`
   width: 1000px;
@@ -47,51 +49,84 @@ const Table = styled.table`
   }
 `;
 
-const BookingTable = ({courts, possibleHours, events, parsedDate, setShowBookingForm}) => { 
+const BookingTable = ({
+  courts,
+  possibleHours,
+  events,
+  parsedDate,
+  showModal,
+  setShowBookingForm,
+}) => {
+  const [selectedHour, setSelectedHour] = useState(possibleHours[0]);
+  const [selectedCourt, setSelectedCourt] = useState(1);
+  const freeHours = [];
+  const busyHours = [];
+
+  const handleBooking = (hour, court) => {
+    setSelectedHour(hour);
+    setSelectedCourt(court);
+    setShowBookingForm(true);
+
+  };
+
   return (
     <Table>
-        <thead>
-          <tr>
-            <th className="header">Hours</th>
-            {courts.map((court) => (
-              <th key={court.id} className="header">
-                Court {court.id}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {possibleHours.map((hour) => (
-            <tr key={hour}>
-              <td className="hour">{hour}</td>
-              {courts.map((court) =>
-                events.some(
-                  (event) => (
-                    event.court == court.id &&
+      <BookingForm
+        showModal={showModal}
+        setShowBookingForm={setShowBookingForm}
+        fromHour={selectedHour}
+        selectedCourt={selectedCourt}
+        date={parsedDate}
+        freeHours={freeHours}
+        busyHours={busyHours}
+      />
+      <thead>
+        <tr>
+          <th className="header">Hours</th>
+          {courts.map((court) => (
+            <th key={court.id} className="header">
+              Court {court.id}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {possibleHours.map((hour) => (
+          <tr key={hour}>
+            <td className="hour">{hour}</td>
+            {courts.map((court) =>
+              events.some(
+                (event) =>
+                  (event.court == court.id &&
                     event.fromHour <= hour &&
                     event.toHour >= hour &&
                     event.date === parsedDate &&
                     event.daily !== true) ||
-                    (
-                      event.court == court.id &&
-                      event.fromHour <= hour &&
-                      event.toHour >= hour &&
-                      event.daily === true)
-                ) ? (
-                  <td className="red">busy </td>
-                ) : (
-                  <td className="green" onClick={() => setShowBookingForm(true)}>book </td>
-                )
-              )}
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+                  (event.court == court.id &&
+                    event.fromHour <= hour &&
+                    event.toHour >= hour &&
+                    event.daily === true)
+              ) ? ( busyHours.push({courtId: court.id, hour: hour}) &&
+                <td className="red" key={shortid()}>
+                  busy
+                </td>
+              ) : ( freeHours.push({courtId: court.id, hour: hour}) && 
+                <td
+                  className="green"
+                  key={shortid()}
+                  onClick={() => handleBooking({hour}, court.id)}
+                >
+                  book{" "}
+                </td>
+              )
+            )}
+          </tr>
+        ))}
+      </tbody>
+    </Table>
   );
 };
 
-
 //BookingTable.PropTypes = {};
-
 
 export default BookingTable;

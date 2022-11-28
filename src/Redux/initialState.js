@@ -101,7 +101,7 @@ const initialState = {
           fromHour: "14:30",
           toHour: "15:00",
           court: 2,
-          daily: false,
+          daily: true,
           duration: 2,
         },
         {
@@ -110,7 +110,7 @@ const initialState = {
           fromHour: "15:30",
           toHour: "16:00",
           court: 1,
-          daily: true,
+          daily: false,
           duration: 2,
         },
       ],

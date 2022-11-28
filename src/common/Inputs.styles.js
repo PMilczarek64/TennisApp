@@ -5,6 +5,7 @@ export const Input = styled.input`
     width: 180px;
     border-radius: 5px;
     font-size: 18px;
+    height: 18px;
 `;
 
 export const Select = styled.select`

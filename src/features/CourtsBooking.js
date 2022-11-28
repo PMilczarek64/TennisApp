@@ -16,8 +16,6 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
-
-
 const CourtsBooking = () => {
   const [startDate, setStartDate] = useState(new Date());
   const parsedDate =
@@ -41,8 +39,6 @@ const CourtsBooking = () => {
   const possibleHours = [];
   const [showBookingForm, setShowBookingForm] = useState(false);
 
-  console.log(parsedDate, "parsedDtae");
-
   const checkAndFormatPossibleHours = () => {
     for (let i = openingHour; i <= closingHour; i += 0.5) {
       let hourToCheck = i.toString();
@@ -55,10 +51,7 @@ const CourtsBooking = () => {
   };
 
   checkAndFormatPossibleHours();
-  possibleHours.map((item) => console.log(item));
 
-  console.log("courts in tables ", openingHour, closingHour);
-  console.log(parsedDate, "test parsedDate");
   return (
     <Wrapper>
       <DatePicker
@@ -66,8 +59,14 @@ const CourtsBooking = () => {
         onChange={(date) => setStartDate(date)}
         inline
       />
-      <BookingTable courts={courts} events={events} possibleHours={possibleHours} parsedDate={parsedDate} setShowBookingForm={setShowBookingForm}/>
-      <BookingForm showModal={showBookingForm} />
+      <BookingTable
+        courts={courts}
+        events={events}
+        possibleHours={possibleHours}
+        parsedDate={parsedDate}
+        showModal={showBookingForm}
+        setShowBookingForm={setShowBookingForm}
+      />
     </Wrapper>
   );
 };
