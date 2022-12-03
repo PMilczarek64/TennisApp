@@ -1,12 +1,10 @@
-import React from "react";
+import moment from "moment/moment";
 import propTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Label, Input, Select } from "../common/Inputs.styles";
-import { useParams } from "react-router-dom";
-import clsx from "clsx";
 import { ButtonGreen } from "../common/Button";
-import { useState } from "react";
-import shortid from "shortid";
+import { Input, Label, Select } from "../common/Inputs.styles";
+import { formatHourToNumber, formatNumberToHour } from "../utils";
 
 const BorderWrapper = styled.div`
   padding: 20px;
@@ -56,74 +54,41 @@ const BookingForm = ({
   fromHour,
   setSelectedHour,
   selectedCourt,
-  date,
 }) => {
-  const possibleNextHours = [];
   const freeHoursByCourt = freeHours.filter(
-    (object) => object.courtId === selectedCourt
+    (object) => object.courtId === selectedCourt,
   );
-  const busyHoursByCourt = [];
-  const checkBusyHoursByCourt = () => {
-    busyHours.map(
-      (object) =>
-        (object.courtId === selectedCourt) && busyHoursByCourt.push(object.hour)
-
-    );
-  };
-
-  const findNextPossibleHour = () => {
-    for (const hour of freeHoursByCourt) {
-      //console.log('fre hour ', hour);
-      if (Number(hour.hour.split(':')[0] + hour.hour.split(':')[1]) > Number(fromHour.hour.split(':')[0] + fromHour.hour.split(':')[1])) {
-        //console.log('większe ', hour.hour, ' od ', fromHour.hour);
-       
-      }
-    };
-  };
-    //freeHoursByCourt.map( hour => 
-   //   (Number(hour.hour.split(':')[0] + hour.hour.split(':')[1]) > Number(fromHour.hour.split(':')[0] + fromHour.hour.split(':')[1])) &&
-   //   console.log('xd ',  busyHoursByCourt)
-       /* console.log('busy hour', busyHour) &&
-        console.log(Number(busyHour.split(':')[0] + busyHour.split(':')[1]), 'test split') //< Number(fromHour.hour.split(':')[0] + fromHour.hour.split(':')[1]) &&
-       && console.log('busyHour < fromHour passed') &&
-        setMaxPossibleHour(hour.hour) 
-      ) */ //)}
-    /*  (Number(fromHour.hour.split(':')[0] + fromHour.hour.split(':')[1]) > Number(object.hour.split(':')[0] + object.hour.split(':')[1]) &&
-      Number(hour.hour.split(':')[0] + hour.hour.split(':')[1]) > Number(fromHour.hour.split(':')[0] + fromHour.hour.split(':')[1])) ?
-      console.log('test: ', Number(fromHour.hour.split(':')[0] + fromHour.hour.split(':')[1])) &&
-      setMaxPossibleHour(hour.hour) :
-     (Number(hour.hour.split(':')[0] + hour.hour.split(':')[1]) > Number(fromHour.hour.split(':')[0] + fromHour.hour.split(':')[1]) &&
-    Number(hour.hour.split(':')[0] + hour.hour.split(':')[1]) <  Number(object.hour.split(':')[0] + object.hour.split(':')[1])) &&
-      setMaxPossibleHour(hour.hour) 
-      
-) */
-  
-  
-
+  const maxBusyHours = busyHours.map(({ hour }) => formatHourToNumber(hour));
   const [name, setName] = useState("");
   const [phone, setPhone] = useState();
-  const [maxPossibleHour, setMaxPossibleHour] = useState('');
+  const [maxPossibleHours, setMaxPossibleHours] = useState([]);
+
+  useEffect(() => {
+    const nextBusyHour =
+      maxBusyHours.filter((hour) => hour > fromHour)[0] || 20.5;
+    let preparedMaxPossibleHours = freeHoursByCourt
+      .map(({ hour }) => formatHourToNumber(hour))
+      .filter((hour) => hour < nextBusyHour && hour > fromHour);
+    if (nextBusyHour) {
+      preparedMaxPossibleHours = [
+        ...preparedMaxPossibleHours,
+        nextBusyHour,
+      ].sort();
+    }
+    setMaxPossibleHours(preparedMaxPossibleHours);
+  }, [fromHour]);
 
   const handleChange = (e) => {
-    setSelectedHour({ hour: e });
-    console.log("test from hour", fromHour);
-    console.log("test busy hours", busyHours);
-    checkBusyHoursByCourt();
-    //findNextPossibleHour();
-    console.log("busyHoursByCourt", busyHoursByCourt);
-    console.log('maxPossibleHour test ', maxPossibleHour);
+    setSelectedHour(formatHourToNumber(e));
   };
-
-  
 
   return (
     <BorderWrapper className={showModal === false && "hide"}>
       <Wrapper>
-        <p>{maxPossibleHour}</p>
         <h2>Book tennis court num. {selectedCourt}</h2>
         <FormItem>
           <Label htmlFor="date">Date: </Label>
-          <p>{date}</p>
+          <p>{moment().format("YYYY/MM/DD")}</p>
         </FormItem>
         <FormItem>
           <Label htmlFor="from-hour">From hour: </Label>
@@ -133,7 +98,7 @@ const BookingForm = ({
             onChange={(e) => handleChange(e.target.value)}
           >
             {freeHoursByCourt.map((object) =>
-              object.hour === fromHour.hour ? (
+              formatHourToNumber(object.hour) === fromHour ? (
                 <option value={object.hour} key={object.hour} selected>
                   {object.hour}
                 </option>
@@ -143,23 +108,18 @@ const BookingForm = ({
                     {object.hour}
                   </option>
                 )
-              )
+              ),
             )}
           </Select>
         </FormItem>
         <FormItem>
           <Label htmlFor="to-hour">To hour: </Label>
           <Select>
-            {freeHoursByCourt.map(
-              (object =>
-                (object.hour.split(':')[0] + object.hour.split(':')[1]) > (fromHour.hour.split(':')[0] + fromHour.hour.split(':')[1]) &&
-                
-                object.hour != maxPossibleHour &&
-                <option value={object.hour} key={object.hour}>
-                  {object.hour}
-                </option>
-              )
-            )}
+            {maxPossibleHours.map((hour) => (
+              <option value={hour} key={hour}>
+                {formatNumberToHour(hour)}
+              </option>
+            ))}
           </Select>
         </FormItem>
         <FormItem>

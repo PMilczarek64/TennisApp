@@ -1,14 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import DateChange from "./DatePicker";
-import { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useSelector } from "react-redux";
-import { getAllEvents, getObjectById } from "../Redux/store";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import { getObjectById } from "../Redux/store";
 import BookingTable from "./BookingTable";
-import BookingForm from "./BookingForm";
 
 const Wrapper = styled.div`
   margin: 50px 100px;
@@ -18,20 +15,14 @@ const Wrapper = styled.div`
 
 const CourtsBooking = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const parsedDate =
-    startDate.getFullYear() +
-    "/" +
-    (startDate.getMonth() + 1) +
-    "/" +
-    startDate.getUTCDate();
 
   const { objectId } = useParams();
   const object = useSelector((state) => getObjectById(state, Number(objectId)));
   const events = useSelector((state) =>
-    getObjectById(state, Number(objectId))
+    getObjectById(state, Number(objectId)),
   ).events;
   const courts = useSelector((state) =>
-    getObjectById(state, Number(objectId))
+    getObjectById(state, Number(objectId)),
   ).courts;
 
   const openingHour = object.contentData[0].openingHour;
@@ -63,7 +54,6 @@ const CourtsBooking = () => {
         courts={courts}
         events={events}
         possibleHours={possibleHours}
-        parsedDate={parsedDate}
         showModal={showBookingForm}
         setShowBookingForm={setShowBookingForm}
       />

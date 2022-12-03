@@ -1,8 +1,8 @@
+import moment from "moment/moment";
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import shortid from "shortid";
+import styled from "styled-components";
+import { formatHourToNumber } from "../utils";
 import BookingForm from "./BookingForm";
 
 const Table = styled.table`
@@ -53,7 +53,6 @@ const BookingTable = ({
   courts,
   possibleHours,
   events,
-  parsedDate,
   showModal,
   setShowBookingForm,
 }) => {
@@ -66,8 +65,22 @@ const BookingTable = ({
     setSelectedHour(hour);
     setSelectedCourt(court);
     setShowBookingForm(true);
-
   };
+
+  const checkIfBusy = (courtId, hour) =>
+    events.some(
+      (event) =>
+        (event.court === courtId &&
+          moment(event.startDate).format("HH:mm") <= hour &&
+          moment(event.endDate).format("HH:mm") >= hour &&
+          moment(event.startDate).format("YYYY/MM/DD") ===
+            moment().format("YYYY/MM/DD") &&
+          event.daily !== true) ||
+        (event.court === courtId &&
+          moment(event.startDate).format("HH:mm") <= hour &&
+          moment(event.endDate).format("HH:mm") >= hour &&
+          event.daily === true),
+    );
 
   return (
     <Table>
@@ -76,7 +89,6 @@ const BookingTable = ({
         setShowBookingForm={setShowBookingForm}
         fromHour={selectedHour}
         selectedCourt={selectedCourt}
-        date={parsedDate}
         freeHours={freeHours}
         busyHours={busyHours}
         setSelectedHour={setSelectedHour}
@@ -96,30 +108,23 @@ const BookingTable = ({
           <tr key={hour}>
             <td className="hour">{hour}</td>
             {courts.map((court) =>
-              events.some(
-                (event) =>
-                  (event.court == court.id &&
-                    event.fromHour <= hour &&
-                    event.toHour >= hour &&
-                    event.date === parsedDate &&
-                    event.daily !== true) ||
-                  (event.court == court.id &&
-                    event.fromHour <= hour &&
-                    event.toHour >= hour &&
-                    event.daily === true)
-              ) ? ( busyHours.push({courtId: court.id, hour: hour}) &&
-                <td className="red" key={shortid()}>
-                  busy
-                </td>
-              ) : ( freeHours.push({courtId: court.id, hour: hour}) && 
-                <td
-                  className="green"
-                  key={shortid()}
-                  onClick={() => handleBooking({hour}, court.id)}
-                >
-                  book{" "}
-                </td>
-              )
+              checkIfBusy(court.id, hour)
+                ? busyHours.push({ courtId: court.id, hour: hour }) && (
+                    <td className="red" key={shortid()}>
+                      busy
+                    </td>
+                  )
+                : freeHours.push({ courtId: court.id, hour: hour }) && (
+                    <td
+                      className="green"
+                      key={shortid()}
+                      onClick={() =>
+                        handleBooking(formatHourToNumber(hour), court.id)
+                      }
+                    >
+                      book{" "}
+                    </td>
+                  ),
             )}
           </tr>
         ))}
