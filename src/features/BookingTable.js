@@ -79,6 +79,7 @@ const BookingTable = ({
         date={parsedDate}
         freeHours={freeHours}
         busyHours={busyHours}
+        setSelectedHour={setSelectedHour}
       />
       <thead>
         <tr>
