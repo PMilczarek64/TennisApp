@@ -55,11 +55,14 @@ const BookingTable = ({
   events,
   showModal,
   setShowBookingForm,
+  tableDate,
 }) => {
   const [selectedHour, setSelectedHour] = useState(possibleHours[0]);
   const [selectedCourt, setSelectedCourt] = useState(1);
   const freeHours = [];
   const busyHours = [];
+
+  console.log('table date', moment(tableDate).format());
 
   const handleBooking = (hour, court) => {
     setSelectedHour(hour);
@@ -74,12 +77,11 @@ const BookingTable = ({
           moment(event.startDate).format("HH:mm") <= hour &&
           moment(event.endDate).format("HH:mm") >= hour &&
           moment(event.startDate).format("YYYY/MM/DD") ===
-            moment().format("YYYY/MM/DD") &&
-          event.daily !== true) ||
+          moment(tableDate).format("YYYY/MM/DD") ) ||
         (event.court === courtId &&
           moment(event.startDate).format("HH:mm") <= hour &&
           moment(event.endDate).format("HH:mm") >= hour &&
-          event.daily === true),
+          event.repeat === true),
     );
 
   return (

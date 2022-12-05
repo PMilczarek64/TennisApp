@@ -15,6 +15,7 @@ const Wrapper = styled.div`
 
 const CourtsBooking = () => {
   const [startDate, setStartDate] = useState(new Date());
+  console.log('start date', startDate);
 
   const { objectId } = useParams();
   const object = useSelector((state) => getObjectById(state, Number(objectId)));
@@ -56,6 +57,7 @@ const CourtsBooking = () => {
         possibleHours={possibleHours}
         showModal={showBookingForm}
         setShowBookingForm={setShowBookingForm}
+        tableDate={startDate}
       />
     </Wrapper>
   );

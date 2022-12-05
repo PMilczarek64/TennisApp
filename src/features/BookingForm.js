@@ -58,11 +58,17 @@ const BookingForm = ({
   const freeHoursByCourt = freeHours.filter(
     (object) => object.courtId === selectedCourt,
   );
-  const maxBusyHours = busyHours.map(({ hour }) => formatHourToNumber(hour));
+
+  const busyHoursByCourt = busyHours.filter(
+    (object) =>object.courtId === selectedCourt
+  );
+  const maxBusyHours = busyHoursByCourt.map(({ hour }) => formatHourToNumber(hour));
   const [name, setName] = useState("");
   const [phone, setPhone] = useState();
   const [maxPossibleHours, setMaxPossibleHours] = useState([]);
 
+  console.log('free hours ', freeHoursByCourt);
+  console.log('max busy hours test: ', busyHoursByCourt.map(({ hour }) => formatHourToNumber(hour)))
   useEffect(() => {
     const nextBusyHour =
       maxBusyHours.filter((hour) => hour > fromHour)[0] || 20.5;
