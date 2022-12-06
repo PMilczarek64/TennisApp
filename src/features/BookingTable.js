@@ -55,14 +55,13 @@ const BookingTable = ({
   events,
   showModal,
   setShowBookingForm,
-  tableDate,
+  selectedHour,
+  setSelectedHour,
+  tableDate
 }) => {
-  const [selectedHour, setSelectedHour] = useState(possibleHours[0]);
   const [selectedCourt, setSelectedCourt] = useState(1);
   const freeHours = [];
   const busyHours = [];
-
-  console.log('table date', moment(tableDate).format());
 
   const handleBooking = (hour, court) => {
     setSelectedHour(hour);
@@ -83,7 +82,6 @@ const BookingTable = ({
           moment(event.endDate).format("HH:mm") >= hour &&
           event.repeat === true),
     );
-
   return (
     <Table>
       <BookingForm
@@ -94,6 +92,7 @@ const BookingTable = ({
         freeHours={freeHours}
         busyHours={busyHours}
         setSelectedHour={setSelectedHour}
+        tableDate={tableDate}
       />
       <thead>
         <tr>

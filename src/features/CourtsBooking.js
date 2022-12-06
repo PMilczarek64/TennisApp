@@ -29,6 +29,7 @@ const CourtsBooking = () => {
   const openingHour = object.contentData[0].openingHour;
   const closingHour = object.contentData[0].closingHour;
   const possibleHours = [];
+  const [selectedHour, setSelectedHour] = useState(possibleHours[0]);
   const [showBookingForm, setShowBookingForm] = useState(false);
 
   const checkAndFormatPossibleHours = () => {
@@ -42,13 +43,17 @@ const CourtsBooking = () => {
     }
   };
 
+  const handleDateChange = (date) => {
+    setStartDate(date);
+  };
+
   checkAndFormatPossibleHours();
 
   return (
     <Wrapper>
       <DatePicker
         selected={startDate}
-        onChange={(date) => setStartDate(date)}
+        onChange={(date) => handleDateChange(date)}
         inline
       />
       <BookingTable
@@ -58,6 +63,8 @@ const CourtsBooking = () => {
         showModal={showBookingForm}
         setShowBookingForm={setShowBookingForm}
         tableDate={startDate}
+        selectedHour={selectedHour}
+        setSelectedHour={setSelectedHour}
       />
     </Wrapper>
   );

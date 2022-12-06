@@ -54,6 +54,7 @@ const BookingForm = ({
   fromHour,
   setSelectedHour,
   selectedCourt,
+  tableDate
 }) => {
   const freeHoursByCourt = freeHours.filter(
     (object) => object.courtId === selectedCourt,
@@ -67,8 +68,6 @@ const BookingForm = ({
   const [phone, setPhone] = useState();
   const [maxPossibleHours, setMaxPossibleHours] = useState([]);
 
-  console.log('free hours ', freeHoursByCourt);
-  console.log('max busy hours test: ', busyHoursByCourt.map(({ hour }) => formatHourToNumber(hour)))
   useEffect(() => {
     const nextBusyHour =
       maxBusyHours.filter((hour) => hour > fromHour)[0] || 20.5;
@@ -82,10 +81,14 @@ const BookingForm = ({
       ].sort();
     }
     setMaxPossibleHours(preparedMaxPossibleHours);
-  }, [fromHour]);
+  }, [fromHour, tableDate]);
 
   const handleChange = (e) => {
     setSelectedHour(formatHourToNumber(e));
+  };
+
+  const handleCLose = () => {
+    setShowBookingForm(false);
   };
 
   return (
@@ -94,7 +97,7 @@ const BookingForm = ({
         <h2>Book tennis court num. {selectedCourt}</h2>
         <FormItem>
           <Label htmlFor="date">Date: </Label>
-          <p>{moment().format("YYYY/MM/DD")}</p>
+          <p>{moment(tableDate).format("YYYY/MM/DD")}</p>
         </FormItem>
         <FormItem>
           <Label htmlFor="from-hour">From hour: </Label>
@@ -151,7 +154,7 @@ const BookingForm = ({
             onChange={(e) => setPhone(e.target.value)}
           ></Input>
         </FormItem>
-        <ButtonGreen onClick={() => setShowBookingForm(false)}>
+        <ButtonGreen onClick={() => handleCLose()}>
           Close
         </ButtonGreen>
       </Wrapper>
