@@ -2,14 +2,14 @@ import moment from "moment/moment";
 import propTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { ButtonGreen } from "../common/Button";
+import { ButtonGreen, ButtonConfirm, ButtonClose } from "../common/Button";
 import { Input, Label, Select } from "../common/Inputs.styles";
 import { formatHourToNumber, formatNumberToHour } from "../utils";
 
 const BorderWrapper = styled.div`
   padding: 20px;
   width: 600px;
-  height: 400px;
+  height: auto;
   background: linear-gradient(90deg, #ddff00 0%, rgb(255, 231, 76) 100%);
   z-index: 1;
   position: fixed;
@@ -20,6 +20,7 @@ const BorderWrapper = styled.div`
     display: none;
   }
 `;
+
 const Wrapper = styled.div`
   height: 100%;
   background-color: white;
@@ -27,6 +28,14 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
   z-index: 1;
+`;
+
+const Header = styled.h2`
+  font-weight: 500;
+  padding-block: 20px;
+  border: 1px;
+  border-color: ${({ theme }) => theme.colors.faded};
+  border-style: none none solid none;
 `;
 
 const FormItem = styled.div`
@@ -44,6 +53,15 @@ const FormItem = styled.div`
       color: red;
     }
   }
+  :last-child {
+    margin-bottom: 10px;
+  }
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  background: transparent;
 `;
 
 const BookingForm = ({
@@ -54,16 +72,18 @@ const BookingForm = ({
   fromHour,
   setSelectedHour,
   selectedCourt,
-  tableDate
+  tableDate,
 }) => {
   const freeHoursByCourt = freeHours.filter(
-    (object) => object.courtId === selectedCourt,
+    (object) => object.courtId === selectedCourt
   );
 
   const busyHoursByCourt = busyHours.filter(
-    (object) =>object.courtId === selectedCourt
+    (object) => object.courtId === selectedCourt
   );
-  const maxBusyHours = busyHoursByCourt.map(({ hour }) => formatHourToNumber(hour));
+  const maxBusyHours = busyHoursByCourt.map(({ hour }) =>
+    formatHourToNumber(hour)
+  );
   const [name, setName] = useState("");
   const [phone, setPhone] = useState();
   const [maxPossibleHours, setMaxPossibleHours] = useState([]);
@@ -94,7 +114,9 @@ const BookingForm = ({
   return (
     <BorderWrapper className={showModal === false && "hide"}>
       <Wrapper>
-        <h2>Book tennis court num. {selectedCourt}</h2>
+        <Header>
+          Book tennis court num. {selectedCourt}
+        </Header>
         <FormItem>
           <Label htmlFor="date">Date: </Label>
           <p>{moment(tableDate).format("YYYY/MM/DD")}</p>
@@ -117,7 +139,7 @@ const BookingForm = ({
                     {object.hour}
                   </option>
                 )
-              ),
+              )
             )}
           </Select>
         </FormItem>
@@ -154,10 +176,13 @@ const BookingForm = ({
             onChange={(e) => setPhone(e.target.value)}
           ></Input>
         </FormItem>
-        <ButtonGreen onClick={() => handleCLose()}>
-          Close
-        </ButtonGreen>
       </Wrapper>
+      <ButtonsWrapper>
+        <ButtonClose onClick={() => handleCLose()}>Close</ButtonClose>
+        <ButtonConfirm onClick={() => handleCLose()}>
+          Confirm booking
+        </ButtonConfirm>
+      </ButtonsWrapper>
     </BorderWrapper>
   );
 };
