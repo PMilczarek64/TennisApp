@@ -5,6 +5,10 @@ import styled from "styled-components";
 import { ButtonGreen, ButtonConfirm, ButtonClose } from "../common/Button";
 import { Input, Label, Select } from "../common/Inputs.styles";
 import { formatHourToNumber, formatNumberToHour } from "../utils";
+import { addBooking, getEventsByObjectId } from "../Redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import shortid from "shortid";
+import { useParams } from "react-router-dom";
 
 const BorderWrapper = styled.div`
   padding: 20px;
@@ -87,6 +91,9 @@ const BookingForm = ({
   const [name, setName] = useState("");
   const [phone, setPhone] = useState();
   const [maxPossibleHours, setMaxPossibleHours] = useState([]);
+  const [selectedEndHour, setSelectedEndHour] = useState(fromHour);
+  const dispatch = useDispatch();
+  const { objectId } = useParams();
 
   useEffect(() => {
     const nextBusyHour =
@@ -111,12 +118,44 @@ const BookingForm = ({
     setShowBookingForm(false);
   };
 
+  const eventsByObject =  useSelector((state) => getEventsByObjectId(state, Number(objectId)));
+
+  const handleBooking = () => {
+    const startHourFormmatedToDispatch = moment(
+      tableDate.toString().slice(0, 16) +
+        formatNumberToHour(fromHour) +
+        ":00 " +
+        tableDate.toString().slice(-46)
+    ).format();
+    console.log("start hour: ", startHourFormmatedToDispatch);
+    const endHourFormattedToDispatch = moment(
+                                        tableDate.toString().slice(0, 16) +
+                                        formatNumberToHour(selectedEndHour) +
+                                        ":00 " +
+                                        tableDate.toString().slice(-46)
+                                       ).format();
+    
+    eventsByObject.push({
+      id: shortid(),
+      startDate: startHourFormmatedToDispatch,
+      endDate: endHourFormattedToDispatch,
+      court: selectedCourt,
+      repeat: false,
+      phone: phone,
+      customerName: name,
+      objectId: Number(objectId)
+    });
+    
+    console.log('effect: ', eventsByObject)
+  };
+
+  
+  console.log('eventsBy ', eventsByObject);
+
   return (
     <BorderWrapper className={showModal === false && "hide"}>
       <Wrapper>
-        <Header>
-          Book tennis court num. {selectedCourt}
-        </Header>
+        <Header>Book tennis court num. {selectedCourt}</Header>
         <FormItem>
           <Label htmlFor="date">Date: </Label>
           <p>{moment(tableDate).format("YYYY/MM/DD")}</p>
@@ -145,7 +184,7 @@ const BookingForm = ({
         </FormItem>
         <FormItem>
           <Label htmlFor="to-hour">To hour: </Label>
-          <Select>
+          <Select onChange={(e) => setSelectedEndHour(e.target.value)}>
             {maxPossibleHours.map((hour) => (
               <option value={hour} key={hour}>
                 {formatNumberToHour(hour)}
@@ -172,14 +211,13 @@ const BookingForm = ({
             value={phone}
             placeholder="123-456-678"
             pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
-            required
             onChange={(e) => setPhone(e.target.value)}
           ></Input>
         </FormItem>
       </Wrapper>
       <ButtonsWrapper>
         <ButtonClose onClick={() => handleCLose()}>Close</ButtonClose>
-        <ButtonConfirm onClick={() => handleCLose()}>
+        <ButtonConfirm onClick={() => handleBooking()}>
           Confirm booking
         </ButtonConfirm>
       </ButtonsWrapper>

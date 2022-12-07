@@ -4,6 +4,7 @@ export const Input = styled.input`
     padding: 7px;
     width: 180px;
     border-radius: 5px;
+    border-color: ${({ theme }) => theme.colors.faded};
     font-size: 18px;
     height: 18px;
 `;

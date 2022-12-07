@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { createStore } from 'redux';
 import initialState from './initialState';
 
@@ -9,18 +10,23 @@ export const getFirstCourtByCity = ({ objects }, city) => objects.find(object =>
 export const getUserName = ({ users }, userName, password) => users.find(user => user.userName === userName && user.password === password);
 export const getLoggingInInfo = ({ users }) => users.find(item => item.loggedInfo !== false );
 export const getUserObjectsByUserId = ({ objects }, userId) => objects.filter(object => object.propertyOfUser === userId);
+export const getEventsByObjectId = ({ objects }, objectId) => objects.filter(object => object.id === objectId)[0].events
 ////export const getAllourWorkCards = state => state.ourWorkCards;
 ////export const getAllAboutUsCards = state => state.aboutUsCards;
 ////export const getAllGridItems = state => state.contentGridItems;
 
 //action creators
 export const setLoggedIn = payload => ({ type: 'SET_LOGGED_IN', payload });
+export const addBooking = payload => ({ type: 'ADD_BOOKING', payload });
 
 const reducer = (state, action) => {
   switch(action.type) {
     case 'SET_LOGGED_IN':
       return {...state, users: state.users.map(user => (user.userName === action.payload.name) ? {...user, loggedInfo: action.payload.setLogged} : user)};
       //return { ...state, cards: state.cards.map(card => (card.id === action.payload) ? { ...card, isFavorite: !card.isFavorite } : card) };
+    case 'ADD_BOOKING':
+      //return {...state, objects: [...state.objects, state.objects.map((object => object.id === action.payload.objectId) && action)]}; 
+      //return {...state, objects: [state.objects.map((object => object.id === action.payload.objectId) ? {...object, ]}; 
     default:
     return state;
   };
