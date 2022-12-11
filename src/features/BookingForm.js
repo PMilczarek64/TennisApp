@@ -88,10 +88,11 @@ const BookingForm = ({
   const maxBusyHours = busyHoursByCourt.map(({ hour }) =>
     formatHourToNumber(hour)
   );
+
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState();
+  const [phone, setPhone] = useState("");
   const [maxPossibleHours, setMaxPossibleHours] = useState([]);
-  const [selectedEndHour, setSelectedEndHour] = useState(fromHour);
+  const [selectedEndHour, setSelectedEndHour] = useState();
   const dispatch = useDispatch();
   const { objectId } = useParams();
 
@@ -108,6 +109,7 @@ const BookingForm = ({
       ].sort();
     }
     setMaxPossibleHours(preparedMaxPossibleHours);
+    setSelectedEndHour(fromHour + 0.5);
   }, [fromHour, tableDate]);
 
   const handleChange = (e) => {
@@ -118,7 +120,6 @@ const BookingForm = ({
     setShowBookingForm(false);
   };
 
-  const eventsByObject =  useSelector((state) => getEventsByObjectId(state, Number(objectId)));
 
   const handleBooking = () => {
     const startHourFormmatedToDispatch = moment(
@@ -127,30 +128,28 @@ const BookingForm = ({
         ":00 " +
         tableDate.toString().slice(-46)
     ).format();
-    console.log("start hour: ", startHourFormmatedToDispatch);
     const endHourFormattedToDispatch = moment(
-                                        tableDate.toString().slice(0, 16) +
-                                        formatNumberToHour(selectedEndHour) +
-                                        ":00 " +
-                                        tableDate.toString().slice(-46)
-                                       ).format();
-    
-    eventsByObject.push({
-      id: shortid(),
-      startDate: startHourFormmatedToDispatch,
-      endDate: endHourFormattedToDispatch,
-      court: selectedCourt,
-      repeat: false,
-      phone: phone,
-      customerName: name,
-      objectId: Number(objectId)
-    });
-    
-    console.log('effect: ', eventsByObject)
-  };
+      tableDate.toString().slice(0, 16) +
+        formatNumberToHour(selectedEndHour - 0.5) +
+        ":00 " +
+        tableDate.toString().slice(-46)
+    ).format();
 
-  
-  console.log('eventsBy ', eventsByObject);
+    dispatch(
+      addBooking({
+        id: shortid(),
+        startDate: startHourFormmatedToDispatch,
+        endDate: endHourFormattedToDispatch,
+        court: selectedCourt,
+        repeat: false,
+        phone: phone,
+        customerName: name,
+        objectId: Number(objectId),
+      })
+    );
+    setName("");
+    setPhone("");
+  };
 
   return (
     <BorderWrapper className={showModal === false && "hide"}>
@@ -185,11 +184,11 @@ const BookingForm = ({
         <FormItem>
           <Label htmlFor="to-hour">To hour: </Label>
           <Select onChange={(e) => setSelectedEndHour(e.target.value)}>
-            {maxPossibleHours.map((hour) => (
-              <option value={hour} key={hour}>
+            {maxPossibleHours.map((hour) => 
+              <option value={hour} key={hour} >
                 {formatNumberToHour(hour)}
               </option>
-            ))}
+            )}
           </Select>
         </FormItem>
         <FormItem>
