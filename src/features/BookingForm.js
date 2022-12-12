@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { ButtonGreen, ButtonConfirm, ButtonClose } from "../common/Button";
 import { Input, Label, Select } from "../common/Inputs.styles";
 import { formatHourToNumber, formatNumberToHour } from "../utils";
-import { addBooking, getEventsByObjectId } from "../Redux/store";
+import { addBooking, getLoggingInInfo } from "../Redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import shortid from "shortid";
 import { useParams } from "react-router-dom";
@@ -89,6 +89,8 @@ const BookingForm = ({
     formatHourToNumber(hour)
   );
 
+  const loggedUser = useSelector(getLoggingInInfo);
+
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [maxPossibleHours, setMaxPossibleHours] = useState([]);
@@ -145,10 +147,12 @@ const BookingForm = ({
         phone: phone,
         customerName: name,
         objectId: Number(objectId),
+        bookedByUser: loggedUser.id,
       })
     );
     setName("");
     setPhone("");
+    setShowBookingForm(false);
   };
 
   return (
@@ -185,9 +189,15 @@ const BookingForm = ({
           <Label htmlFor="to-hour">To hour: </Label>
           <Select onChange={(e) => setSelectedEndHour(e.target.value)}>
             {maxPossibleHours.map((hour) => 
+              hour === (fromHour + 0.5) ? (
+              <option value={hour} key={hour} selected>
+                {formatNumberToHour(hour)}
+              </option> 
+              ) : (
               <option value={hour} key={hour} >
                 {formatNumberToHour(hour)}
               </option>
+              )
             )}
           </Select>
         </FormItem>

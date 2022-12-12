@@ -68,7 +68,7 @@ const initialState = {
         },
         {
           id: 3,
-          name: "booking",
+          name: "Booking",
           busyTerms: [],
         },
       ],
@@ -165,7 +165,7 @@ const initialState = {
         },
         {
           id: 3,
-          name: "booking",
+          name: "Booking",
           busyTerms: [],
         },
       ],
@@ -267,7 +267,7 @@ const initialState = {
         },
         {
           id: 3,
-          name: "booking",
+          name: "Booking",
           busyTerms: [],
         },
       ],
@@ -337,7 +337,7 @@ const initialState = {
         },
         {
           id: 3,
-          name: "booking",
+          name: "Booking",
           busyTerms: [],
         },
       ],
@@ -406,7 +406,7 @@ const initialState = {
         },
         {
           id: 3,
-          name: "booking",
+          name: "Booking",
           busyTerms: [],
         },
       ],
@@ -475,7 +475,7 @@ const initialState = {
         },
         {
           id: 3,
-          name: "booking",
+          name: "Booking",
           busyTerms: [],
         },
       ],
@@ -544,7 +544,7 @@ const initialState = {
         },
         {
           id: 3,
-          name: "booking",
+          name: "Booking",
           busyTerms: [],
         },
       ],
@@ -613,7 +613,7 @@ const initialState = {
         },
         {
           id: 3,
-          name: "booking",
+          name: "Booking",
           busyTerms: [],
         },
       ],
