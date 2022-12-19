@@ -53,7 +53,7 @@ const TopHeader = styled.div`
   justify-content: space-between;
 `;
 
-const Logo = styled.div`
+export const Logo = styled.div`
   max-height: 100px;
   padding-left: 30px;
   position: relative;

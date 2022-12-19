@@ -31,6 +31,8 @@ const CourtsBooking = () => {
   const possibleHours = [];
   const [selectedHour, setSelectedHour] = useState(possibleHours[0]);
   const [showBookingForm, setShowBookingForm] = useState(false);
+  const [showEditBooking, setShowEditBooking] = useState(false);
+  const [showRemoveModal, setShowRemoveModal] = useState(false);
 
   const checkAndFormatPossibleHours = () => {
     for (let i = openingHour; i <= closingHour; i += 0.5) {
@@ -65,6 +67,10 @@ const CourtsBooking = () => {
         tableDate={startDate}
         selectedHour={selectedHour}
         setSelectedHour={setSelectedHour}
+        showEditBooking={showEditBooking}
+        setShowEditBooking={setShowEditBooking}
+        showRemoveModal={showRemoveModal}
+        setShowRemoveModal={setShowRemoveModal}
       />
     </Wrapper>
   );

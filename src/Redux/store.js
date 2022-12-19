@@ -20,10 +20,11 @@ export const getUserObjectsByUserId = ({ objects }, userId) =>
   objects.filter((object) => object.propertyOfUser === userId);
 export const getEventsByObjectId = ({ objects }, objectId) =>
   objects.filter((object) => object.id === objectId)[0].events;
-  
+
 //action creators
 export const setLoggedIn = (payload) => ({ type: "SET_LOGGED_IN", payload });
 export const addBooking = (payload) => ({ type: "ADD_BOOKING", payload });
+export const deleteBooking = (payload) => ({ type: "DELETE_BOOKING", payload });
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -46,7 +47,7 @@ const reducer = (state, action) => {
         ...object,
         events: object.events.concat([action.payload]),
       };
-      
+
       return {
         ...state,
         objects: state.objects.map((item) => {
@@ -57,6 +58,24 @@ const reducer = (state, action) => {
           }
         }),
       };
+    case "DELETE_BOOKING":
+      const obj = state.objects.find(
+        (object) => object.id === action.payload.objectId
+      );
+      const newObjItem = {
+        ...obj,
+        events: obj.events.filter(event => event.id !== action.payload.bookingId),
+      };
+      return {
+        ...state,
+        objects: state.objects.map((item) => {
+          if (item.id === action.payload.objectId) {
+            return newObjItem;
+          } else {
+            return item;
+          }
+        }),
+      }
 
     default:
       return state;

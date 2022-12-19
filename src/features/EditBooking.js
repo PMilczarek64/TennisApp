@@ -71,9 +71,9 @@ const ButtonsWrapper = styled.div`
   background: transparent;
 `;
 
-const BookingForm = ({
-  showModal,
-  setShowBookingForm,
+const EditBooking = ({
+  showEditBooking,
+  setShowEditBooking,
   freeHours,
   busyHours,
   fromHour,
@@ -82,9 +82,16 @@ const BookingForm = ({
   tableDate,
   bookingId,
 }) => {
+  console.log("show edit booking ? ", showEditBooking);
   const freeHoursByCourt = freeHours.filter(
     (object) => object.courtId === selectedCourt
   );
+
+  console.log('free hour by court ', freeHoursByCourt);
+
+ // const freeHoursWithoutUserBooking = freeHoursByCourt.filter(
+  //  object => console.log();
+ // )
 
   const busyHoursByCourt = busyHours.filter(
     (object) => object.courtId === selectedCourt
@@ -123,9 +130,8 @@ const BookingForm = ({
   };
 
   const handleCLose = () => {
-    setShowBookingForm(false);
+    setShowEditBooking(false);
   };
-
 
   const handleBooking = () => {
     const startHourFormmatedToDispatch = moment(
@@ -141,11 +147,9 @@ const BookingForm = ({
         tableDate.toString().slice(-46)
     ).format();
 
-
-
     dispatch(
       addBooking({
-        id: bookingId,
+        id: shortid(),
         startDate: startHourFormmatedToDispatch,
         endDate: endHourFormattedToDispatch,
         court: selectedCourt,
@@ -158,13 +162,13 @@ const BookingForm = ({
     );
     setName("");
     setPhone("");
-    setShowBookingForm(false);
+    setShowEditBooking(false);
   };
 
   return (
-    <BorderWrapper className={showModal === false && "hide"}>
+    <BorderWrapper className={showEditBooking === false && "hide"}>
       <Wrapper>
-        <Header>Book tennis court num. {selectedCourt}</Header>
+        <Header>Edit Booking, court num. {selectedCourt}</Header>
         <FormItem>
           <Label htmlFor="date">Date: </Label>
           <p>{moment(tableDate).format("YYYY/MM/DD")}</p>
@@ -176,33 +180,31 @@ const BookingForm = ({
             name="from-hour"
             onChange={(e) => handleChange(e.target.value)}
           >
-            {freeHoursByCourt.map((object) =>
-              formatHourToNumber(object.hour) === fromHour ? (
-                <option value={object.hour} key={object.hour} selected>
-                  {object.hour}
-                </option>
-              ) : (
+            <option value={fromHour} key={fromHour} selected>
+              {formatNumberToHour(fromHour)}
+            </option>
+            {freeHoursByCourt.map(
+              (object) =>
                 object.courtId === selectedCourt && (
                   <option value={object.hour} key={object.hour}>
                     {object.hour}
                   </option>
                 )
-              )
             )}
           </Select>
         </FormItem>
         <FormItem>
           <Label htmlFor="to-hour">To hour: </Label>
           <Select onChange={(e) => setSelectedEndHour(e.target.value)}>
-            {maxPossibleHours.map((hour) => 
-              hour === (fromHour + 0.5) ? (
-              <option value={hour} key={hour} selected>
-                {formatNumberToHour(hour)}
-              </option> 
+            {maxPossibleHours.map((hour) =>
+              hour === fromHour + 0.5 ? (
+                <option value={hour} key={hour} selected>
+                  {formatNumberToHour(hour)}
+                </option>
               ) : (
-              <option value={hour} key={hour} >
-                {formatNumberToHour(hour)}
-              </option>
+                <option value={hour} key={hour}>
+                  {formatNumberToHour(hour)}
+                </option>
               )
             )}
           </Select>
@@ -240,8 +242,8 @@ const BookingForm = ({
   );
 };
 
-BookingForm.propTypes = {
-  setShowBookingForm: propTypes.func,
+EditBooking.propTypes = {
+  setShowEditBooking: propTypes.func,
 };
 
-export default BookingForm;
+export default EditBooking;

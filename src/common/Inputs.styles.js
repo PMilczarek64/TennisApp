@@ -2,11 +2,16 @@ import styled from "styled-components";
 
 export const Input = styled.input`
     padding: 7px;
-    width: 180px;
     border-radius: 5px;
     border-color: ${({ theme }) => theme.colors.faded};
     font-size: 18px;
     height: 18px;
+    width: 100%;
+
+:-webkit-autofill, :focus {
+    box-shadow: 0 0 0px 1000px white inset !important;
+    outline: none;
+}
 `;
 
 export const Select = styled.select`
