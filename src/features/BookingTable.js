@@ -75,6 +75,7 @@ const BookingTable = ({
   const busyHours = [];
   const loggedUser = useSelector(getLoggingInInfo);
   const [bookingId, setBookingId] = useState("");
+  
 
   const handleBooking = (hour, court, bookingId) => {
     setSelectedHour(hour);
@@ -82,6 +83,7 @@ const BookingTable = ({
     setBookingId(bookingId);
     console.log("bookingId: ", bookingId);
     setShowBookingForm(true);
+    
   };
 
   const handleEdit = (hour, court, bookingId) => {
@@ -91,10 +93,9 @@ const BookingTable = ({
     setShowEditBooking(true);
   };
 
-  const handleRemove = (hour, court, bookingId) => {
+  const handleRemove = (hour, court) => {
     setSelectedHour(hour);
     setSelectedCourt(court);
-    setBookingId(bookingId);
     setShowRemoveModal(true);
   };
 
@@ -112,7 +113,8 @@ const BookingTable = ({
           event.repeat === true)
     );
 
-  const checkIfBusyByYou = (courtId, hour) =>
+  const checkIfBusyByYou = (courtId, hour) => 
+
     events.some(
       (event) =>
         event.court === courtId &&
@@ -182,13 +184,11 @@ const BookingTable = ({
                   (checkIfBusyByYou(court.id, hour) ? (
                     <td
                       className="yellow"
-                      id={shortid()}
                       key={shortid()}
                       onClick={(e) =>
                         handleRemove(
                           formatHourToNumber(hour),
                           court.id,
-                          e.target.id
                         )
                       }
                     >

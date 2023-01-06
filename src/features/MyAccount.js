@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getUserObjectsByUserId } from "../Redux/store";
 import EditObject from "./EditObject";
@@ -9,6 +9,9 @@ import { useState } from "react";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  h1 {
+    color: black;
+  }
 `;
 
 const Bar = styled.div`
@@ -40,6 +43,7 @@ const MyAccount = () => {
   const { userId } = useParams();
   const userProperties = useSelector(state => getUserObjectsByUserId(state, Number(userId)));
   const [expandProperty, setExpandProperty] = useState();
+  const navigate = useNavigate();
   console.log('test userId ', userId)
 
   const handleExpand = (id) => {
@@ -47,9 +51,9 @@ const MyAccount = () => {
   }
   return (
     <Wrapper>
-      <Bar><h1>MY account</h1></Bar>
+      <Object onClick={() => navigate('/myaccount/' + userId + '/bookings')}><h4>My Bookings</h4></Object>
+      <Object><h4>My sports facilities</h4></Object>
       <MyObjects>
-        <h4>My objects</h4>
         {userProperties.map(property =>
           <Object >
             {property.name}, {property.address}

@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Bree+Serif&family=Electrolize&family=Hammersmith+One&family=Monoton&family=Montserrat:ital,wght@0,100;0,200;0,400;1,300&family=Oleo+Script&family=Roboto:ital,wght@0,100;0,300;0,400;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Bree+Serif&family=Electrolize&family=Hammersmith+One&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,700&family=Monoton&family=Montserrat:ital,wght@0,100;0,200;0,400;1,300&family=Oleo+Script&family=Roboto:ital,wght@0,100;0,300;0,400;1,300&display=swap');
 
 h7{
   color: #000000ae;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.871), rgb(255, 231, 76));
-  background-color: rgba(0, 0, 0, 0.122);
+  background: linear-gradient(90deg, rgba(156, 202, 27, 0.871), rgb(255, 255, 255));
+  background-color: rgb(174, 196, 3);
   background: linear-gradient(180deg, rgba(250, 250, 250, 0.235)) 2%, rgba(255, 244, 244, 0.827) 50%,rgba(250, 250, 250, 0.235);
 }

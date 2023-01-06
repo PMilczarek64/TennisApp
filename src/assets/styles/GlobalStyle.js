@@ -43,6 +43,7 @@ p {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 ul{

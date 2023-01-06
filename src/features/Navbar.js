@@ -14,7 +14,8 @@ const Wrapper = styled.div`
 const Ul = styled.ul`
   display: flex;
   flex-direction: row;
-  background: linear-gradient(180deg, rgba(255,255,255,1) 2%, rgba(250,250,250,0.6306897759103641) 50%, rgba(255,255,255,1) 98%);
+  background-color: rgba(0, 0, 0, 0.719);
+  
   height: 100%;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
@@ -26,10 +27,19 @@ const Ul = styled.ul`
     justify-content: center;
     padding-inline: 20px;
     list-style: none;
-    font-size: 21px;
+    font-size: 20px;
+    font-weight: 500;
     border-right: solid 1px rgba(0, 0, 0, 0.122);
+    color: white;
+    :first-child {
+      filter: blur(0.3px);
+      :hover {
+        transform: rotate(360deg);
+        transition: 0.3s ease-in-out;
+      }
+    }
     :last-child {
-      margin-right: 80px;
+      margin-right: 10px;
     }
     a {
       width: 100%;
@@ -37,12 +47,38 @@ const Ul = styled.ul`
       display: flex;
       justify-content: center;
       align-items: center;
+      transition: 0.15s ease-in-out;
+      color: white;
     }
+    :hover {
+        .fa-sign-in {
+          color: ${({ theme }) => theme.colors.detailGreen};
+          transition: 0.2s ease-in-out;
+        }
+        .fa-power-off {
+          color: orangered;
+          transition: 0.2s ease-in-out;
+        }
+      }
     img {
       object-fit: cover;
       max-height: 30px;
       width: 30px;
     }
+  }
+`;
+
+const NavIcon = styled.div`
+  height: 25px;
+  width: 25px;
+  font-size: 23px;
+  margin-inline: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.white};
+  :hover {
+    color: ${({ theme }) => theme.colors.detailGreen};
   }
 `;
 
@@ -61,11 +97,11 @@ const Navbar = () => {
         <li>Blog</li>
         <li>Contact</li>
         {userIsLogged === undefined ?
-          <li><NavLink to="/login">Login</NavLink></li>
+          <li><NavLink to="/login">Login  <NavIcon className="fa fa-sign-in"/></NavLink></li>
           :
           <>
-            <li onClick={logOut}><NavLink to="/">Log Out</NavLink></li>
             <li><NavLink to={'/myaccount/' + userIsLogged.id}>My account</NavLink></li>
+            <li onClick={logOut}><NavLink to="/">{'Log Out'}<NavIcon className="fa fa-power-off"/></NavLink></li>
           </>
         }
       </Ul>

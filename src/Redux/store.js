@@ -4,6 +4,7 @@ import initialState from "./initialState";
 
 //selectors
 export const getAllCities = (state) => state.cities;
+export const getAllObjects = (state) => state.objects;
 export const getObjectsByCity = ({ objects }, city) =>
   objects.filter((object) => object.city === city);
 export const getObjectById = ({ objects }, objectId) =>
@@ -20,6 +21,7 @@ export const getUserObjectsByUserId = ({ objects }, userId) =>
   objects.filter((object) => object.propertyOfUser === userId);
 export const getEventsByObjectId = ({ objects }, objectId) =>
   objects.filter((object) => object.id === objectId)[0].events;
+export const getAllEvents = ({ objects }) => objects.filter(object => object.events && object.events);
 
 //action creators
 export const setLoggedIn = (payload) => ({ type: "SET_LOGGED_IN", payload });
@@ -64,7 +66,7 @@ const reducer = (state, action) => {
       );
       const newObjItem = {
         ...obj,
-        events: obj.events.filter(event => event.id !== action.payload.bookingId),
+        events: obj.events.filter(event => event.id !== (action.payload.bookingId).toString()),
       };
       return {
         ...state,

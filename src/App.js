@@ -7,6 +7,7 @@ import ShowObject from './features/ShowObject';
 import LoginForm from './features/LoginForm';
 import MyAccount from './features/MyAccount';
 import CourtsBooking from './features/CourtsBooking';
+import MyBookings from './features/MyBookings';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/courts/:city/:objectId/*" element={<ShowObject /> } />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/myaccount/:userId" element={<MyAccount />} />
+        <Route path="/myaccount/:userId/bookings" element={<MyBookings />} />
       </Routes>
     </div>
   );

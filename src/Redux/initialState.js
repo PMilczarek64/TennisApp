@@ -283,6 +283,34 @@ const initialState = {
           doubles: "yes",
         },
       ],
+      events: [
+        {
+          id: 1,
+          startDate: "2022-12-03T12:30:00+01:00",
+          endDate: "2022-12-03T13:30:00+01:00",
+          court: 1,
+          repeat: true,
+          name: 'rezerwacja wewnętrzna'
+        },
+        {
+          id: 2,
+          startDate: "2022-12-03T15:30:00+01:00",
+          endDate: "2022-12-03T16:00:00+01:00",
+          court: 1,
+          repeat: false,
+          name: 'Adam Turek',
+          phone: '654-456-654'
+        },
+        {
+          id: 3,
+          startDate: "2022-12-03T14:30:00+01:00",
+          endDate: "2022-12-03T15:00:00+01:00",
+          court: 2,
+          repeat: true,
+          name: 'rezerwacja wewnętrzna'
+        },
+      ],
+      
     },
     {
       id: 4,
@@ -351,6 +379,33 @@ const initialState = {
           id: 2,
           type: "Clay",
           doubles: "yes",
+        },
+      ],
+      events: [
+        {
+          id: 1,
+          startDate: "2022-12-03T12:30:00+01:00",
+          endDate: "2022-12-03T13:30:00+01:00",
+          court: 1,
+          repeat: true,
+          name: 'rezerwacja wewnętrzna'
+        },
+        {
+          id: 2,
+          startDate: "2022-12-03T15:30:00+01:00",
+          endDate: "2022-12-03T16:00:00+01:00",
+          court: 1,
+          repeat: false,
+          name: 'Adam Turek',
+          phone: '654-456-654'
+        },
+        {
+          id: 3,
+          startDate: "2022-12-03T14:30:00+01:00",
+          endDate: "2022-12-03T15:00:00+01:00",
+          court: 2,
+          repeat: true,
+          name: 'rezerwacja wewnętrzna'
         },
       ],
     },
@@ -422,6 +477,33 @@ const initialState = {
           doubles: "yes",
         },
       ],
+      events: [
+        {
+          id: 1,
+          startDate: "2022-12-03T12:30:00+01:00",
+          endDate: "2022-12-03T13:30:00+01:00",
+          court: 1,
+          repeat: true,
+          name: 'rezerwacja wewnętrzna'
+        },
+        {
+          id: 2,
+          startDate: "2022-12-03T15:30:00+01:00",
+          endDate: "2022-12-03T16:00:00+01:00",
+          court: 1,
+          repeat: false,
+          name: 'Adam Turek',
+          phone: '654-456-654'
+        },
+        {
+          id: 3,
+          startDate: "2022-12-03T14:30:00+01:00",
+          endDate: "2022-12-03T15:00:00+01:00",
+          court: 2,
+          repeat: true,
+          name: 'rezerwacja wewnętrzna'
+        },
+      ],
     },
     {
       id: 6,
@@ -489,6 +571,33 @@ const initialState = {
           id: 2,
           type: "Clay",
           doubles: "yes",
+        },
+      ],
+      events: [
+        {
+          id: 1,
+          startDate: "2022-12-03T12:30:00+01:00",
+          endDate: "2022-12-03T13:30:00+01:00",
+          court: 1,
+          repeat: true,
+          name: 'rezerwacja wewnętrzna'
+        },
+        {
+          id: 2,
+          startDate: "2022-12-03T15:30:00+01:00",
+          endDate: "2022-12-03T16:00:00+01:00",
+          court: 1,
+          repeat: false,
+          name: 'Adam Turek',
+          phone: '654-456-654'
+        },
+        {
+          id: 3,
+          startDate: "2022-12-03T14:30:00+01:00",
+          endDate: "2022-12-03T15:00:00+01:00",
+          court: 2,
+          repeat: true,
+          name: 'rezerwacja wewnętrzna'
         },
       ],
     },
@@ -560,6 +669,33 @@ const initialState = {
           doubles: "yes",
         },
       ],
+      events: [
+        {
+          id: 1,
+          startDate: "2022-12-03T12:30:00+01:00",
+          endDate: "2022-12-03T13:30:00+01:00",
+          court: 1,
+          repeat: true,
+          name: 'rezerwacja wewnętrzna'
+        },
+        {
+          id: 2,
+          startDate: "2022-12-03T15:30:00+01:00",
+          endDate: "2022-12-03T16:00:00+01:00",
+          court: 1,
+          repeat: false,
+          name: 'Adam Turek',
+          phone: '654-456-654'
+        },
+        {
+          id: 3,
+          startDate: "2022-12-03T14:30:00+01:00",
+          endDate: "2022-12-03T15:00:00+01:00",
+          court: 2,
+          repeat: true,
+          name: 'rezerwacja wewnętrzna'
+        },
+      ],
     },
     {
       id: 8,
@@ -627,6 +763,33 @@ const initialState = {
           id: 2,
           type: "Clay",
           doubles: "yes",
+        },
+      ],
+      events: [
+        {
+          id: 1,
+          startDate: "2022-12-03T12:30:00+01:00",
+          endDate: "2022-12-03T13:30:00+01:00",
+          court: 1,
+          repeat: true,
+          name: 'rezerwacja wewnętrzna'
+        },
+        {
+          id: 2,
+          startDate: "2022-12-03T15:30:00+01:00",
+          endDate: "2022-12-03T16:00:00+01:00",
+          court: 1,
+          repeat: false,
+          name: 'Adam Turek',
+          phone: '654-456-654'
+        },
+        {
+          id: 3,
+          startDate: "2022-12-03T14:30:00+01:00",
+          endDate: "2022-12-03T15:00:00+01:00",
+          court: 2,
+          repeat: true,
+          name: 'rezerwacja wewnętrzna'
         },
       ],
     },

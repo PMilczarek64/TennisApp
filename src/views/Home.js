@@ -19,6 +19,7 @@ const Header = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  background-position: 10% 100%;
  
   flex-direction: column;
   display: flex;
@@ -26,7 +27,7 @@ const Header = styled.div`
   span {
     max-width: 100%;
     margin-block: 10px;
-    background-color: rgba(0, 0, 0, 0.419);
+    background-color: rgba(0, 0, 0, 0.719);
     font-weight: 100;
     &.left {
       margin-top: 100px;

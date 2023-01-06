@@ -88,13 +88,14 @@ const RemoveBookingModal = ({
   const { objectId } = useParams();
 
   console.log('obj remove test id ', objectId );
+  console.log('remove booking id: ', bookingId)
 
   const handleCLose = () => {
     setShowRemoveModal(false);
   };
 
   const handleDelete = () => {
-    dispatch(deleteBooking({objectId: Number(objectId), bookingId: bookingId.toString()}))
+    dispatch(deleteBooking({objectId: Number(objectId), bookingId: bookingId}))
     setShowRemoveModal(false);
   };
 
