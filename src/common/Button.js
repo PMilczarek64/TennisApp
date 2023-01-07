@@ -11,7 +11,7 @@ export const ButtonGreen = styled.button`
   cursor: pointer;
 `;
 
-export const ButtonConfirm = styled.button`
+export const ButtonGreenOutline = styled.button`
   width: 100%;
   background-color: white;
   border: solid 1px;
@@ -33,7 +33,7 @@ export const ButtonConfirm = styled.button`
   }
 `;
 
-export const ButtonClose = styled.button`
+export const ButtonRedOutline = styled.button`
   width: 100%;
   background-color: white;
   border: solid 1px ;
@@ -53,5 +53,26 @@ export const ButtonClose = styled.button`
     color: white;
     
   }
+`;
 
+export const ButtonGreyOutline = styled.button`
+  width: 100%;
+  background-color: white;
+  border: solid 1px;
+  border-style: solid none none none;
+  color: grey;
+  font-weight: 700;
+  padding: 10px 30px;
+  font-size: 22px;
+  cursor: pointer;
+  background-image: linear-gradient(150deg, grey 50%, white 50%);
+  background-size: 300%;
+  background-position: 100% 0;
+  transition: 0.5s ease-in-out;
+  :hover {
+    background-position: 0 100%;
+    background-color: grey;
+    color: white;
+    
+  }
 `;

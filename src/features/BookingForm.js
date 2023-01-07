@@ -2,7 +2,7 @@ import moment from "moment/moment";
 import propTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { ButtonGreen, ButtonConfirm, ButtonClose } from "../common/Button";
+import { ButtonGreen, ButtonGreenOutline, ButtonRedOutline } from "../common/Button";
 import { Input, Label, Select } from "../common/Inputs.styles";
 import { formatHourToNumber, formatNumberToHour } from "../utils";
 import { addBooking, getLoggingInInfo } from "../Redux/store";
@@ -231,10 +231,10 @@ const BookingForm = ({
         </FormItem>
       </Wrapper>
       <ButtonsWrapper>
-        <ButtonClose onClick={() => handleCLose()}>Close</ButtonClose>
-        <ButtonConfirm onClick={() => handleBooking()}>
+        <ButtonRedOutline onClick={() => handleCLose()}>Close</ButtonRedOutline>
+        <ButtonGreenOutline onClick={() => handleBooking()}>
           Confirm booking
-        </ButtonConfirm>
+        </ButtonGreenOutline>
       </ButtonsWrapper>
     </BorderWrapper>
   );

@@ -15,6 +15,7 @@ const Wrapper = styled.div`
 
 const List = styled.ul`
   margin-inline: 50px;
+  margin-bottom: 50px;
   border: 1px solid ${({theme}) => theme.colors.faded};
   width: 80%;
   border-radius: 15px;
@@ -23,19 +24,29 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  width: 100%;
-  height: 80px;
+  max-width: 100%;
+  height: 120px;
   display: flex;
-  justify-content: center;
+  justify-content: baseline;
   align-items: center;
   border-bottom: 1px solid ${({theme}) => theme.colors.faded};
   h3 {
     color: black;
   }
   background: linear-gradient(180deg, rgba(224,224,224,0.4962359943977591) 0%, rgba(250,250,250,0.8603816526610644) 50%, rgba(224,224,224,1) 100%);
-  
   :hover {
     background: linear-gradient(90deg,#ddff00c3 0%, #ddff00b0 50%, #ddff00c3 100%);
+  }
+`;
+
+const Logo = styled.div`
+margin-inline: 20px;
+min-width: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img{
+    max-height: 90px;
   }
 `;
 
@@ -45,6 +56,7 @@ const Courts = () => {
   const navigate = useNavigate();
   console.log('objects test: ', objects);
 
+
   const handleClick = (id) => {
     navigate('/courts/' +  city + '/' + id + '/Info');
   };
@@ -52,8 +64,9 @@ const Courts = () => {
     <Wrapper>
       <HeaderBar value={'Courts in ' + city}></HeaderBar>
     <List>
-      {objects.map(object => 
+      {objects.map(object =>
         <ListItem key={object.id} onClick={() => handleClick(object.id)}>
+          <Logo><img src={`../../logos/${object.logo}`}></img></Logo>
           <h3><b>{object.name}</b> {object.address}</h3>
         </ListItem>  
       )}

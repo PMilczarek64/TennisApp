@@ -1,14 +1,12 @@
 import moment from "moment/moment";
 import propTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { ButtonGreen, ButtonConfirm, ButtonClose } from "../common/Button";
-import { Input, Label, Select } from "../common/Inputs.styles";
-import { formatHourToNumber, formatNumberToHour } from "../utils";
-import { addBooking, deleteBooking, getLoggingInInfo } from "../Redux/store";
-import { useDispatch, useSelector } from "react-redux";
-import shortid from "shortid";
-import { useParams } from "react-router-dom";
+import { ButtonRedOutline, ButtonGrey, ButtonGreyOutline } from "../common/Button";
+import { Label} from "../common/Inputs.styles";
+import { deleteBooking } from "../Redux/store";
+import { useDispatch} from "react-redux";
+
 
 const BorderWrapper = styled.div`
   padding: 20px;
@@ -72,20 +70,14 @@ const ButtonsWrapper = styled.div`
 `;
 
 const RemoveBookingModal = ({
-  showEditBooking,
-  setShowEditBooking,
-  freeHours,
-  busyHours,
-  fromHour,
-  setSelectedHour,
-  selectedCourt,
-  tableDate,
   bookingId,
   showRemoveModal,
   setShowRemoveModal,
+  objectId,
+  eventStartDate,
+  objectName,
 }) => {
   const dispatch = useDispatch();
-  const { objectId } = useParams();
 
   console.log('obj remove test id ', objectId );
   console.log('remove booking id: ', bookingId)
@@ -102,16 +94,17 @@ const RemoveBookingModal = ({
   return (
     <BorderWrapper className={showRemoveModal === false && "hide"}>
       <Wrapper>
-        <Header>Do you want to delete booking?</Header>
+        <Header>Do you want to cancel your booking? {objectName}</Header>
+        
         <FormItem>
           <Label htmlFor="date">Date: </Label>
-          <p>{moment(tableDate).format("YYYY/MM/DD")}</p>
+          <p>{moment(eventStartDate).format("YYYY/MM/DD")}</p>
         </FormItem>
         <ButtonsWrapper>
-          <ButtonClose onClick={() => handleCLose()}>Close</ButtonClose>
-          <ButtonConfirm onClick={() => handleDelete()}>
+          <ButtonGreyOutline onClick={() => handleCLose()}>Close</ButtonGreyOutline>
+          <ButtonRedOutline onClick={() => handleDelete()}>
             Delete Booking
-          </ButtonConfirm>
+          </ButtonRedOutline>
         </ButtonsWrapper>
       </Wrapper>
     </BorderWrapper>

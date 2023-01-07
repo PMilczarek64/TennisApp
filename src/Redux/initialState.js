@@ -20,10 +20,11 @@ const initialState = {
       propertyOfUser: 2,
       name: "SPORT Center",
       city: "Cracow",
-      address: "Adama Mickiewicza 12",
+      address: "Rakowicka 45",
       phoneNumber: "456-354-065",
       email: "court.example@example.com",
       website: "sportcentercracow.com",
+      logo: 'sport-center-logo.png',
       priceListCourt: [
         {
           header: "WINTER/SUMMER",
@@ -117,10 +118,11 @@ const initialState = {
       propertyOfUser: 1,
       name: "TENNIS MAX",
       city: "Warsaw",
-      address: "Adama Mickiewicza 12",
+      address: "Towarowa 132",
       phoneNumber: "456-354-065",
       email: "court.example@example.com",
       website: "sportcentercracow.com",
+      logo: 'tennis-max-logo.png',
       priceListCourt: [
         {
           header: "WINTER/SUMMER",
@@ -219,10 +221,11 @@ const initialState = {
       propertyOfUser: 1,
       name: "TENNIS ACADEMY",
       city: "Katowice",
-      address: "Adama Mickiewicza 12",
+      address: "sportowa 8B",
       phoneNumber: "456-354-065",
       email: "court.example@example.com",
       website: "sportcentercracow.com",
+      logo: 'tennis-academy-logo.png',
       priceListCourt: [
         {
           header: "WINTER/SUMMER",
@@ -317,10 +320,11 @@ const initialState = {
       propertyOfUser: 2,
       name: "SPORT CITY CENTER",
       city: "Gdansk",
-      address: "Adama Mickiewicza 12",
+      address: "Warszawska 322",
       phoneNumber: "456-354-065",
       email: "court.example@example.com",
       website: "sportcentercracow.com",
+      logo: 'sport-city-center-logo.png',
       priceListCourt: [
         {
           header: "WINTER/SUMMER",
@@ -413,10 +417,11 @@ const initialState = {
       id: 5,
       name: "TENNIS COURTS",
       city: "Cracow",
-      address: "Adama Mickiewicza 12",
+      address: "Szpitalna 92",
       phoneNumber: "456-354-065",
       email: "court.example@example.com",
       website: "sportcentercracow.com",
+      logo: 'tennis-courts-logo.png',
       priceListCourt: [
         {
           header: "WINTER/SUMMER",
@@ -509,10 +514,11 @@ const initialState = {
       id: 6,
       name: "CLAY ACADEMY",
       city: "Warsaw",
-      address: "Adama Mickiewicza 12",
+      address: "Centralna 50",
       phoneNumber: "456-354-065",
       email: "court.example@example.com",
       website: "sportcentercracow.com",
+      logo: 'clay-academy-logo.png',
       priceListCourt: [
         {
           header: "WINTER/SUMMER",
@@ -605,10 +611,11 @@ const initialState = {
       id: 7,
       city: "Katowice",
       name: "HARD COURTS",
-      address: "Adama Mickiewicza 12",
+      address: "Mariacka 122",
       phoneNumber: "456-354-065",
       email: "court.example@example.com",
       website: "sportcentercracow.com",
+      logo: 'hard-courts-logo.png',
       priceListCourt: [
         {
           header: "WINTER/SUMMER",
@@ -701,10 +708,11 @@ const initialState = {
       id: 8,
       name: "GRASS COURTS",
       city: "Gdansk",
-      address: "Adama Mickiewicza 12",
+      address: "Plażowa 36",
       phoneNumber: "456-354-065",
       email: "court.example@example.com",
       website: "sportcentercracow.com",
+      logo: 'grass-courts-logo.png',
       priceListCourt: [
         {
           header: "WINTER/SUMMER",
@@ -768,8 +776,8 @@ const initialState = {
       events: [
         {
           id: 1,
-          startDate: "2022-12-03T12:30:00+01:00",
-          endDate: "2022-12-03T13:30:00+01:00",
+          startDate: "2022-12-03T15:30:00+01:00",
+          endDate: "2022-12-03T17:30:00+01:00",
           court: 1,
           repeat: true,
           name: 'rezerwacja wewnętrzna'
@@ -785,7 +793,7 @@ const initialState = {
         },
         {
           id: 3,
-          startDate: "2022-12-03T14:30:00+01:00",
+          startDate: "2022-12-03T10:30:00+01:00",
           endDate: "2022-12-03T15:00:00+01:00",
           court: 2,
           repeat: true,

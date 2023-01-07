@@ -86,10 +86,7 @@ const BookingTable = ({
     
   };
 
-  const handleEdit = (hour, court, bookingId) => {
-    setSelectedHour(hour);
-    setSelectedCourt(court);
-    setBookingId(bookingId);
+  const handleEdit = () => {
     setShowEditBooking(true);
   };
 
@@ -127,6 +124,7 @@ const BookingTable = ({
     );
 
   return (
+    
     <Table>
       <BookingForm
         showModal={showModal}
@@ -142,13 +140,7 @@ const BookingTable = ({
       <EditBooking
         showEditBooking={showEditBooking}
         setShowEditBooking={setShowEditBooking}
-        fromHour={selectedHour}
-        selectedCourt={selectedCourt}
-        freeHours={freeHours}
-        busyHours={busyHours}
-        setSelectedHour={setSelectedHour}
-        tableDate={tableDate}
-        bookingId={bookingId}
+        userId={loggedUser.id}
       />
       <RemoveBookingModal 
         showEditBooking={showEditBooking}
@@ -186,10 +178,7 @@ const BookingTable = ({
                       className="yellow"
                       key={shortid()}
                       onClick={(e) =>
-                        handleRemove(
-                          formatHourToNumber(hour),
-                          court.id,
-                        )
+                        handleEdit()
                       }
                     >
                       Booked by YOU
