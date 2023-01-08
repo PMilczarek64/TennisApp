@@ -4,7 +4,7 @@ import { ButtonGreen } from "../common/Button";
 import { Input, Label } from "../common/Inputs.styles";
 import { getUserName } from "../Redux/store";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { setLoggedIn } from "../Redux/store";
 import { Logo } from "../views/Home";
 import LogoImage from "../assets/images/Tennis.png";
@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 
 const Form = styled.div`
   padding: 30px 30px 20px 30px;
-  
+
   display: flex;
   flex-direction: column;
   border: none;
@@ -86,6 +86,7 @@ const FormItem = styled.div`
 const LoginForm = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const { objectId } = useParams();
   const checkUser = useSelector((state) =>
     getUserName(state, userName, password)
   );
@@ -95,7 +96,9 @@ const LoginForm = () => {
   const loginAction = () => {
     if (checkUser !== undefined) {
       dispatch(setLoggedIn({ setLogged: true, name: userName }));
-      navigate('/');
+      if (objectId === undefined) {
+        navigate("/");
+      }
     } else {
       setError(true);
     }
