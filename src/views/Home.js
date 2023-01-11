@@ -20,6 +20,7 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   background-position: 10% 100%;
+  
  
   flex-direction: column;
   display: flex;

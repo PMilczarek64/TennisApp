@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getAllCities, getObjectsByCity, getFirstCourtByCity, getLoggingInInfo } from "../Redux/store";
 import { Select } from "../common/Inputs.styles";
 import HeaderBar from "../common/HeaderBar";
+import Net from '../assets/images/Net.jpg'
 
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 `;
 
+
 const LocationForm = styled.form`
-  width: 30%;
-  padding: 10px 30px;
+  width: 25%;
+  padding: 60px 100px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 50px;
   text-align: start;
   font-size: 20px;
+  border-right: 2px solid;
+  border-color: #00000020;;
   button {
     margin-left: 70%;
     background: ${({ theme }) => theme.colors.detailGreen};

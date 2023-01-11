@@ -150,8 +150,6 @@ const BookingForm = ({
         endDate: endHourFormattedToDispatch,
         court: selectedCourt,
         repeat: false,
-        phone: phone,
-        customerName: name,
         objectId: Number(objectId),
         bookedByUser: loggedUser.id,
       })
@@ -206,28 +204,6 @@ const BookingForm = ({
               )
             )}
           </Select>
-        </FormItem>
-        <FormItem>
-          <Label htmlFor="name">Name: </Label>
-          <Input
-            type="text"
-            id="name"
-            name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></Input>
-        </FormItem>
-        <FormItem>
-          <Label htmlFor="phone">Phone number: </Label>
-          <Input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={phone}
-            placeholder="123-456-678"
-            pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
-            onChange={(e) => setPhone(e.target.value)}
-          ></Input>
         </FormItem>
       </Wrapper>
       <ButtonsWrapper>

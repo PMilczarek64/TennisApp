@@ -7,6 +7,7 @@ import CourtsBooking from "./CourtsBooking";
 import LoginForm from "./LoginForm";
 import { getLoggingInInfo } from "../Redux/store";
 import { useSelector } from "react-redux";
+import CourtsGallery from "./CourtsGallery/CourtsGallery";
 
 
 const Wrapper = styled.div`
@@ -34,6 +35,7 @@ const ShowObject = () => {
           <Routes>
             <Route path="Info" element={<CourtInfo objectId={objectId} />} />
             <Route path="Booking" element={checkLoggedUser !== undefined ? <CourtsBooking objectId={objectId} /> : <LoginForm/>} />
+            <Route path="Gallery" element={<CourtsGallery objectId={objectId} />} />
           </Routes>
         </Content>
       </Wrapper>

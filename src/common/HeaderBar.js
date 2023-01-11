@@ -8,8 +8,7 @@ const Bar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: -1px 13px 24px -18px rgba(66, 68, 90, 1);
-  margin-bottom: 50px;
+  box-shadow: 0px 2px 14px -4px rgba(66, 68, 90, 1);
 `;
 
 const HeaderBar = ({value}) => {
