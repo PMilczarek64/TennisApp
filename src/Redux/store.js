@@ -6,7 +6,9 @@ import initialState from "./initialState";
 export const getAllCities = (state) => state.cities;
 export const getAllObjects = (state) => state.objects;
 export const getObjectsByCity = ({ objects }, city) =>
-  objects.filter((object) => object.city === city);
+  (city !== '' && city !== undefined) ?
+  objects.filter((object) => object.city === city) :
+  objects;
 export const getObjectById = ({ objects }, objectId) =>
   objects.find((object) => object.id === objectId);
 export const getFirstCourtByCity = ({ objects }, city) =>

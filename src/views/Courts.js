@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 
 const List = styled.ul`
   margin-inline: 50px;
-  margin-bottom: 50px;
+  margin-block: 50px;
   border: 1px solid ${({theme}) => theme.colors.faded};
   width: 80%;
   border-radius: 15px;
@@ -57,15 +57,15 @@ const Courts = () => {
   console.log('objects test: ', objects);
 
 
-  const handleClick = (id) => {
+  const handleClick = (id, city) => {
     navigate('/courts/' +  city + '/' + id + '/Info');
   };
   return (
     <Wrapper>
-      <HeaderBar value={'Courts in ' + city}></HeaderBar>
+      <HeaderBar value={city !== undefined ? 'Courts in ' + city : 'All Courts'}></HeaderBar>
     <List>
       {objects.map(object =>
-        <ListItem key={object.id} onClick={() => handleClick(object.id)}>
+        <ListItem key={object.id} onClick={() => handleClick(object.id, object.city)}>
           <Logo><img src={`../../logos/${object.logo}`}></img></Logo>
           <h3><b>{object.name}</b> {object.address}</h3>
         </ListItem>  
