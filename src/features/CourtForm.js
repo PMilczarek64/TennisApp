@@ -52,6 +52,9 @@ const CourtsList = styled.div`
   flex-wrap: wrap;
   border-left: 2px solid;
   border-color: ${({ theme }) => theme.colors.strongFaded};
+  p {
+    color: black;
+  }
 `;
 
 const FormItem = styled.div`

@@ -21,6 +21,9 @@ const Bar = styled.ul`
       color:  #00ac56;
       transition: 0.2s ease-in-out;
     }
+    &.active {
+      border-bottom: solid 3px #00ac56;
+    }
   }
 `;
 

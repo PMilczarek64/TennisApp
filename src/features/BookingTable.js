@@ -12,22 +12,23 @@ import RemoveBookingModal from "./RemoveBookingModal";
 const Table = styled.table`
   width: 1000px;
   background: linear-gradient(90deg, #ddff00 0%, rgb(255, 231, 76) 100%);
-  padding: 20px;
+  box-shadow: 12px 12px 24px -18px ${({ theme }) => theme.colors.darkGrey};
   margin-left: 20px;
   &.red {
     background: linear-gradient(90deg, rgb(247, 200, 200), rgb(255, 141, 141));
   }
   td,
   th {
-    padding: 15px 40px;
+    padding: 15px 15px;
     font-weight: 800;
     background-color: white;
-
+    width: 25%;
     &.green {
       color: ${({ theme }) => theme.colors.darkGrey};
       cursor: pointer;
     }
     &.red {
+      flex-grow: 2;
       color: white;
       cursor: not-allowed;
       background: linear-gradient(
@@ -40,10 +41,10 @@ const Table = styled.table`
       opacity: 0.9;
     }
     &.header {
-      color: #ddff00;
+      color: white;
       font-weight: 800;
       font-size: 24px;
-      opacity: 1;
+      background: transparent;
     }
     &.yellow {
       background: linear-gradient(70deg, transparent, rgb(255, 255, 255));
@@ -88,12 +89,6 @@ const BookingTable = ({
 
   const handleEdit = () => {
     setShowEditBooking(true);
-  };
-
-  const handleRemove = (hour, court) => {
-    setSelectedHour(hour);
-    setSelectedCourt(court);
-    setShowRemoveModal(true);
   };
 
   const checkIfBusy = (courtId, hour) =>
