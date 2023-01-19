@@ -6,8 +6,8 @@ const ListItem = styled.div`
   display: flex;
   flex-direction: column;
   white-space: nowrap;
-  width: 180px;
-  margin: 20px;
+  width: 200px;
+  margin: 5px;
   padding: 10px 17px;
   gap: 5px;
   font-size: 20px;

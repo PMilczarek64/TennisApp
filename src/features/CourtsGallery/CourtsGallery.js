@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import data from "./data/images.json";
 import Modal from "./Modal";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getObjectById } from "../../Redux/store";
 
-const Wrapper = styled.div`
+const GalleryWrapper = styled.div`
   max-width: 1350px;
   padding: 0px 60px;
   margin: 50px auto;
@@ -30,6 +32,11 @@ const GalleryItem = styled.div`
 function App() {
   const [clickedImg, setClickedImg] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(null);
+  const { objectId } = useParams();
+  const object = useSelector((state) => getObjectById(state, Number(objectId)));
+  const photos = object.contentData[1].photos;
+
+  console.log("gallery object test ", photos.length > 0);
 
   const handleClick = (item, index) => {
     setCurrentIndex(index);
@@ -37,16 +44,16 @@ function App() {
   };
 
   const handelRotationRight = () => {
-    const totalLength = data.data.length;
+    const totalLength = photos.length;
     if (currentIndex + 1 >= totalLength) {
       setCurrentIndex(0);
-      const newUrl = data.data[0].link;
+      const newUrl = photos[0].link;
       setClickedImg(newUrl);
       return;
     }
     const newIndex = currentIndex + 1;
-    const newUrl = data.data.filter((item) => {
-      return data.data.indexOf(item) === newIndex;
+    const newUrl = photos.filter((item) => {
+      return photos.indexOf(item) === newIndex;
     });
     const newItem = newUrl[0].link;
     setClickedImg(newItem);
@@ -54,16 +61,16 @@ function App() {
   };
 
   const handelRotationLeft = () => {
-    const totalLength = data.data.length;
+    const totalLength = photos.length;
     if (currentIndex === 0) {
       setCurrentIndex(totalLength - 1);
-      const newUrl = data.data[totalLength - 1].link;
+      const newUrl = photos[totalLength - 1].link;
       setClickedImg(newUrl);
       return;
     }
     const newIndex = currentIndex - 1;
-    const newUrl = data.data.filter((item) => {
-      return data.data.indexOf(item) === newIndex;
+    const newUrl = photos.filter((item) => {
+      return photos.indexOf(item) === newIndex;
     });
     const newItem = newUrl[0].link;
     setClickedImg(newItem);
@@ -71,16 +78,24 @@ function App() {
   };
 
   return (
-    <Wrapper>
-      {data.data.map((item, index) => (
-        <GalleryItem key={index}>
-          <img
-            src={item.link}
-            alt={item.text}
-            onClick={() => handleClick(item, index)}
-          />
-        </GalleryItem>
-      ))}
+    <GalleryWrapper>
+      {photos.length > 0 && photos !== undefined ? 
+      (
+        photos.map((item, index) => (
+          <GalleryItem key={index}>
+            <img
+              src={item.link}
+              alt={item.text}
+              onClick={() => handleClick(item, index)}
+            />
+          </GalleryItem>
+        ))
+      ) : (
+        <div>
+          <h2>There is no photos :(</h2>
+          <p>Photos have not been added by the facility owner</p>
+        </div>
+      )}
       <div>
         {clickedImg && (
           <Modal
@@ -91,7 +106,7 @@ function App() {
           />
         )}
       </div>
-    </Wrapper>
+    </GalleryWrapper>
   );
 }
 

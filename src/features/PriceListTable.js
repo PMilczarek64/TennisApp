@@ -3,17 +3,22 @@ import styled from "styled-components";
 import shortid from "shortid";
 
 const Table = styled.div`
+  margin: 30px;
   min-height: 300px;
   display: grid;
+  grid-gap: 1px;
+  grid-row-gap: 1px;
+  background: linear-gradient(140deg, white 0%, rgba(2,101,146,1) 40%);
   grid-template-areas:
     'header header header header header header header header'
     'weekdays1 weekdays1 weekdays1 hours1 hours1 hours1 price1 price1'
     'weekdays1 weekdays1 weekdays1 hours2 hours2 hours2 price2 price2'
     'weekdays2 weekdays2 weekdays2 hours3 hours3 hours3 price3 price3';
-    background-color: ${({ theme }) => theme.colors.darkGrey};
     box-shadow: 8px 8px 24px -14px rgba(66, 68, 90, 1);
-    border: 0.5px solid;
     border-color: ${({ theme }) => theme.colors.darkGrey};
+    p{
+      color: black;
+    }
 `;
 
 const GridItem = styled.div`
@@ -22,9 +27,14 @@ const GridItem = styled.div`
   justify-content: center;
   align-items: center;
   background-color: white;
-  border: solid 0.5px;
+  opacity: 0.9;
   &.header {
     grid-area: header;
+    background: linear-gradient(140deg, white 0%, rgba(2,101,146,1) 40%);
+    color: white;
+    p {
+      color: white;
+    }
   }
   &.weekdays1 {
   grid-area: weekdays1;

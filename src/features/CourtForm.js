@@ -33,7 +33,7 @@ const LocationForm = styled.form`
   font-size: 20px;
   button {
     margin-left: 70%;
-    background: ${({ theme }) => theme.colors.detailGreen};
+    background: linear-gradient(90deg, #ddff00 0%, rgb(255, 231, 76) 100%);
     border: none;
     border-radius: 10px;
     padding: 10px 15px;
@@ -69,14 +69,10 @@ const CourtForm = () => {
   const [selectedCity, setSelectedCity] = useState("");
   const objects = useSelector((state) => getObjectsByCity(state, selectedCity));
   const navigate = useNavigate();
-  const objectId = "";
+  const [objectId, setObjectId] = useState("");
 
   const handleCityChange = (e) => {
     setSelectedCity(e);
-  };
-
-  const handleObjectIdChange = (e) => {
-    objectId = e;
   };
 
   const handleSubmit = (e) => {
@@ -117,7 +113,7 @@ const CourtForm = () => {
               type="select"
               name="object"
               disabled={selectedCity.length > 2 ? false : true}
-              onChange={(e) => handleObjectIdChange(e.target.value)}
+              onChange={(e) => setObjectId(e.target.value)}
             >
               <option value="" key={shortid()}>all</option>
               {objects.map((object) => (
@@ -127,7 +123,7 @@ const CourtForm = () => {
               ))}
             </Select>
           </FormItem>
-          <button onClick={handleSubmit}>Show</button>
+          <button onClick={handleSubmit}>Search</button>
         </LocationForm>
         <CourtsList>
           {objects.map((object) => (

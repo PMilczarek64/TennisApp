@@ -12,14 +12,14 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
-  min-height: 70vh;
+  min-height: 90vh;
   max-width: 100%;
   background-image: url(${HeaderImg});
   background-size: cover;
   position: relative;
   display: flex;
   align-items: center;
-  background-position: 10% 100%;
+  background-position-y: 45%;
   
  
   flex-direction: column;
@@ -30,18 +30,37 @@ const Header = styled.div`
     margin-block: 10px;
     background-color: rgba(0, 0, 0, 0.719);
     font-weight: 100;
+    color: ${({ theme }) => theme.colors.detalGreen};
     &.left {
-      margin-top: 100px;
-      transform: translateX(-40%);
+      margin-top: 130px;
+      transform: translateX(-54%);
       padding: 10px 40px 10px 50%;
       border-top-right-radius: 15px;
       border-bottom-right-radius: 15px;
+      margin-bottom: 80px;
+      h3 {
+        color: ${({ theme }) => theme.colors.detailGreen};
+      }
     }
     &.right {
-      transform: translateX(40%);
+      transform: translateX(77%);
       padding: 12px 50% 12px 40px;
       border-top-left-radius: 15px;
       border-bottom-left-radius: 15px;
+      h2 {
+        color: #026592;
+      }
+      i {
+        font-size: 32px;
+        color: ${({ theme }) => theme.colors.detailGreen};
+      }
+    }
+    &.left2 {
+      transform: translateX(-63%);
+      padding: 12px 50px 12px 50%;
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+      margin-bottom: 75px;
     }
   }
 `;
@@ -84,8 +103,10 @@ const Home = () => {
           </Logo>
           <Navbar />
         </TopHeader>
-          <span className="left"><h1>Create our society!</h1></span>
-          <span className="right"><h3>BOOK A COURT, TRAININGS, BLOG</h3></span>
+          
+          <span className="left"><h3>BOOK A COURT, TRAININGS, BLOG</h3></span>
+          <span className="left2"><h1>Create our society!</h1></span>
+          <span className="right"><h2>Play tennis <i class="fa fa-play" aria-hidden="true"></i></h2></span>
       </Header>
     </Container>
   );

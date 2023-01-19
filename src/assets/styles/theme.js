@@ -13,7 +13,7 @@ export const theme = {
     warning: '#E1D888',
     darkPurple: '#C0C7D6',
     lightPurple: '#ECEFF7',
-    detailGreen: '#ddff00',
+    detailGreen: '#dfff4f',
     greenTransparent: 'rgba(35, 238, 174, 0.376)',
     fadedDetailGreen: '#ddff0041',
 

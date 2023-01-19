@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import styled from "styled-components";
 import CourtInfo from "../pages/CourtInfo";
 import ContentNav from "./ContentNav";
@@ -11,7 +11,6 @@ import CourtsGallery from "./CourtsGallery/CourtsGallery";
 
 
 const Wrapper = styled.div`
-
 `;
 
 const Content = styled.div`
@@ -19,15 +18,12 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
 `;
 
 const ShowObject = () => {
   const { city, objectId } = useParams();
-  console.log('showObject City', city);
-  console.log('showObject id', objectId);
   const checkLoggedUser = useSelector(getLoggingInInfo);
-  console.log('logingin? ', checkLoggedUser);
+
   return (
       <Wrapper>
         <ContentNav objectId={Number(objectId)} city={city} />

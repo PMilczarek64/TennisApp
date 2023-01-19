@@ -78,6 +78,8 @@ const BookingForm = ({
   busyHours,
   fromHour,
   setSelectedHour,
+  selectedEndHour,
+  setSelectedEndHour,
   selectedCourt,
   tableDate,
   bookingId,
@@ -94,15 +96,11 @@ const BookingForm = ({
   );
 
   const loggedUser = useSelector(getLoggingInInfo);
-
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
   const [maxPossibleHours, setMaxPossibleHours] = useState([]);
-  const [selectedEndHour, setSelectedEndHour] = useState();
   const dispatch = useDispatch();
   const { objectId } = useParams();
 
-  useEffect(() => {
+  const countPossibleHours = () => {
     const nextBusyHour =
       maxBusyHours.filter((hour) => hour > fromHour)[0] || 20.5;
     let preparedMaxPossibleHours = freeHoursByCourt
@@ -115,6 +113,10 @@ const BookingForm = ({
       ].sort();
     }
     setMaxPossibleHours(preparedMaxPossibleHours);
+  }
+
+  useEffect(() => {
+    countPossibleHours();
     setSelectedEndHour(fromHour + 0.5);
   }, [fromHour, tableDate]);
 
@@ -140,9 +142,6 @@ const BookingForm = ({
         ":00 " +
         tableDate.toString().slice(-46)
     ).format();
-
-
-
     dispatch(
       addBooking({
         id: bookingId,
@@ -154,8 +153,8 @@ const BookingForm = ({
         bookedByUser: loggedUser.id,
       })
     );
-    setName("");
-    setPhone("");
+    countPossibleHours();
+    setSelectedHour(fromHour - 0.5);
     setShowBookingForm(false);
   };
 

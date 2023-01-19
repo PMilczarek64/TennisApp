@@ -4,30 +4,24 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { CompanyLogo } from "../common/CompanyLogo";
+import CompanyHeader from "../common/CompanyHeader";
 import { getObjectById } from "../Redux/store";
 import BookingTable from "./BookingTable";
 
 const ColumnWrapper = styled.div`
+width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 0 100px;
+  box-shadow: 0px 5px 24px -10px rgba(66, 68, 90, 1);
+  padding-bottom: 50px;
   h3 {
     color: black;
   }
 `;
 
-const BookingHeader = styled.div`
-  margin-block: 30px;
-`;
-
-const HeaderWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
 const RowWrapper = styled.div`
   margin-top: 20px;
+  padding-inline: 50px;
   display: flex;
   justify-content: space-between;
   .react-datepicker {
@@ -91,18 +85,7 @@ const CourtsBooking = () => {
 
   return (
     <ColumnWrapper>
-      <HeaderWrapper>
-        <CompanyLogo>
-          <img src={`/logos/${object.logo}`}></img>
-        </CompanyLogo>
-        <BookingHeader>
-          <h2>{object.name}</h2>
-          <h3>Book a court</h3>
-        </BookingHeader>
-        <CompanyLogo>
-          <img src={`/logos/${object.logo}`}></img>
-        </CompanyLogo>
-      </HeaderWrapper>
+      <CompanyHeader name={object.name} city={object.city} logo={object.logo} address={object.address} phone={object.phoneNumber} subHeader="Book a court"/>
       <p>
         Select a date from the calendar and click on a free date in the table to
         open the booking window. If you need to cancel your reservation, click

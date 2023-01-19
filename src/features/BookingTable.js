@@ -7,10 +7,9 @@ import BookingForm from "./BookingForm";
 import { useSelector } from "react-redux";
 import { getLoggingInInfo } from "../Redux/store";
 import EditBooking from "./EditBooking";
-import RemoveBookingModal from "./RemoveBookingModal";
 
 const Table = styled.table`
-  width: 1000px;
+  width: 90%;
   background: linear-gradient(90deg, #ddff00 0%, rgb(255, 231, 76) 100%);
   box-shadow: 12px 12px 24px -18px ${({ theme }) => theme.colors.darkGrey};
   margin-left: 20px;
@@ -68,21 +67,18 @@ const BookingTable = ({
   tableDate,
   showEditBooking,
   setShowEditBooking,
-  showRemoveModal,
-  setShowRemoveModal,
 }) => {
   const [selectedCourt, setSelectedCourt] = useState(1);
   const freeHours = [];
   const busyHours = [];
   const loggedUser = useSelector(getLoggingInInfo);
   const [bookingId, setBookingId] = useState("");
-  
+  const [selectedEndHour, setSelectedEndHour] = useState();
 
   const handleBooking = (hour, court, bookingId) => {
     setSelectedHour(hour);
     setSelectedCourt(court);
     setBookingId(bookingId);
-    console.log("bookingId: ", bookingId);
     setShowBookingForm(true);
     
   };
@@ -98,7 +94,7 @@ const BookingTable = ({
           moment(event.startDate).format("HH:mm") <= hour &&
           moment(event.endDate).format("HH:mm") >= hour &&
           moment(event.startDate).format("YYYY/MM/DD") ===
-            moment(tableDate).format("YYYY/MM/DD")) ||
+          moment(tableDate).format("YYYY/MM/DD")) ||
         (event.court === courtId &&
           moment(event.startDate).format("HH:mm") <= hour &&
           moment(event.endDate).format("HH:mm") >= hour &&
@@ -113,7 +109,7 @@ const BookingTable = ({
         moment(event.startDate).format("HH:mm") <= hour &&
         moment(event.endDate).format("HH:mm") >= hour &&
         moment(event.startDate).format("YYYY/MM/DD") ===
-          moment(tableDate).format("YYYY/MM/DD") &&
+        moment(tableDate).format("YYYY/MM/DD") &&
         Number(event.bookedByUser) === Number(loggedUser.id) &&
         event.bookedByUser !== undefined
     );
@@ -131,25 +127,13 @@ const BookingTable = ({
         setSelectedHour={setSelectedHour}
         tableDate={tableDate}
         bookingId={bookingId}
+        selectedEndHour={selectedEndHour}
+        setSelectedEndHour={setSelectedEndHour}
       />
       <EditBooking
         showEditBooking={showEditBooking}
         setShowEditBooking={setShowEditBooking}
         userId={loggedUser.id}
-      />
-      <RemoveBookingModal 
-        showEditBooking={showEditBooking}
-        setShowEditBooking={setShowEditBooking}
-        fromHour={selectedHour}
-        selectedCourt={selectedCourt}
-        freeHours={freeHours}
-        busyHours={busyHours}
-        setSelectedHour={setSelectedHour}
-        tableDate={tableDate}
-        bookingId={bookingId}
-        showRemoveModal={showRemoveModal}
-        setShowRemoveModal={setShowRemoveModal}
-
       />
       <thead>
         <tr>
@@ -206,7 +190,5 @@ const BookingTable = ({
     </Table>
   );
 };
-
-//BookingTable.PropTypes = {};
 
 export default BookingTable;

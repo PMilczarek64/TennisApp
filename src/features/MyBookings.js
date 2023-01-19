@@ -100,7 +100,7 @@ const MyBookings = () => {
                   object.id === event.objectId && 
                     <h4>{object.name}</h4>
               )}
-
+              <p>Court: {event.court}</p>
               <p>Date: {moment(event.startDate).format("LL")}</p>
               <p>
                 Booking hours:{" "}
