@@ -8,6 +8,8 @@ import LoginForm from './features/LoginForm';
 import MyAccount from './features/MyAccount';
 import CourtsBooking from './features/CourtsBooking';
 import MyBookings from './features/MyBookings';
+import NotFound from './views/404NotFound';
+
 
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
       <GlobalStyle />
       <Home />
       <Routes>
+        <Route path="*" element={<NotFound />} />
         <Route path="/" element={<CourtForm />} />
         <Route path="/courts/" element={<Courts />} />
         <Route path="/courts/:city" element={<Courts />} />

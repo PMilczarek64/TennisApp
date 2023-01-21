@@ -11,7 +11,7 @@ export const getObjectsByCity = ({ objects }, city) =>
   objects;
 export const getObjectById = ({ objects }, objectId) =>
   objects.find((object) => object.id === objectId);
-export const getFirstCourtByCity = ({ objects }, city) =>
+export const getFirstFacilityByCity = ({ objects }, city) =>
   objects.find((object) => object.city === city);
 export const getUserName = ({ users }, userName, password) =>
   users.find(

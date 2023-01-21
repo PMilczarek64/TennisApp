@@ -5,13 +5,16 @@ import CourtInfo from "../pages/CourtInfo";
 import ContentNav from "./ContentNav";
 import CourtsBooking from "./CourtsBooking";
 import LoginForm from "./LoginForm";
-import { getLoggingInInfo } from "../Redux/store";
+import {
+  getFirstFacilityByCity,
+  getLoggingInInfo,
+  getObjectById,
+} from "../Redux/store";
 import { useSelector } from "react-redux";
 import CourtsGallery from "./CourtsGallery/CourtsGallery";
+import NotFound from "../views/404NotFound";
 
-
-const Wrapper = styled.div`
-`;
+const Wrapper = styled.div``;
 
 const Content = styled.div`
   margin: 0 150px 50px 150px;
@@ -24,17 +27,44 @@ const ShowObject = () => {
   const { city, objectId } = useParams();
   const checkLoggedUser = useSelector(getLoggingInInfo);
 
+  const checkCityURL = useSelector((state) =>
+    getFirstFacilityByCity(state, city)
+  );
+  const checkObjectIdURL = useSelector((state) =>
+    getObjectById(state, Number(objectId))
+  );
+  console.log("checking city ", checkCityURL);
+  console.log("checking object id ", checkObjectIdURL);
+
   return (
-      <Wrapper>
-        <ContentNav objectId={Number(objectId)} city={city} />
-        <Content>
-          <Routes>
-            <Route path="Info" element={<CourtInfo objectId={objectId} />} />
-            <Route path="Booking" element={checkLoggedUser !== undefined ? <CourtsBooking objectId={objectId} /> : <LoginForm/>} />
-            <Route path="Gallery" element={<CourtsGallery objectId={objectId} />} />
-          </Routes>
-        </Content>
-      </Wrapper>
+    <Wrapper>
+      { checkCityURL === undefined || checkObjectIdURL === undefined ?
+      <NotFound message="uncorrect URL!" /> :
+        <>
+          <ContentNav objectId={Number(objectId)} city={city} />
+          <Content>
+            <Routes>
+              <Route path="*" element={<CourtInfo objectId={objectId} />} />
+              <Route path="Info" element={<CourtInfo objectId={objectId} />} />
+              <Route
+                path="Booking"
+                element={
+                  checkLoggedUser !== undefined ? (
+                    <CourtsBooking objectId={objectId} />
+                  ) : (
+                    <LoginForm />
+                  )
+                }
+              />
+              <Route
+                path="Gallery"
+                element={<CourtsGallery objectId={objectId} />}
+              />
+            </Routes>
+          </Content>
+        </>
+      }
+    </Wrapper>
   );
 };
 
