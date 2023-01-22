@@ -16,9 +16,10 @@ const Header = styled.div`
   max-width: 100%;
   background-image: url(${HeaderImg});
   background-size: cover;
+  background-position-x: center;
   position: relative;
   display: flex;
-  align-items: center;
+  
   background-position-y: 45%;
   
  
@@ -26,6 +27,7 @@ const Header = styled.div`
   display: flex;
   overflow: hidden;
   span {
+    position: relative;
     max-width: 100%;
     margin-block: 10px;
     background-color: rgba(0, 0, 0, 0.719);
@@ -33,18 +35,31 @@ const Header = styled.div`
     color: ${({ theme }) => theme.colors.detalGreen};
     &.left {
       margin-top: 130px;
-      transform: translateX(-54%);
-      padding: 10px 40px 10px 50%;
+      text-align: right;
+      width: 650px;
+      padding: 10px 20px 10px 5%;
       border-top-right-radius: 15px;
       border-bottom-right-radius: 15px;
       margin-bottom: 80px;
       h3 {
         color: ${({ theme }) => theme.colors.detailGreen};
       }
+      @media screen and (max-width: 1100px) {
+        margin-top: 20px;
+      }
+      @media screen and (max-width: 720px) {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+      }
     }
     &.right {
-      transform: translateX(77%);
-      padding: 12px 50% 12px 40px;
+      position: absolute;
+      bottom: 5%;
+      right: 0;
+      padding: 12px 100px 12px 20px;
+      width: 350px;
+      text-align: left;
       border-top-left-radius: 15px;
       border-bottom-left-radius: 15px;
       h2 {
@@ -54,13 +69,24 @@ const Header = styled.div`
         font-size: 32px;
         color: ${({ theme }) => theme.colors.detailGreen};
       }
+      @media screen and (max-width: 720px) {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+      }
     }
     &.left2 {
-      transform: translateX(-63%);
-      padding: 12px 50px 12px 50%;
+      width: 590px;
+      padding: 12px 20px;
+      text-align: right;
       border-top-right-radius: 15px;
       border-bottom-right-radius: 15px;
       margin-bottom: 75px;
+      @media screen and (max-width: 720px) {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+      }
     }
   }
 `;
@@ -103,7 +129,6 @@ const Home = () => {
           </Logo>
           <Navbar />
         </TopHeader>
-          
           <span className="left"><h3>BOOK A COURT, TRAININGS, BLOG</h3></span>
           <span className="left2"><h1>Create our society!</h1></span>
           <span className="right"><h2>Play tennis <i class="fa fa-play" aria-hidden="true"></i></h2></span>

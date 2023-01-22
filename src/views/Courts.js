@@ -26,7 +26,7 @@ const List = styled.ul`
 
 const ListItem = styled.li`
   max-width: 100%;
-  height: 120px;
+  min-height: 120px;
   margin-block: 5px;
   display: flex;
   justify-content: baseline;
@@ -40,6 +40,13 @@ const ListItem = styled.li`
     border-color: ${({ theme }) => theme.colors.detailGreen};
     box-shadow: 12px 12px 24px -22px ${({ theme }) => theme.colors.detailGreen};
     background-color: ${({ theme }) => theme.colors.fadedDetailGreen};
+  }
+  @media screen and (max-width: 700px){
+    flex-direction: column;
+    padding: 20px;
+    h3 {
+      margin-top: 10px;
+    }
   }
 `;
 
@@ -69,7 +76,7 @@ const Courts = () => {
               <img src={`../../logos/${object.logo}`}></img>
             </CompanyLogo>
             <h3>
-              <p><b>{object.name}</b> {object.city}, {object.address}, Types of courts: </p>
+              <p><b>{object.name}</b> {object.city}, {object.address}</p>
             </h3>
           </ListItem>
         ))}

@@ -4,11 +4,13 @@ import Ball from '../assets/images/Ball.png';
 import { Link, NavLink } from 'react-router-dom';
 import { getLoggingInInfo } from "../Redux/store";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { setLoggedIn } from "../Redux/store";
 
 const Wrapper = styled.div`
   height: 50px;
+  @media screen and (max-width: 1030px){
+    display: none;
+  }
 `;
 
 const Ul = styled.ul`

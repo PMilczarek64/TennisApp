@@ -18,4 +18,7 @@ export const CompanyLogo = styled.div`
       }
     }
   }
+  @media screen and (max-width: 770px) {
+    margin-inline: 0;
+  }
 `;

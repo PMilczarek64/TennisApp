@@ -21,6 +21,12 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media screen and (max-width: 1110px){
+    margin: 0 0 50px 0;
+  }
+  @media screen and (max-width: 870px){
+    margin: 0 0 50px 0;
+  }
 `;
 
 const ShowObject = () => {

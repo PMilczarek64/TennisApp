@@ -17,12 +17,20 @@ const HeaderWrapper = styled.div`
   h3 {
     color: black;
   }
+  @media screen and (max-width: 820px) {
+    flex-direction: column;
+    padding-bottom: 0;
+    margin-inline: 0;
+  }
 `;
 
 const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 820px) {
+    display: none;
+  }
 `;
 
 const Header = styled.div`

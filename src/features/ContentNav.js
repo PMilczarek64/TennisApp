@@ -22,7 +22,7 @@ const Bar = styled.ul`
       transition: 0.2s ease-in-out;
     }
     &.active {
-      border-bottom: solid 3px #00ac56;
+      color:  #00ac56;
     }
   }
 `;

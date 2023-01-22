@@ -19,6 +19,9 @@ const Table = styled.div`
     p{
       color: black;
     }
+    @media screen and (max-width: 505px){
+      display: none;
+    }
 `;
 
 const GridItem = styled.div`

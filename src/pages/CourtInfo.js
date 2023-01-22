@@ -12,7 +12,6 @@ const Wrapper = styled.div`
   box-shadow: 0px 5px 24px -10px rgba(66, 68, 90, 1);
   h4 {
     margin-bottom: 15px;
-    
   }
 `;
 
@@ -22,14 +21,24 @@ const MainInfoWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding-inline: 50px;
-  
+  @media screen and (max-width: 670px){
+    flex-direction: column;
+    align-items: center;
+    padding-block: 0;
+  }
+  @media screen and (max-width: 460px){
+    padding: 0;
+  }
 `;
 
 const Info = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
+  @media screen and (max-width: 670px){
+    align-items: center;
+    margin: 25px;
+  }
 `;
 
 const ObjectDescription = styled.div`
@@ -43,6 +52,16 @@ const DetailLine = styled.span`
   border-bottom: 3px solid #026592;
   &.first {
     margin-top: 0;
+  }
+  &.mobile {
+    width: 130px;
+    border-bottom: 2px solid #026592;
+    @media screen and (min-width: 670px){
+      display: none;
+    }
+  }
+  @media screen and (max-width: 460px){
+    margin-inline: 0;
   }
 `;
 
@@ -65,6 +84,7 @@ const CourtInfo = () => {
           <p><b>Email:</b> {object.email}</p>
           <p><b>Website:</b> {object.website}</p>
         </Info>
+        <DetailLine className="mobile"/>
         <Info>
           <h4>Info about the courts</h4>
           <p><b>Opening hours:</b> {infoData.openingHour} - {infoData.closingHour}</p>
@@ -97,7 +117,7 @@ const CourtInfo = () => {
         <p>WE ACCEPT MULTISPORT PLUS CARDS, FITPROFIT - Discount for holders of PLN 15 (discount regulations available on the card issuer's website)</p>
         <p>ROCKETS AND BALLS ARE AVAILABLE FOR THE GAME FOR FREE</p>
       </ObjectDescription>
-      <PriceListTable priceList={priceList}/>
+      <PriceListTable priceList={priceList} className="mobile-hide"/>
     </Wrapper>
   );
 };

@@ -21,18 +21,24 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  @media screen and (max-width: 770px){
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const LocationForm = styled.form`
-  min-width: 20%;
+  min-width: 200px;
   min-height: 100%;
   padding: 60px 100px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
   font-size: 20px;
   button {
-    margin-left: 70%;
+    width: 100%;
+    margin: 0;
     background: linear-gradient(90deg, #ddff00 0%, rgb(255, 231, 76) 100%);
     border: none;
     border-radius: 10px;
@@ -40,6 +46,31 @@ const LocationForm = styled.form`
     margin-block: 10px;
     font-size: 18px;
     cursor: pointer;
+  }
+  h4 {
+    margin-bottom: 10px;
+  }
+  label {
+    font-size: 17px;
+  }
+  @media screen and (max-width: 770px){
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 20px 0;
+     button {
+      margin-block: 0;
+    }
+    h4 {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 546px){
+    flex-direction: column;
+    width: 85%;
+    button {
+    height: 60px;
+    }
   }
 `;
 
@@ -55,13 +86,33 @@ const CourtsList = styled.div`
   p {
     color: black;
   }
+  @media screen and (max-width: 770px){
+    width: 90%;
+    padding: 20px;
+  }
 `;
 
 const FormItem = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-block: 5px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 0 5px;
+  width: 100%;
+  @media screen and (max-width: 546px){
+    margin: 5px 0;
+    align-items: center;
+    select {
+      width: 100%;
+      height: 60px;
+      font-size: 23px;
+    }
+    label {
+      font-size: 23px;
+      margin-bottom: 2px;
+    }
+  }
 `;
 
 const CourtForm = () => {
