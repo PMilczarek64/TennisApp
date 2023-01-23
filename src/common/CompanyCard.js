@@ -17,6 +17,7 @@ const ListItem = styled.div`
   box-shadow: 12px 12px 24px -22px ${({ theme }) => theme.colors.faded};
   border: 1px solid ${({ theme }) => theme.colors.strongFaded};
   cursor: pointer;
+  background-color: white;
   img {
     max-height: 50px;
   }

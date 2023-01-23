@@ -49,13 +49,13 @@ const DetailLine = styled.span`
   margin-inline: 50px;
   margin-block: 20px;
   height: 3px;
-  border-bottom: 3px solid #026592;
+  border-bottom: 3px solid ${({ theme }) => theme.colors.detailBlue};
   &.first {
     margin-top: 0;
   }
   &.mobile {
     width: 130px;
-    border-bottom: 2px solid #026592;
+    border-bottom: 2px solid ${({ theme }) => theme.colors.detailBlue};
     @media screen and (min-width: 670px){
       display: none;
     }

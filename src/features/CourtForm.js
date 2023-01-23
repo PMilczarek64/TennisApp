@@ -21,6 +21,7 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  padding-block: 30px;
   @media screen and (max-width: 770px){
     flex-direction: column;
     align-items: center;

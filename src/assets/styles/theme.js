@@ -14,6 +14,7 @@ export const theme = {
     darkPurple: '#C0C7D6',
     lightPurple: '#ECEFF7',
     detailGreen: '#dfff4f',
+    detailBlue: '#026592',
     greenTransparent: 'rgba(35, 238, 174, 0.376)',
     fadedDetailGreen: '#ddff0041',
 

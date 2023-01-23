@@ -9,12 +9,12 @@ import MyAccount from './features/MyAccount';
 import CourtsBooking from './features/CourtsBooking';
 import MyBookings from './features/MyBookings';
 import NotFound from './views/404NotFound';
-
-
+import Footer from './views/Footer';
+import styled from 'styled-components';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <GlobalStyle />
       <Home />
       <Routes>
@@ -27,6 +27,7 @@ function App() {
         <Route path="/myaccount/:userId" element={<MyAccount />} />
         <Route path="/myaccount/:userId/bookings" element={<MyBookings />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

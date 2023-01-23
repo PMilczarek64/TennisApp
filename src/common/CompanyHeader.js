@@ -12,7 +12,7 @@ const HeaderWrapper = styled.div`
   background-position-y: 30%;
   background-size: cover;
   h2 {
-    color: #026592;
+    color: ${({ theme }) => theme.colors.detailBlue};
   }
   h3 {
     color: black;
