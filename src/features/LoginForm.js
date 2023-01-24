@@ -22,6 +22,9 @@ const Wrapper = styled.div`
       color: black;
     }
   }
+  @media screen and (max-width: 600px){
+    padding: 50px 10px;
+  }
 `;
 
 const Form = styled.div`

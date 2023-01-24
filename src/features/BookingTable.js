@@ -18,7 +18,7 @@ const Table = styled.table`
   }
   td,
   th {
-    padding: 15px 15px;
+    padding: 15px;
     font-weight: 800;
     background-color: white;
     width: 25%;
@@ -44,6 +44,11 @@ const Table = styled.table`
       font-weight: 800;
       font-size: 24px;
       background: transparent;
+      @media screen and (max-width: 450px){
+        display: flex row;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
     }
     &.yellow {
       background: linear-gradient(70deg, transparent, rgb(255, 255, 255));
@@ -53,6 +58,15 @@ const Table = styled.table`
     :hover {
       opacity: 0.9;
     }
+    @media screen and (max-width: 920px){
+    padding: 15px 5px;
+  }
+  @media screen and (max-width: 620px){
+    height: 38px;
+  }
+  }
+  @media screen and (max-width: 920px){
+    margin-left: 0;
   }
 `;
 

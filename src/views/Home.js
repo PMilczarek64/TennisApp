@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import HeaderImg from '../assets/images/Header.jpg';
 import LogoImage from '../assets/images/Tennis.png';
-import Navbar from "../features/Navbar";
+import Navbar from "../features/Nav/Navbar";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -110,6 +110,7 @@ export const Logo = styled.div`
   object-fit: cover;
   width: 220px;
   height: 200px;
+  z-index: 99;
   cursor: pointer;
   img {
     max-height: 100%;
@@ -117,17 +118,17 @@ export const Logo = styled.div`
   }
 `;
 
-const Home = () => {
+const Home = ({passedRef, action, pages}) => {
   const navigate = useNavigate();
   return (
-    <Container>
+    <Container ref={passedRef}>
       <Header>
         <TopHeader>
           <Logo onClick={() => navigate('/')}>
             <h3>TENNIS MOTION</h3>
             <img src={LogoImage} alt="logo"></img>
           </Logo>
-          <Navbar />
+          <Navbar action={action} pages={pages}/>
         </TopHeader>
           <span className="left"><h3>BOOK A COURT, TRAININGS, BLOG</h3></span>
           <span className="left2"><h1>Create our society!</h1></span>

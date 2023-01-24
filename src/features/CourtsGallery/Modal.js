@@ -29,6 +29,9 @@ const Overlay = styled.div`
     z-index: 999;
     cursor: pointer;
   }
+  @media screen and (max-width: 708px){
+    display: none;
+  }
 `;
 
 const Arrow = styled.div`

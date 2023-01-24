@@ -1,33 +1,25 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
+import { getLoggingInInfo, setLoggedIn } from "../../Redux/store";
 import styled from "styled-components";
-import Ball from '../assets/images/Ball.png';
-import { Link, NavLink } from 'react-router-dom';
-import { getLoggingInInfo } from "../Redux/store";
-import { useSelector, useDispatch } from "react-redux";
-import { setLoggedIn } from "../Redux/store";
-
-const Wrapper = styled.div`
-  height: 50px;
-  @media screen and (max-width: 1030px){
-    display: none;
-  }
-`;
+import Ball from '../../assets/images/Ball.png';
 
 const Ul = styled.ul`
+  list-style: none;
   display: flex;
-  flex-direction: row;
+  flex-flow: row;
   background-color: rgba(0, 0, 0, 0.719);
-  
-  height: 100%;
+  height: 50px;
+  z-index: 2;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
-  overflow: hidden;
   li {
     display: flex;
     max-height: 100%;
     align-items: center;
     justify-content: center;
-    padding-inline: 20px;
+    padding-inline: 15px;
     list-style: none;
     font-size: 20px;
     font-weight: 500;
@@ -68,6 +60,31 @@ const Ul = styled.ul`
       width: 30px;
     }
   }
+
+  @media (max-width: 1090px) {
+    flex-flow: column nowrap;
+    background-color: ${({ theme }) => theme.colors.detailBlue};
+    text-align: start;
+    position: fixed;
+    transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(100%)'};
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 350px;
+    opacity: 0.95;
+    transition: transform 0.3s ease-in-out;
+    justify-content: center;
+    border-radius: 0;
+    li {
+      color: white;
+      font-size: ${({ theme }) => theme.fontSize.l};
+      padding-left: 30px;
+      padding-block: 30px;
+    }
+  }
+  @media (max-width: 600px) {
+    width: 60%;
+  }
 `;
 
 const NavIcon = styled.div`
@@ -84,31 +101,33 @@ const NavIcon = styled.div`
   }
 `;
 
-const Navbar = ({action, pages}) => {
+
+
+const RightNav = ({ open, action, pages }) => {
+
   const userIsLogged = useSelector(getLoggingInInfo);
   const dispatch = useDispatch();
   const logOut = () => {
     dispatch(setLoggedIn({ setLogged: false, name: userIsLogged.userName }));
   }
+
   return (
-    <Wrapper>
-      <Ul>
-        <li><Link to="/" onClick={() => action(pages.home)}><img src={Ball}></img></Link></li>
+    <Ul open={open}>
+      <li><Link to="/" onClick={() => action(pages.home)}><img src={Ball}></img></Link></li>
         <li><NavLink to="/"  onClick={() => action(pages.content)}>Book a court</NavLink></li>
         <li>Find a partner</li>
         <li>Blog</li>
         <li>Contact</li>
         {userIsLogged === undefined ?
-          <li><NavLink to="/login">Login  <NavIcon className="fa fa-sign-in"/></NavLink></li>
+          <li><NavLink to="/login" onClick={() => action(pages.content)}>Login <NavIcon className="fa fa-sign-in"/></NavLink></li>
           :
           <>
             <li><NavLink to={'/myaccount/' + userIsLogged.id}>My account</NavLink></li>
             <li onClick={logOut}><NavLink to="/">{'Log Out'}<NavIcon className="fa fa-power-off"/></NavLink></li>
           </>
         }
-      </Ul>
-    </Wrapper>
+    </Ul>
   );
 };
 
-export default Navbar;
+export default RightNav;

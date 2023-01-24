@@ -17,9 +17,12 @@ width: 100%;
   h3 {
     color: black;
   }
+  p {
+    padding-inline: 50px;
+  }
 `;
 
-const RowWrapper = styled.div`
+const ContentWrapper = styled.div`
   margin-top: 20px;
   padding-inline: 50px;
   display: flex;
@@ -41,11 +44,24 @@ const RowWrapper = styled.div`
       border-radius: 50%;
     }
   }
+  @media screen and (max-width: 920px){
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 0px;
+    .react-datepicker {
+      margin-bottom: 20px;
+    }
+  }
+  @media screen and (max-width: 520px){
+    .react-datepicker {
+      transform: scale(1.37);
+      margin-block: 60px;
+    }
+  }
 `;
 
 const CourtsBooking = () => {
   const [startDate, setStartDate] = useState(new Date());
-  console.log("start date", startDate);
 
   const { objectId } = useParams();
   const object = useSelector((state) => getObjectById(state, Number(objectId)));
@@ -79,8 +95,6 @@ const CourtsBooking = () => {
     setStartDate(date);
   };
 
-  console.log(`/logos${object.logo}`);
-
   checkAndFormatPossibleHours();
 
   return (
@@ -91,7 +105,7 @@ const CourtsBooking = () => {
         open the booking window. If you need to cancel your reservation, click
         on it
       </p>
-      <RowWrapper>
+      <ContentWrapper>
         <DatePicker
           selected={startDate}
           onChange={(date) => handleDateChange(date)}
@@ -112,7 +126,7 @@ const CourtsBooking = () => {
           showRemoveModal={showRemoveModal}
           setShowRemoveModal={setShowRemoveModal}
         />
-      </RowWrapper>
+      </ContentWrapper>
     </ColumnWrapper>
   );
 };

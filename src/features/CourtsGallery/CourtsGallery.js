@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import { getObjectById } from "../../Redux/store";
 
 const GalleryWrapper = styled.div`
-  max-width: 1350px;
-  padding: 0px 60px;
+  max-width: 95%;
+  
   margin: 50px auto;
   display: flex;
   flex-wrap: wrap;
@@ -17,15 +17,24 @@ const GalleryWrapper = styled.div`
   img {
     cursor: pointer;
   }
+  @media screen and (max-width: 708px){
+    padding: 0;
+    margin: 50px 0;
+    gap: 0.5em;
+  }
 `;
 
 const GalleryItem = styled.div`
   width: 320px;
-  max-height: 200px;
+  height: 200px;
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  @media screen and (max-width: 708px){
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -35,8 +44,6 @@ function App() {
   const { objectId } = useParams();
   const object = useSelector((state) => getObjectById(state, Number(objectId)));
   const photos = object.contentData[1].photos;
-
-  console.log("gallery object test ", photos.length > 0);
 
   const handleClick = (item, index) => {
     setCurrentIndex(index);

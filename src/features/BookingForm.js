@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 
 const BorderWrapper = styled.div`
   padding: 20px;
-  width: 600px;
+  max-width: 100%;
   height: auto;
   background: linear-gradient(90deg, #ddff00 0%, rgb(255, 231, 76) 100%);
   z-index: 1;
@@ -22,6 +22,12 @@ const BorderWrapper = styled.div`
   transform: translate(-50%, -50%);
   &.hide {
     display: none;
+  }
+  @media screen and (max-width: 990px){
+    width: 70%;
+  }
+  @media screen and (max-width: 790px){
+    width: 90%;
   }
 `;
 
@@ -40,6 +46,7 @@ const Header = styled.h2`
   border: 1px;
   border-color: ${({ theme }) => theme.colors.faded};
   border-style: none none solid none;
+  padding: 20px;
 `;
 
 const FormItem = styled.div`
@@ -62,6 +69,10 @@ const FormItem = styled.div`
   }
   :last-child {
     margin-bottom: 10px;
+  }
+  @media screen and (max-width: 990px){
+    flex-direction: column;
+    margin: 0;
   }
 `;
 
