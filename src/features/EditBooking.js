@@ -6,7 +6,7 @@ import { useNavigate} from "react-router-dom";
 
 const BorderWrapper = styled.div`
   padding: 20px;
-  width: 600px;
+  max-width: 100%;
   height: auto;
   background: linear-gradient(90deg, #ddff00 0%, rgb(255, 231, 76) 100%);
   z-index: 1;
@@ -34,6 +34,9 @@ const Header = styled.h2`
   border: 1px;
   border-color: ${({ theme }) => theme.colors.faded};
   border-style: none none solid none;
+  @media (max-width: 750px) {
+    font-size: 24px;
+  }
 `;
 
 const FormItem = styled.div`
@@ -42,7 +45,8 @@ const FormItem = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  font-size: 20px;
   :last-child {
     margin-bottom: 10px;
   }
@@ -69,7 +73,7 @@ const EditBooking = ({ showEditBooking, setShowEditBooking, userId }) => {
       <Wrapper>
         <Header>Do you want to cancel this reservation?</Header>
         <FormItem>
-          <h4>Go to the booking management panel</h4>
+          Go to the booking management panel
         </FormItem>
       </Wrapper>
       <ButtonsWrapper>

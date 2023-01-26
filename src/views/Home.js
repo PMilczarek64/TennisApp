@@ -87,6 +87,9 @@ const Header = styled.div`
         text-align: center;
         padding: 12px;
       }
+      @media (max-width: 400px) {
+        display: none;
+      }
     }
   }
 `;
@@ -110,7 +113,7 @@ export const Logo = styled.div`
   object-fit: cover;
   width: 220px;
   height: 200px;
-  z-index: 99;
+  z-index: 3;
   cursor: pointer;
   img {
     max-height: 100%;

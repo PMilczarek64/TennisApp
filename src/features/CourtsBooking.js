@@ -20,6 +20,9 @@ width: 100%;
   p {
     padding-inline: 50px;
   }
+  @media (max-width: 1110px){
+    box-shadow: none;
+  }
 `;
 
 const ContentWrapper = styled.div`

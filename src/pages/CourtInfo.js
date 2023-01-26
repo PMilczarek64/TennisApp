@@ -13,6 +13,9 @@ const Wrapper = styled.div`
   h4 {
     margin-bottom: 15px;
   }
+  @media (max-width: 1110px){
+    box-shadow: none;
+  }
 `;
 
 const MainInfoWrapper = styled.div`

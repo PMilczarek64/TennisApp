@@ -2,12 +2,12 @@ import moment from "moment/moment";
 import propTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { ButtonGreen, ButtonGreenOutline, ButtonRedOutline } from "../common/Button";
-import { Input, Label, Select } from "../common/Inputs.styles";
+import { ButtonGreenOutline, ButtonRedOutline } from "../common/Button";
+import { Label, Select } from "../common/Inputs.styles";
 import { formatHourToNumber, formatNumberToHour } from "../utils";
 import { addBooking, getLoggingInInfo } from "../Redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import shortid from "shortid";
+
 import { useParams } from "react-router-dom";
 
 const BorderWrapper = styled.div`
@@ -165,7 +165,7 @@ const BookingForm = ({
       })
     );
     countPossibleHours();
-    setSelectedHour(fromHour - 0.5);
+    setSelectedHour(null);
     setShowBookingForm(false);
   };
 
