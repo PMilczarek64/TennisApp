@@ -12,6 +12,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 600px) {
+    margin-inline: 0px;
+  }
 `;
 
 const CardsWrapper = styled.div`
@@ -21,6 +24,9 @@ const CardsWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: stretch;
   align-items: flex-start;
+  @media (max-width: 600px) {
+    margin-inline: 0px;
+  }
 `;
 
 const Card = styled.div`

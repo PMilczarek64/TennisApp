@@ -10,7 +10,7 @@ import { useDispatch} from "react-redux";
 
 const BorderWrapper = styled.div`
   padding: 20px;
-  width: 600px;
+  max-width: 100%;
   height: auto;
   background: linear-gradient(90deg, #ddff00 0%, rgb(255, 231, 76) 100%);
   z-index: 1;
@@ -21,10 +21,15 @@ const BorderWrapper = styled.div`
   &.hide {
     display: none;
   }
+  @media screen and (max-width: 750px) {
+    min-width: 80%;
+    max-width: 100%;
+  }
 `;
 
 const Wrapper = styled.div`
   height: 100%;
+  width: 100%;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -38,6 +43,10 @@ const Header = styled.h2`
   border: 1px;
   border-color: ${({ theme }) => theme.colors.faded};
   border-style: none none solid none;
+  font-size: 32px;
+  @media screen and (max-width: 950px) {
+    font-size: 28px;
+  }
 `;
 
 const FormItem = styled.div`
@@ -103,7 +112,7 @@ const RemoveBookingModal = ({
         <ButtonsWrapper>
           <ButtonGreyOutline onClick={() => handleCLose()}>Close</ButtonGreyOutline>
           <ButtonRedOutline onClick={() => handleDelete()}>
-            Delete Booking
+            Delete
           </ButtonRedOutline>
         </ButtonsWrapper>
       </Wrapper>

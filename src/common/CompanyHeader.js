@@ -28,6 +28,9 @@ const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  .zi2 {
+    z-index: 0;
+  }
   @media screen and (max-width: 820px) {
     display: none;
   }
@@ -49,7 +52,7 @@ const CompanyHeader = ({ logo, name, subHeader }) => {
         <h3>{subHeader}</h3>
       </Header>
       <LogoWrapper>
-        <Logo>
+        <Logo className="zi2">
           <h3>TENNIS MOTION</h3>
           <img src={LogoImage} alt="logo"></img>
         </Logo>
