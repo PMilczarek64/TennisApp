@@ -11,6 +11,7 @@ import NotFound from "./views/404NotFound";
 import Footer from "./views/Footer";
 import styled from "styled-components";
 import { useRef } from "react";
+import FindAPartner from "./features/FindAPartner";
 
 function App() {
   const RoutesContainer = styled.div`
@@ -44,6 +45,7 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/myaccount/:userId" element={<MyAccount />} />
           <Route path="/myaccount/:userId/bookings" element={<MyBookings />} />
+          <Route path="/findapartner" element={<FindAPartner />} />
         </Routes>
       </RoutesContainer>
       <Footer />

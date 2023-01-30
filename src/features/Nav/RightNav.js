@@ -115,7 +115,7 @@ const RightNav = ({ open, action, pages }) => {
     <Ul open={open}>
       <li><Link to="/" onClick={() => action(pages.home)}><img src={Ball}></img></Link></li>
         <li><NavLink to="/"  onClick={() => action(pages.content)}>Book a court</NavLink></li>
-        <li>Find a partner</li>
+        <li><NavLink to="/findapartner"  onClick={() => action(pages.content)}>Find a partner</NavLink></li>
         <li>Blog</li>
         <li>Contact</li>
         {userIsLogged === undefined ?
