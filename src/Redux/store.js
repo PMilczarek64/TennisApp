@@ -1,14 +1,15 @@
 import { useSelector } from "react-redux";
 import { createStore } from "redux";
 import initialState from "./initialState";
+import { strContains } from "../utils";
 
 //selectors
 export const getAllCities = (state) => state.cities;
 export const getAllObjects = (state) => state.objects;
 export const getObjectsByCity = ({ objects }, city) =>
-  (city !== '' && city !== undefined) ?
-  objects.filter((object) => object.city === city) :
-  objects;
+  city !== "" && city !== undefined
+    ? objects.filter((object) => object.city === city)
+    : objects;
 export const getObjectById = ({ objects }, objectId) =>
   objects.find((object) => object.id === objectId);
 export const getFirstFacilityByCity = ({ objects }, city) =>
@@ -23,7 +24,16 @@ export const getUserObjectsByUserId = ({ objects }, userId) =>
   objects.filter((object) => object.propertyOfUser === userId);
 export const getEventsByObjectId = ({ objects }, objectId) =>
   objects.filter((object) => object.id === objectId)[0].events;
-export const getAllEvents = ({ objects }) => objects.filter(object => object.events && object.events);
+export const getAllEvents = ({ objects }) =>
+  objects.filter((object) => object.events && object.events);
+export const getAllPlayers = (state) => state.players;
+export const getFilteredPlayers = ({ players }, city, name, ntrp) =>
+  players.filter(
+    (player) =>
+      strContains(player.city, city) &&
+      strContains(player.name, name) &&
+      strContains(player.ntrp, ntrp)
+  );
 
 //action creators
 export const setLoggedIn = (payload) => ({ type: "SET_LOGGED_IN", payload });
@@ -68,7 +78,9 @@ const reducer = (state, action) => {
       );
       const newObjItem = {
         ...obj,
-        events: obj.events.filter(event => event.id !== (action.payload.bookingId).toString()),
+        events: obj.events.filter(
+          (event) => event.id !== action.payload.bookingId.toString()
+        ),
       };
       return {
         ...state,
@@ -79,7 +91,7 @@ const reducer = (state, action) => {
             return item;
           }
         }),
-      }
+      };
 
     default:
       return state;

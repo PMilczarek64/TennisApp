@@ -8,4 +8,12 @@ const formatNumberToHour = (inputNumber) => {
   return `${hour}:${minutes ? "30" : "00"}`;
 };
 
-export { formatHourToNumber, formatNumberToHour };
+const strContains = (str1, str2) => {
+  let callback = false;
+  if(str1.toLowerCase().includes(str2.toLowerCase())) {
+    callback = true;
+  };
+  return callback;
+};
+
+export { formatHourToNumber, formatNumberToHour, strContains };
