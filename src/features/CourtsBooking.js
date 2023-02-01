@@ -7,6 +7,7 @@ import styled from "styled-components";
 import CompanyHeader from "../common/CompanyHeader";
 import { getObjectById } from "../Redux/store";
 import BookingTable from "./BookingTable";
+import moment from "moment";
 
 const ColumnWrapper = styled.div`
 width: 100%;
@@ -112,6 +113,7 @@ const CourtsBooking = () => {
         <DatePicker
           selected={startDate}
           onChange={(date) => handleDateChange(date)}
+          minDate={moment().toDate()}
           inline
           popperClassName="shade"
         />
