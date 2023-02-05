@@ -2,7 +2,7 @@ import moment from "moment/moment";
 import React, { useState } from "react";
 import shortid from "shortid";
 import styled from "styled-components";
-import { formatHourToNumber } from "../utils";
+import { formatHourToNumber, formatNumberToHour } from "../utils";
 import BookingForm from "./BookingForm";
 import { useSelector } from "react-redux";
 import { getLoggingInInfo } from "../Redux/store";
@@ -44,7 +44,7 @@ const Table = styled.table`
       font-weight: 800;
       font-size: 24px;
       background: transparent;
-      @media screen and (max-width: 450px){
+      @media screen and (max-width: 450px) {
         display: flex row;
         justify-content: flex-start;
         align-items: flex-start;
@@ -58,14 +58,14 @@ const Table = styled.table`
     :hover {
       opacity: 0.9;
     }
-    @media screen and (max-width: 920px){
-    padding: 15px 5px;
+    @media screen and (max-width: 920px) {
+      padding: 15px 5px;
+    }
+    @media screen and (max-width: 620px) {
+      height: 38px;
+    }
   }
-  @media screen and (max-width: 620px){
-    height: 38px;
-  }
-  }
-  @media screen and (max-width: 920px){
+  @media screen and (max-width: 920px) {
     margin-left: 0;
   }
 `;
@@ -94,7 +94,6 @@ const BookingTable = ({
     setSelectedCourt(court);
     setBookingId(bookingId);
     setShowBookingForm(true);
-    
   };
 
   const handleEdit = () => {
@@ -108,28 +107,39 @@ const BookingTable = ({
           moment(event.startDate).format("HH:mm") <= hour &&
           moment(event.endDate).format("HH:mm") >= hour &&
           moment(event.startDate).format("YYYY/MM/DD") ===
-          moment(tableDate).format("YYYY/MM/DD")) ||
+            moment(tableDate).format("YYYY/MM/DD")) ||
         (event.court === courtId &&
           moment(event.startDate).format("HH:mm") <= hour &&
           moment(event.endDate).format("HH:mm") >= hour &&
           event.repeat === true)
     );
 
-  const checkIfBusyByYou = (courtId, hour) => 
-
+  const checkIfBusyByYou = (courtId, hour) =>
     events.some(
       (event) =>
         event.court === courtId &&
         moment(event.startDate).format("HH:mm") <= hour &&
         moment(event.endDate).format("HH:mm") >= hour &&
         moment(event.startDate).format("YYYY/MM/DD") ===
-        moment(tableDate).format("YYYY/MM/DD") &&
+          moment(tableDate).format("YYYY/MM/DD") &&
         Number(event.bookedByUser) === Number(loggedUser.id) &&
         event.bookedByUser !== undefined
     );
 
+  const checkIfTermExpired = (hour) => {
+    if (
+      moment(tableDate).format("L") === moment().format("L") &&
+      formatNumberToHour(hour) > moment(tableDate).format("HH:mm")
+    ) {
+      return true;
+    } else if (moment(tableDate).format("L") !== moment().format("L")) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
-    
     <Table>
       <BookingForm
         showModal={showModal}
@@ -160,46 +170,47 @@ const BookingTable = ({
         </tr>
       </thead>
       <tbody>
-        {possibleHours.map((hour) => (
-          <tr key={hour}>
-            <td className="hour">{hour}</td>
-            {courts.map((court) =>
-              checkIfBusy(court.id, hour)
-                ? busyHours.push({ courtId: court.id, hour: hour }) &&
-                  (checkIfBusyByYou(court.id, hour) ? (
-                    <td
-                      className="yellow"
-                      key={shortid()}
-                      onClick={(e) =>
-                        handleEdit()
-                      }
-                    >
-                      Booked by YOU
-                    </td>
-                  ) : (
-                    <td className="red" key={shortid()}>
-                      busy
-                    </td>
-                  ))
-                : freeHours.push({ courtId: court.id, hour: hour }) && (
-                    <td
-                      className="green"
-                      key={shortid()}
-                      id={shortid()}
-                      onClick={(e) =>
-                        handleBooking(
-                          formatHourToNumber(hour),
-                          court.id,
-                          e.target.id
-                        )
-                      }
-                    >
-                      free
-                    </td>
-                  )
-            )}
-          </tr>
-        ))}
+        {possibleHours.map(
+          (hour) =>
+            checkIfTermExpired(hour) && (
+              <tr key={hour}>
+                <td className="hour">{hour}</td>
+                {courts.map((court) =>
+                  checkIfBusy(court.id, hour)
+                    ? busyHours.push({ courtId: court.id, hour: hour }) &&
+                      (checkIfBusyByYou(court.id, hour) ? (
+                        <td
+                          className="yellow"
+                          key={shortid()}
+                          onClick={(e) => handleEdit()}
+                        >
+                          Booked by YOU
+                        </td>
+                      ) : (
+                        <td className="red" key={shortid()}>
+                          busy
+                        </td>
+                      ))
+                    : freeHours.push({ courtId: court.id, hour: hour }) && (
+                        <td
+                          className="green"
+                          key={shortid()}
+                          id={shortid()}
+                          onClick={(e) =>
+                            handleBooking(
+                              formatHourToNumber(hour),
+                              court.id,
+                              e.target.id
+                            )
+                          }
+                        >
+                          free
+                        </td>
+                      )
+                )}
+              </tr>
+            )
+        )}
       </tbody>
     </Table>
   );

@@ -11,7 +11,7 @@ import NotFound from "./views/404NotFound";
 import Footer from "./views/Footer";
 import styled from "styled-components";
 import { useRef } from "react";
-import FindAPartnerCards from "./features/FindAPartnerCards";
+import FindAPartnerCards from "./features/FindAPartner/FindAPartnerCards";
 
 function App() {
   const RoutesContainer = styled.div`

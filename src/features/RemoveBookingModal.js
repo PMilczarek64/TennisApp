@@ -2,11 +2,15 @@ import moment from "moment/moment";
 import propTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
-import { ButtonRedOutline, ButtonGrey, ButtonGreyOutline } from "../common/Button";
-import { Label} from "../common/Inputs.styles";
+import {
+  ButtonRedOutline,
+  ButtonGrey,
+  ButtonGreyOutline,
+} from "../common/Button";
+import { Label } from "../common/Inputs.styles";
 import { deleteBooking } from "../Redux/store";
-import { useDispatch} from "react-redux";
-
+import { useDispatch } from "react-redux";
+import { isLessThan24H } from "../utils";
 
 const BorderWrapper = styled.div`
   padding: 20px;
@@ -88,34 +92,52 @@ const RemoveBookingModal = ({
 }) => {
   const dispatch = useDispatch();
 
-  console.log('obj remove test id ', objectId );
-  console.log('remove booking id: ', bookingId)
+  console.log("obj remove test id ", objectId);
+  console.log("remove booking id: ", bookingId);
 
   const handleCLose = () => {
     setShowRemoveModal(false);
   };
 
   const handleDelete = () => {
-    dispatch(deleteBooking({objectId: Number(objectId), bookingId: bookingId}))
+    dispatch(
+      deleteBooking({ objectId: Number(objectId), bookingId: bookingId })
+    );
     setShowRemoveModal(false);
   };
 
   return (
     <BorderWrapper className={showRemoveModal === false && "hide"}>
-      <Wrapper>
-        <Header>Do you want to cancel your booking? {objectName}</Header>
-        
-        <FormItem>
-          <Label htmlFor="date">Date: </Label>
-          <p>{moment(eventStartDate).format("YYYY/MM/DD")}</p>
-        </FormItem>
-        <ButtonsWrapper>
-          <ButtonGreyOutline onClick={() => handleCLose()}>Close</ButtonGreyOutline>
-          <ButtonRedOutline onClick={() => handleDelete()}>
-            Delete
-          </ButtonRedOutline>
-        </ButtonsWrapper>
-      </Wrapper>
+      {isLessThan24H(eventStartDate) === true ? (
+        <Wrapper>
+          <Header>Booking cancellation is not possible</Header>
+          <FormItem>
+              <p>Bookings with less than 24 hours left cannot be cancelled</p>
+            </FormItem>
+          <ButtonsWrapper>
+            <ButtonGreyOutline onClick={() => handleCLose()}>
+              Close
+            </ButtonGreyOutline>
+          </ButtonsWrapper>
+        </Wrapper>
+      ) : (
+        <Wrapper>
+          <Header>Do you want to cancel your booking? {objectName}</Header>
+
+          <FormItem>
+            <Label htmlFor="date">Date: </Label>
+            <p>{moment(eventStartDate).format("YYYY/MM/DD")}</p>
+          </FormItem>
+          <ButtonsWrapper>
+            <ButtonGreyOutline onClick={() => handleCLose()}>
+              Close
+            </ButtonGreyOutline>
+            <ButtonRedOutline onClick={() => handleDelete()}>
+              Delete
+            </ButtonRedOutline>
+          </ButtonsWrapper>
+        </Wrapper>
+      )}
     </BorderWrapper>
   );
 };

@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const formatHourToNumber = (inputHour) => {
   const [hour, minutes] = inputHour.split(":");
   return Number(hour) + Number(minutes) / 60;
@@ -15,5 +17,16 @@ const strContains = (str1, str2) => {
   };
   return callback;
 };
+
+export const isLessThan24H = (eventDate) => {
+  const currentDate = moment();
+  const bookingDate = moment(eventDate);
+  const bookingDifference = bookingDate.diff(currentDate, 'hours')
+  if (bookingDifference < 24) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 export { formatHourToNumber, formatNumberToHour, strContains };

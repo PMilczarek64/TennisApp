@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Card = styled.div`
   width: 330px;
-  max-height: 60vh;
+  max-height: 520px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -14,7 +14,13 @@ const Card = styled.div`
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   overflow: hidden;
+  cursor: pointer;
   box-shadow: 0px 2px 14px -4px rgba(66, 68, 90, 1);
+  &.no-margin {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
   h4 {
     color: ${({ theme }) => theme.colors.detailBlue};
     margin: 5px 0 5px 0;
@@ -37,17 +43,18 @@ const Card = styled.div`
 `;
 
 const Image = styled.div`
-  height: 60%;
+  max-height: 60%;
   width: 100%;
   img {
+    object-fit: cover;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-position: 60% 40%;
   }
 `;
 
 const CityBar = styled.div`
-margin: 0;
+  margin: 0;
   position: absolute;
   display: flex;
   justify-content: center;
@@ -57,7 +64,7 @@ margin: 0;
   color: white;
   text-align: center;
   z-index: 1;
-  background-color: #4169E1;
+  background-color: #4169e1;
   top: 9%;
   transform: rotate(45deg);
   right: -17%;
@@ -68,6 +75,7 @@ const CardContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: white;
   h4 {
     margin-top: 7px;
   }
@@ -107,34 +115,41 @@ const LowBarItem = styled.div`
   }
 `;
 
-const FindAPartnerCard = ({image, city, name, description, ntrp, age, height}) => {
+const FindAPartnerCard = ({ player, action, onlyPhoto, noMargin }) => {
   return (
-    <Card>
+    <Card onClick={action} className={noMargin && 'no-margin'}>
+      {onlyPhoto ? (
+        <Image>
+          <img src={player.photo}></img>
+          <CityBar>{player.city}</CityBar>
+        </Image>
+      ) : (
+        <>
           <Image>
-            <img src={image}></img>
-            <CityBar>{city}</CityBar>
+            <img src={player.photo}></img>
+            <CityBar>{player.city}</CityBar>
           </Image>
           <CardContent>
-            <h4>{name}</h4>
-            <p>
-              {description}
-            </p>
+            <h4>{player.name}</h4>
+            <p>{player.shortDescription}</p>
             <LowBar>
               <LowBarItem>
-                <h4>{ntrp}</h4>
+                <h4>{player.ntrp}</h4>
                 <p>NTRP</p>
               </LowBarItem>
               <LowBarItem>
-                <h4>{age}</h4>
+                <h4>{player.age}</h4>
                 <p>Age</p>
               </LowBarItem>
               <LowBarItem>
-                <h4>{height}</h4>
+                <h4>{player.height}</h4>
                 <p>Height</p>
               </LowBarItem>
             </LowBar>
           </CardContent>
-        </Card>
+        </>
+      )}
+    </Card>
   );
 };
 

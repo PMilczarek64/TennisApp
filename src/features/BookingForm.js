@@ -7,6 +7,7 @@ import { Label, Select } from "../common/Inputs.styles";
 import { formatHourToNumber, formatNumberToHour } from "../utils";
 import { addBooking, getLoggingInInfo } from "../Redux/store";
 import { useDispatch, useSelector } from "react-redux";
+import { getObjectById } from "../Redux/store";
 
 import { useParams } from "react-router-dom";
 
@@ -23,10 +24,10 @@ const BorderWrapper = styled.div`
   &.hide {
     display: none;
   }
-  @media screen and (max-width: 990px){
+  @media screen and (max-width: 990px) {
     width: 70%;
   }
-  @media screen and (max-width: 790px){
+  @media screen and (max-width: 790px) {
     width: 90%;
   }
 `;
@@ -70,7 +71,7 @@ const FormItem = styled.div`
   :last-child {
     margin-bottom: 10px;
   }
-  @media screen and (max-width: 990px){
+  @media screen and (max-width: 990px) {
     flex-direction: column;
     margin: 0;
   }
@@ -111,9 +112,12 @@ const BookingForm = ({
   const dispatch = useDispatch();
   const { objectId } = useParams();
 
+  const object = useSelector((state) => getObjectById(state, Number(objectId)));
+  const closingHour = object.contentData[0].closingHour;
+
   const countPossibleHours = () => {
     const nextBusyHour =
-      maxBusyHours.filter((hour) => hour > fromHour)[0] || 20.5;
+      maxBusyHours.filter((hour) => hour > fromHour)[0] || closingHour + 0.5;
     let preparedMaxPossibleHours = freeHoursByCourt
       .map(({ hour }) => formatHourToNumber(hour))
       .filter((hour) => hour < nextBusyHour && hour > fromHour);
@@ -124,7 +128,7 @@ const BookingForm = ({
       ].sort();
     }
     setMaxPossibleHours(preparedMaxPossibleHours);
-  }
+  };
 
   useEffect(() => {
     countPossibleHours();
@@ -138,7 +142,6 @@ const BookingForm = ({
   const handleCLose = () => {
     setShowBookingForm(false);
   };
-
 
   const handleBooking = () => {
     const startHourFormmatedToDispatch = moment(
@@ -202,15 +205,15 @@ const BookingForm = ({
         <FormItem>
           <Label htmlFor="to-hour">To hour: </Label>
           <Select onChange={(e) => setSelectedEndHour(e.target.value)}>
-            {maxPossibleHours.map((hour) => 
-              hour === (fromHour + 0.5) ? (
-              <option value={hour} key={hour} selected>
-                {formatNumberToHour(hour)}
-              </option> 
+            {maxPossibleHours.map((hour) =>
+              hour === fromHour + 0.5 ? (
+                <option value={hour} key={hour} selected>
+                  {formatNumberToHour(hour)}
+                </option>
               ) : (
-              <option value={hour} key={hour} >
-                {formatNumberToHour(hour)}
-              </option>
+                <option value={hour} key={hour}>
+                  {formatNumberToHour(hour)}
+                </option>
               )
             )}
           </Select>

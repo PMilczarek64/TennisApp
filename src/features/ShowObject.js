@@ -27,9 +27,6 @@ const Content = styled.div`
   @media screen and (max-width: 1110px){
     margin: 0 0 50px 0;
   }
-  @media screen and (max-width: 870px){
-    padding-inline: 0;
-  }
 `;
 
 const ShowObject = () => {

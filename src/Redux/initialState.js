@@ -51,11 +51,12 @@ const initialState = {
       height: '1.79m',
       email: 'michonne@example.com',
       shortDescription: 'I am looking for someone to train with a similar level of NTRP',
+      fullDescription: 'I am looking for someone to train with a similar level of NTRP. Available in the afternoon during the week. If you want to play with me, write to me',
       photo: "https://images.pexels.com/photos/12189140/pexels-photo-12189140.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       id: 4,
-      name: 'Alexa',
+      name: 'Justine',
       userId: '',
       city: 'Poznań',
       preferedCourt: '',
@@ -166,7 +167,7 @@ const initialState = {
           description:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
           openingHour: 10.0,
-          closingHour: 20.0,
+          closingHour: 23.5,
         },
         {
           id: 2,
@@ -245,7 +246,7 @@ const initialState = {
         {
           id: 3,
           startDate: "2022-12-03T14:30:00+01:00",
-          endDate: "2022-12-03T15:00:00+01:00",
+          endDate: "2022-12-03T16:30:00+01:00",
           court: 2,
           repeat: true,
           name: 'rezerwacja wewnętrzna'
