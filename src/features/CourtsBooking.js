@@ -7,12 +7,12 @@ import styled from "styled-components";
 import CompanyHeader from "../common/CompanyHeader";
 import { getObjectById } from "../Redux/store";
 import BookingTable from "./BookingTable";
+import moment from "moment";
 
 const ColumnWrapper = styled.div`
-width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 5px 24px -10px rgba(66, 68, 90, 1);
   padding-bottom: 50px;
   h3 {
     color: black;
@@ -21,6 +21,9 @@ width: 100%;
     padding-inline: 50px;
   }
   @media (max-width: 1110px){
+    box-shadow: none;
+  }
+  @media (max-width: 1110px) {
     box-shadow: none;
   }
 `;
@@ -37,7 +40,7 @@ const ContentWrapper = styled.div`
       background-color: ${({ theme }) => theme.colors.detailGreen};
       border-color: ${({ theme }) => theme.colors.detailGreen};
     }
-    .react-datepicker__navigation{
+    .react-datepicker__navigation {
       color: white;
     }
     .react-datepicker__day--selected {
@@ -47,7 +50,7 @@ const ContentWrapper = styled.div`
       border-radius: 50%;
     }
   }
-  @media screen and (max-width: 920px){
+  @media screen and (max-width: 920px) {
     flex-direction: column;
     align-items: center;
     padding-inline: 0px;
@@ -55,7 +58,7 @@ const ContentWrapper = styled.div`
       margin-bottom: 20px;
     }
   }
-  @media screen and (max-width: 520px){
+  @media screen and (max-width: 520px) {
     .react-datepicker {
       transform: scale(1.37);
       margin-block: 60px;
@@ -102,7 +105,14 @@ const CourtsBooking = () => {
 
   return (
     <ColumnWrapper>
-      <CompanyHeader name={object.name} city={object.city} logo={object.logo} address={object.address} phone={object.phoneNumber} subHeader="Book a court"/>
+      <CompanyHeader
+        name={object.name}
+        city={object.city}
+        logo={object.logo}
+        address={object.address}
+        phone={object.phoneNumber}
+        subHeader="Book a court"
+      />
       <p>
         Select a date from the calendar and click on a free date in the table to
         open the booking window. If you need to cancel your reservation, click
@@ -112,6 +122,7 @@ const CourtsBooking = () => {
         <DatePicker
           selected={startDate}
           onChange={(date) => handleDateChange(date)}
+          minDate={moment().toDate()}
           inline
           popperClassName="shade"
         />

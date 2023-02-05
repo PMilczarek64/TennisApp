@@ -9,7 +9,7 @@ import CompanyHeader from "../common/CompanyHeader";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 5px 24px -10px rgba(66, 68, 90, 1);
+  
   h4 {
     margin-bottom: 15px;
   }
