@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { formatCmToMeters } from "../utils";
 
 const Card = styled.div`
   width: 330px;
@@ -34,7 +35,7 @@ const Card = styled.div`
   @media (max-width: 450px) {
     margin-inline: 10px;
     width: 100vw;
-    max-height: 95vh;
+    max-height: 80vh;
   }
   @media (max-height: 830px) {
     max-height: 85vh;
@@ -43,19 +44,22 @@ const Card = styled.div`
 `;
 
 const Image = styled.div`
-  max-height: 60%;
+  height: 60%;
   width: 100%;
+  overflow: hidden;
+  position: relative;
   img {
     object-fit: cover;
-    width: 100%;
+    min-width: 100%;
     height: 100%;
-    object-position: 60% 40%;
+    margin-left: 50%;
+    transform: translateX(-50%);
   }
 `;
 
 const CityBar = styled.div`
   margin: 0;
-  position: absolute;
+  position:absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,9 +69,9 @@ const CityBar = styled.div`
   text-align: center;
   z-index: 1;
   background-color: #4169e1;
-  top: 9%;
+  top: 15%;
   transform: rotate(45deg);
-  right: -17%;
+  right: -15%;
 `;
 
 const CardContent = styled.div`
@@ -142,7 +146,7 @@ const FindAPartnerCard = ({ player, action, onlyPhoto, noMargin }) => {
                 <p>Age</p>
               </LowBarItem>
               <LowBarItem>
-                <h4>{player.height}</h4>
+                <h4>{formatCmToMeters(player.height)}</h4>
                 <p>Height</p>
               </LowBarItem>
             </LowBar>

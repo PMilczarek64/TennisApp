@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import CompanyHeader from "../common/CompanyHeader";
+import CompanyHeader from "../common/CompanyHeader/CompanyHeader";
 import { getObjectById } from "../Redux/store";
 import BookingTable from "./BookingTable";
 import moment from "moment";
