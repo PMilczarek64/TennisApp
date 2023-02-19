@@ -3,12 +3,16 @@ import styled from "styled-components";
 import HeaderBar from "../../common/HeaderBar";
 import FindAPartnerCard from "../../common/FindAPartnerCard";
 import { useSelector } from "react-redux";
-import { getAllPlayers } from "../../Redux/store";
-import { ButtonGreen, ButtonGreenH, ButtonGreenHighlited, ButtonGreenHighlitedighlitedButtonGreenHighlited } from "../../common/Button";
-import { Input, Label } from "../../common/Inputs.styles";
+import { getAllPlayers, getLoggingInInfo, getPlayerByUserId } from "../../Redux/store";
+import { ButtonGreenHighlited } from "../../common/Button";
+import { Input } from "../../common/Inputs.styles";
 import { strContains } from "../../utils";
 import PlayerModal from "./PlayerModal";
-import { Button } from "bootstrap";
+import PlayerProfileMenager from "./PlayerProfileMenager";
+import FindAPartnerModal from "./FindAPratnerModal";
+import AddPlayerProfile from "./AddPlayerProfile";
+import EditPlayerProfile from "./EditPlayerProfile";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   max-width: 100%;
@@ -40,7 +44,7 @@ const MenagementBar = styled.div`
   align-items: center;
   justify-content: center;
   i {
-    color: #4169E1;
+    color: #4169e1;
   }
 `;
 
@@ -64,18 +68,18 @@ const Inputs = styled.div`
     }
   }
   @media (max-width: 450px) {
-      
-      input {
-        transform: scale(1.4);
-        margin: 15px;
-      }
+    input {
+      transform: scale(1.4);
+      margin: 15px;
     }
+  }
 `;
 
 const FindAPartnerCards = () => {
   const [city, setCity] = useState("");
   const [name, setName] = useState("");
   const [ntrp, setNtrp] = useState("");
+  const navigate = useNavigate();
 
   const allPlayers = useSelector(getAllPlayers);
   const players = allPlayers.filter(
@@ -84,35 +88,97 @@ const FindAPartnerCards = () => {
       strContains(player.name, name) &&
       strContains(player.ntrp, ntrp)
   );
-  
-  const [selectedPlayer, setSelectedPlayer] = useState('');
-  const [showModal, setShowModal] = useState(false);
+
+  const [selectedPlayer, setSelectedPlayer] = useState("");
+  const [showPlayerModal, setShowPlayerModal] = useState(false);
+  const [showAddProfileModal, setShowAddProfileModal] = useState(false);
+  const [showEditProfileModal, setShowEditProfileModal] = useState(false);
 
   const handleCardClick = (player) => {
     setSelectedPlayer(player);
-    setShowModal(true);
-    console.log('card clicked!!!', player);
+    setShowPlayerModal(true);
+    console.log("card clicked!!!", player);
+  };
+
+  const loggedUserId = useSelector(getLoggingInInfo)?.id;
+  const checkloggedUserId = () => {
+    if (loggedUserId !== undefined) {
+      return true;
+    } else {
+      console.log('test undefined userId? ', loggedUserId)
+      navigate('/login', {
+        state: {
+          previousUrl: '/findapartner',
+        }
+      });
+      return false
+    }
+  };
+
+  checkloggedUserId();
+
+  const playerProfile = useSelector(state => getPlayerByUserId(state, Number(loggedUserId)));
+
+  const checkIfUserHasProfile = () => {
+    if (loggedUserId !== null) {
+      if (playerProfile !== undefined) {
+        console.log('user has a profile ', playerProfile.id); 
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
+
+  checkIfUserHasProfile();
+  console.log('user profile test ', playerProfile);
+  console.log(loggedUserId, 'logged test');
+  // zastanowić się na useEffect
+
+ /* const showProfileMenager = () => {
+    if (loggedUserId !== null) {
+      SetShowEditProfile();
+      return true;
+  } */
+
 
   return (
     <Wrapper>
-      {showModal === true && <PlayerModal player={selectedPlayer} setShowModal={setShowModal}/>}
+      {showPlayerModal && (
+        <PlayerModal
+          player={selectedPlayer}
+          setShowPlayerModal={setShowPlayerModal}
+        />
+      )}
+      {showAddProfileModal && <AddPlayerProfile userId={loggedUserId} setShowModal={setShowAddProfileModal} />}
+      {showEditProfileModal && <EditPlayerProfile userId={loggedUserId} setShowModal={setShowEditProfileModal} player={playerProfile}/>}
       <HeaderBar value="Find a partner"></HeaderBar>
       <MenagementBar>
-        <h4>Fill the fields below to search <i className="fa fa-search"></i></h4>
+        <h4>
+          Fill the fields below to search <i className="fa fa-search"></i>
+        </h4>
         <Inputs>
           <Input
             placeholder="City"
             onChange={(e) => setCity(e.target.value)}
           ></Input>
-          <Input placeholder="Player's name" onChange={(e) => setName(e.target.value)}></Input>
-          <Input placeholder="NTRP level" onChange={(e) => setNtrp(e.target.value)}></Input>
+          <Input
+            placeholder="Player's name"
+            onChange={(e) => setName(e.target.value)}
+          ></Input>
+          <Input
+            placeholder="NTRP level"
+            onChange={(e) => setNtrp(e.target.value)}
+          ></Input>
         </Inputs>
-        <ButtonGreenHighlited>Click to add your profile <i className="fa fa-users"></i></ButtonGreenHighlited>
+        <ButtonGreenHighlited onClick={() => checkIfUserHasProfile() === false ? setShowAddProfileModal(true) : setShowEditProfileModal(true)} >
+          {checkloggedUserId() === false ? `Log in and add your player profile` : `Click to add or edit your profile`} <i className="fa fa-users"></i>
+        </ButtonGreenHighlited>
       </MenagementBar>
       <CardsWrapper>
         {players.map((player) => (
-          <FindAPartnerCard
+          <FindAPartnerCard 
+            key={player.id}
             action={() => handleCardClick(player)}
             player={player}
           />

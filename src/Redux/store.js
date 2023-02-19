@@ -34,11 +34,17 @@ export const getFilteredPlayers = ({ players }, city, name, ntrp) =>
       strContains(player.name, name) &&
       strContains(player.ntrp, ntrp)
   );
+export const getAllNtrpLevels = (state) => state.ntrpLevels;
+export const getPlayerByUserId = ({ players }, userId) =>
+    players.find(player => player.profileOwner == userId);
 
 //action creators
 export const setLoggedIn = (payload) => ({ type: "SET_LOGGED_IN", payload });
 export const addBooking = (payload) => ({ type: "ADD_BOOKING", payload });
 export const deleteBooking = (payload) => ({ type: "DELETE_BOOKING", payload });
+export const addPlayerProfile = (payload) => ({type: "ADD_PLAYER_PROFILE", payload});
+export const editPlayerProfile = (payload) => ({type: "EDIT_PLAYER_PROFILE", payload});
+export const removePlayerProfile = (payload) => ({type: "REMOVE_PLAYER_PROFILE", payload});
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -72,6 +78,13 @@ const reducer = (state, action) => {
           }
         }),
       };
+
+    case "ADD_PLAYER_PROFILE":
+      return {...state, players: state.players.concat([action.payload])};
+    case "EDIT_PLAYER_PROFILE":
+      return {...state, players: state.players.map(player => player.id === action.payload.id ? {...player, ...action.payload } : player)};
+    case "REMOVE_PLAYER_PROFILE": 
+      return {...state, players: state.players.filter(player => player.id !== action.payload)};
     case "DELETE_BOOKING":
       const obj = state.objects.find(
         (object) => object.id === action.payload.objectId
@@ -97,6 +110,8 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
+
 
 const store = createStore(
   reducer,

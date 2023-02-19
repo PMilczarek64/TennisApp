@@ -4,7 +4,7 @@ import { ButtonGreen } from "../common/Button";
 import { Input, Label } from "../common/Inputs.styles";
 import { getUserName } from "../Redux/store";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { setLoggedIn } from "../Redux/store";
 import { Logo } from "../views/Home";
 import LogoImage from "../assets/images/Tennis.png";
@@ -95,12 +95,13 @@ const LoginForm = () => {
   );
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
   const loginAction = () => {
     if (checkUser !== undefined) {
       dispatch(setLoggedIn({ setLogged: true, name: userName }));
       if (objectId === undefined) {
-        navigate("/");
+        navigate(location.state.previousUrl);
       }
     } else {
       setError(true);

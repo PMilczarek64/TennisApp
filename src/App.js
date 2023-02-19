@@ -45,7 +45,7 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/myaccount/:userId" element={<MyAccount />} />
           <Route path="/myaccount/:userId/bookings" element={<MyBookings />} />
-          <Route path="/findapartner" element={<FindAPartnerCards />} />
+          <Route path="/findapartner/*" element={<FindAPartnerCards />} />
         </Routes>
       </RoutesContainer>
       <Footer />

@@ -1,46 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
-import { Input } from "../../common/Inputs.styles";
-
-const ModalWrapper = styled.div`
-  width: 100vw;
-  height: 100%;
-  background-color: #00000193;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 4;
-  position: fixed;
-  top: 0;
-`;
-
-const PlayerWrapper = styled.div`
-  height: 630px;
-  width: 55%;
-  background: white;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
-  overflow: hidden;
-  display: flex;
-  img {
-    transform: scale(1.015);
-  }
-  @media (max-width: 1400px) {
-    width: 65%;
-  }
-  @media (max-width: 1200px) {
-    width: 80%;
-  }
-  @media screen and (max-width: 990px) {
-    width: 90%;
-  }
-  @media (max-width: 680px) {
-    flex-direction: column;
-  }
-`;
+import { TextArea } from "../../common/Inputs.styles";
+import FindAPartnerModal, {
+  ButtonsWrapper,
+  GreenyDetailLine,
+  ModalHeader,
+} from "./FindAPratnerModal";
+import { formatCmToMeters } from "../../utils";
 
 const Image = styled.div`
   height: 100%;
@@ -68,43 +36,17 @@ const InfoWrapper = styled.div`
   &.hide {
     display: none;
   }
-  .quill {
-    max-width: 100%;
-    max-height: 150px;
-    position: relative;
-    display: block;
-  }
   i {
     font-size: 36px;
-    color: #4169e1;
+    color: ${({ theme }) => theme.colors.lightBlue};
     cursor: pointer;
     &.message {
       font-size: 24px;
       margin-inline: 3px;
     }
   }
-`;
-
-const Header = styled.h3`
-  width: 100%;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: solid 3px #4169e1;
-  border-bottom: solid 3px #4169e1;
-  color: white;
-  align-items: center;
-  background-color: #4169e1;
-`;
-
-const DetailLine = styled.span`
-  margin-block: 30px;
-  height: 1px;
-  width: 85%;
-  background-color: ${({ theme }) => theme.colors.detailGreen};
-  &.last {
-    margin-bottom: 15px;
+  @media (max-width: 680px) {
+    width: 100%;
   }
 `;
 
@@ -112,97 +54,105 @@ const Info = styled.div`
   width: 80%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-`;
-
-const ButtonsWrapper = styled.div`
-  width: 100%;
-  height: 35px;
-  display: flex;
-  justify-content: flex-end;
   align-items: center;
+  justify-content: flex-start;
+  overflow: clip;
+  .short {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .success {
+    color: ${({ theme }) => theme.colors.success};
+  }
+  a {
+    color: ${({ theme }) => theme.colors.lightBlue};
+    margin-top: 10px;
+    cursor: pointer;
+    :hover {
+      font-weight: 600;
+      
+      transition: 0.1s ease-in-out;
+    }
+  }
 `;
 
-const TextArea = styled.textarea`
-  height: 200px;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 15px;
-  border: 1px solid ${({ theme }) => theme.colors.faded};
-  border-radius: 10px;
-  margin-bottom: 5px;
-`;
-const PlayerModal = ({ player, setShowModal }) => {
+const PlayerModal = ({ player, setShowPlayerModal }) => {
   const [message, setMessage] = useState("");
   const [showQuill, setShowQuill] = useState(false);
+  const [messageSent, setMessageSent] = useState(false);
+
+  const handleSendMessage = () => {
+    setMessageSent(true);
+    setMessage("");
+  }
 
   return (
-    <ModalWrapper>
-      <PlayerWrapper>
-        <Image>
-          <img src={player.photo}></img>
-        </Image>
-        <InfoWrapper className={showQuill && "hide"}>
+    <FindAPartnerModal>
+      <Image>
+        <img src={player.photo}></img>
+      </Image>
+      <InfoWrapper className={showQuill && "hide"}>
+        <ButtonsWrapper>
+          <i
+            className="close-icon fa fa-close"
+            onClick={() => setShowPlayerModal(false)}
+          ></i>
+        </ButtonsWrapper>
+        <ModalHeader>Player details</ModalHeader>
+        <GreenyDetailLine />
+        <Info>
+          <p>Name: {player.name}</p>
+          <p>City: {player.city}</p>
+          <p>Age: {player.age}</p>
+          <p>Height: {formatCmToMeters(player.height)}</p>
+          <p>Email: {player.email}</p>
+          <p>Phone: {player.phone}</p>
+          <p>Dominant hand: {player.dominantHand}</p>
+          <p>NTRP: {player.ntrp}</p>
+        </Info>
+        <GreenyDetailLine />
+        <Info>
+          <p className="short">{player.shortDescription}</p>
+          <a onClick={() => setShowQuill(true)}>Show full description</a>
+        </Info>
+        <GreenyDetailLine className="last" />
+        <i className="fa fa-envelope" onClick={() => setShowQuill(true)}></i>
+      </InfoWrapper>
+      <InfoWrapper className={"between" && !showQuill && "hide"}>
+        <>
           <ButtonsWrapper>
             <i
               className="close-icon fa fa-close"
-              onClick={() => setShowModal(false)}
+              onClick={() => setShowPlayerModal(false)}
             ></i>
           </ButtonsWrapper>
-          <Header>Player details</Header>
-          <DetailLine />
-          <Info>
-            <p>Name: {player.name}</p>
-            <p>City: {player.city}</p>
-            <p>Age: {player.age}</p>
-            <p>Height: {player.height}</p>
-            <p>Email: {player.email}</p>
-            <p>Phone: </p>
-            <p>Dominant hand: </p>
-            <p>Prefered type of court: </p>
-          </Info>
-          <DetailLine />
+          <ModalHeader>Message to {player.name}</ModalHeader>
+          <GreenyDetailLine />
           <Info>
             <p>{player.shortDescription}</p>
           </Info>
-          <DetailLine className="last" />
-          <i className="fa fa-envelope" onClick={() => setShowQuill(true)}></i>
-        </InfoWrapper>
-        <InfoWrapper className={'between' && !showQuill && "hide"}>
-          <>
+          <GreenyDetailLine />
+        </>
+        <Info>
+          <TextArea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Write a message..."
+          ></TextArea>
+          {messageSent && 
+            <p className="success">Message successfully sent</p>}
           <ButtonsWrapper>
             <i
-              className="close-icon fa fa-close"
-              onClick={() => setShowModal(false)}
+              className="message close-icon fa fa-undo"
+              onClick={() => setShowQuill(false)}
             ></i>
+            <i className="message fa fa-paper-plane" onClick={() => handleSendMessage()}></i>
           </ButtonsWrapper>
-          <Header>Message to {player.name}</Header>
-          <DetailLine />
-          <Info>
-            <p>{player.shortDescription}</p>
-          </Info>
-          <DetailLine />
-          </>
-          <Info>
-            <TextArea
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Write a message..."
-            ></TextArea>
-            <ButtonsWrapper>
-              <i
-                className="message close-icon fa fa-undo"
-                onClick={() => setShowQuill(false)}
-              ></i>
-              <i
-                className="message fa fa-paper-plane"
-              ></i>
-            </ButtonsWrapper>
-          </Info>
-        </InfoWrapper>
-      </PlayerWrapper>
-    </ModalWrapper>
+        </Info>
+      </InfoWrapper>
+    </FindAPartnerModal>
   );
 };
 

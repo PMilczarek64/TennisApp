@@ -10,6 +10,17 @@ const formatNumberToHour = (inputNumber) => {
   return `${hour}:${minutes ? "30" : "00"}`;
 };
 
+const formatCmToMeters = (cm) => {
+  const formattedValue = cm.slice(0, 1) + '.' + cm.slice(1,4) + 'm';
+    return formattedValue
+}
+
+const formatMetersStringToCm = (meters) => {
+  const strCopy = meters.split(/[.m]/);
+  const formattedValue = Number(strCopy[0] + strCopy[1]);
+  return formattedValue;
+}
+
 const strContains = (str1, str2) => {
   let callback = false;
   if(str1.toLowerCase().includes(str2.toLowerCase())) {
@@ -29,4 +40,4 @@ export const isLessThan24H = (eventDate) => {
   }
 }
 
-export { formatHourToNumber, formatNumberToHour, strContains };
+export { formatHourToNumber, formatNumberToHour, strContains, formatCmToMeters, formatMetersStringToCm };

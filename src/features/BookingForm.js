@@ -8,7 +8,6 @@ import { formatHourToNumber, formatNumberToHour } from "../utils";
 import { addBooking, getLoggingInInfo } from "../Redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { getObjectById } from "../Redux/store";
-
 import { useParams } from "react-router-dom";
 
 const BorderWrapper = styled.div`
@@ -66,7 +65,13 @@ const FormItem = styled.div`
     }
   }
   input {
-    width: 180px;
+    max-width: 180px;
+    width: 50%;
+  }
+  label {
+    min-width: 100px;
+    width: 100%;
+    text-align: left;
   }
   :last-child {
     margin-bottom: 10px;
@@ -222,7 +227,7 @@ const BookingForm = ({
       <ButtonsWrapper>
         <ButtonRedOutline onClick={() => handleCLose()}>Close</ButtonRedOutline>
         <ButtonGreenOutline onClick={() => handleBooking()}>
-          Confirm booking
+          Confirm
         </ButtonGreenOutline>
       </ButtonsWrapper>
     </BorderWrapper>

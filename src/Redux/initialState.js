@@ -1,13 +1,13 @@
 const initialState = {
   users: [
     {
-      id: 1,
+      id: '1',
       userName: "user",
       password: "user",
       loggedInfo: false,
     },
     {
-      id: 2,
+      id: '2',
       userName: "user2",
       password: "user2",
       loggedInfo: false,
@@ -22,7 +22,7 @@ const initialState = {
       preferedCourt: '',
       ntrp: '4.5',
       age: 28,
-      height: '1.72m',
+      height: '172',
       email: 'barbara@example.com',
       shortDescription: 'I work in corpo on a daily basis, I am looking for a training partner',
       photo: "https://images.pexels.com/photos/1772724/pexels-photo-1772724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -35,7 +35,7 @@ const initialState = {
       preferedCourt: '',
       ntrp: '4.0',
       age: 26,
-      height: '1.79m',
+      height: '179',
       email: 'mark@example.com',
       shortDescription: 'I study physical education, I love effort and I am looking for challenges',
       photo: "https://images.pexels.com/photos/1103828/pexels-photo-1103828.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -48,7 +48,7 @@ const initialState = {
       preferedCourt: '',
       ntrp: '5.0',
       age: 20,
-      height: '1.79m',
+      height: '177',
       email: 'michonne@example.com',
       shortDescription: 'I am looking for someone to train with a similar level of NTRP',
       fullDescription: 'I am looking for someone to train with a similar level of NTRP. Available in the afternoon during the week. If you want to play with me, write to me',
@@ -62,7 +62,7 @@ const initialState = {
       preferedCourt: '',
       ntrp: '3.5',
       age: 17,
-      height: '1.70m',
+      height: '170',
       email: 'alexa@example.com',
       shortDescription: "I'm a tennis freak, I'm looking for people who don't like rest too much. Evening hours only",
       photo: "https://images.pexels.com/photos/5409085/pexels-photo-5409085.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -75,7 +75,7 @@ const initialState = {
       preferedCourt: '',
       ntrp: '2.0',
       age: 33,
-      height: '1.81m',
+      height: '181',
       email: 'stan@example.com',
       shortDescription: "I am a lover of the 70s. I am looking for someone to go to tennis classes with",
       photo: "https://images.pexels.com/photos/5739221/pexels-photo-5739221.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -88,7 +88,7 @@ const initialState = {
       preferedCourt: '',
       ntrp: '3.0',
       age: 72,
-      height: '1.76m',
+      height: '176',
       email: 'jeremy@example.com',
       shortDescription: "I am an experienced tennis amateur, looking for people of similar age to play",
       photo: "https://images.pexels.com/photos/6292760/pexels-photo-6292760.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -101,7 +101,7 @@ const initialState = {
       preferedCourt: '',
       ntrp: '4.0',
       age: 28,
-      height: '1.82m',
+      height: '182',
       email: 'jacob28@example.com',
       shortDescription: "I especially like to play on clay courts. If you are too - call me! I am available all week ;)",
       photo: "https://images.pexels.com/photos/5837026/pexels-photo-5837026.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -114,14 +114,15 @@ const initialState = {
       preferedCourt: '',
       ntrp: '3.5',
       age: 36,
-      height: '1.75m',
+      height: '175',
       email: 'barbara@example.com',
       shortDescription: "I'm left-handed and like a one-handed backhand. I want to prepare for amateur competitions",
       photo: "https://images.pexels.com/photos/10145713/pexels-photo-10145713.jpeg?auto=compress&cs=tinysrgb&w=600"
     },
   ],
+  ntrpLevels: ['1.5', '2.0', '2.5', '3.0', '3.5', '4.0', '4.5', '5.0', '5.5', '6.0', '6.5', '7.0'],
   cities: ["Cracow", "Warsaw", "Katowice", "Gdansk"],
-  objects: [
+  objects: [ //sportsObjects , poszukać innej nazwy
     {
       id: 1,
       propertyOfUser: 2,

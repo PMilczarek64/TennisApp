@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { getObjectById } from "../Redux/store";
 import PriceListTable from "../features/PriceListTable";
-import CompanyHeader from "../common/CompanyHeader";
+import CompanyHeader from "../common/CompanyHeader/CompanyHeader";
 
 const Wrapper = styled.div`
   display: flex;
