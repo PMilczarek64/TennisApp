@@ -135,7 +135,7 @@ const Home = ({passedRef, action, pages}) => {
         </TopHeader>
           <span className="left"><h3>BOOK A COURT, TRAININGS, BLOG</h3></span>
           <span className="left2"><h1>Create our society!</h1></span>
-          <span className="right"><h2>Play tennis <i class="fa fa-play" aria-hidden="true"></i></h2></span>
+          <span className="right"><h2>Play tennis <i className="fa fa-play" aria-hidden="true"></i></h2></span>
       </Header>
     </Container>
   );

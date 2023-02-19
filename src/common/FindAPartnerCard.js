@@ -83,6 +83,13 @@ const CardContent = styled.div`
   h4 {
     margin-top: 7px;
   }
+  p {
+    word-wrap:break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 `;
 
 const LowBar = styled.div`

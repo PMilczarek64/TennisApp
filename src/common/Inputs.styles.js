@@ -34,7 +34,7 @@ export const Label = styled.label`
 `;
 
 export const TextArea = styled.textarea`
-  height: 150px;
+  height: 100px;
   width: 100%;
   box-sizing: border-box;
   padding: 8px;

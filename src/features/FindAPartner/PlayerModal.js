@@ -56,14 +56,37 @@ const Info = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  p {
-  text-align: center;
+  overflow: clip;
+  .short {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .success {
+    color: ${({ theme }) => theme.colors.success};
+  }
+  a {
+    color: ${({ theme }) => theme.colors.lightBlue};
+    margin-top: 10px;
+    cursor: pointer;
+    :hover {
+      font-weight: 600;
+      
+      transition: 0.1s ease-in-out;
+    }
   }
 `;
 
 const PlayerModal = ({ player, setShowPlayerModal }) => {
   const [message, setMessage] = useState("");
   const [showQuill, setShowQuill] = useState(false);
+  const [messageSent, setMessageSent] = useState(false);
+
+  const handleSendMessage = () => {
+    setMessageSent(true);
+    setMessage("");
+  }
 
   return (
     <FindAPartnerModal>
@@ -87,11 +110,12 @@ const PlayerModal = ({ player, setShowPlayerModal }) => {
           <p>Email: {player.email}</p>
           <p>Phone: {player.phone}</p>
           <p>Dominant hand: {player.dominantHand}</p>
-          <p>Prefered type of court: </p>
+          <p>NTRP: {player.ntrp}</p>
         </Info>
         <GreenyDetailLine />
         <Info>
-          <p>{player.shortDescription}</p>
+          <p className="short">{player.shortDescription}</p>
+          <a onClick={() => setShowQuill(true)}>Show full description</a>
         </Info>
         <GreenyDetailLine className="last" />
         <i className="fa fa-envelope" onClick={() => setShowQuill(true)}></i>
@@ -117,12 +141,14 @@ const PlayerModal = ({ player, setShowPlayerModal }) => {
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Write a message..."
           ></TextArea>
+          {messageSent && 
+            <p className="success">Message successfully sent</p>}
           <ButtonsWrapper>
             <i
               className="message close-icon fa fa-undo"
               onClick={() => setShowQuill(false)}
             ></i>
-            <i className="message fa fa-paper-plane"></i>
+            <i className="message fa fa-paper-plane" onClick={() => handleSendMessage()}></i>
           </ButtonsWrapper>
         </Info>
       </InfoWrapper>

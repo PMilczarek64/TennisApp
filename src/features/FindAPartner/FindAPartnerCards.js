@@ -177,7 +177,8 @@ const FindAPartnerCards = () => {
       </MenagementBar>
       <CardsWrapper>
         {players.map((player) => (
-          <FindAPartnerCard
+          <FindAPartnerCard 
+            key={player.id}
             action={() => handleCardClick(player)}
             player={player}
           />

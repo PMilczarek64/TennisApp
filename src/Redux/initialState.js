@@ -1,13 +1,13 @@
 const initialState = {
   users: [
     {
-      id: 1,
+      id: '1',
       userName: "user",
       password: "user",
       loggedInfo: false,
     },
     {
-      id: 2,
+      id: '2',
       userName: "user2",
       password: "user2",
       loggedInfo: false,

@@ -2,7 +2,7 @@ import React from "react";
 import PlayerProfileMenager from "./PlayerProfileMenager";
 import { useDispatch, useSelector } from "react-redux";
 import { getPlayerByUserId, getLoggingInInfo, editPlayerProfile, removePlayerProfile } from "../../Redux/store";
-import { formatMetersStringToCm } from "../../utils";
+import propTypes from "prop-types";
 
 const EditPlayerProfile = ( { setShowModal } ) => {
 
@@ -37,6 +37,10 @@ const EditPlayerProfile = ( { setShowModal } ) => {
       profileOwner={playerData?.profileOwner}
     />
   );
+};
+
+EditPlayerProfile.propTypes = {
+  setShowModal: propTypes.func.isRequired,
 };
 
 export default EditPlayerProfile;

@@ -4,6 +4,8 @@ import shortid from "shortid";
 import styled from "styled-components";
 import { Input, Label, Select, TextArea } from "../../common/Inputs.styles";
 import { getAllNtrpLevels } from "../../Redux/store";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 import propTypes from "prop-types";
 import FindAPartnerModal, {
   ButtonsWrapper,
@@ -79,13 +81,13 @@ const Image = styled.div`
 
 const PhotoURLInput = styled.div`
   box-sizing: border-box;
-  height: 32px;
+  height: 100%;
+  max-height: 32px;
   display: flex;
   width: 100%;
   flex-direction: row;
   align-items: center;
-  border: solid 1px ${({ theme }) => theme.colors.faded};
-  border-radius: 5px;
+  border-bottom: 2px solid ${({ theme }) => theme.colors.strongFaded};
   overflow: hidden;
   input {
     border: none;
@@ -98,15 +100,14 @@ const LoadButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: greenyellow;
   margin-block: 6px;
-  color: white;
+  color: greenyellow;
   font-size: 20px;
   border: none;
   cursor: pointer;
 `;
 
-const Forms = styled.form`
+const Form = styled.form`
   padding-block: 15px;
   width: 80%;
   display: flex;
@@ -114,6 +115,20 @@ const Forms = styled.form`
   align-items: flex-start;
   justify-content: center;
   gap: 5px;
+  overflow: auto;
+  input {
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.strongFaded};
+    color: ${({ theme }) => theme.colors.darkGrey};
+  }
+  span {
+    &.alert {
+      color: ${({ theme }) => theme.colors.error};
+      padding-inline: 5px;
+      font-size: 14px;
+    }
+  }
 `;
 
 const FormItem = styled.div`
@@ -148,19 +163,6 @@ const PlayerProfileMenager = ({
 }) => {
   const ntrpLevels = useSelector(getAllNtrpLevels);
   const [id] = useState(props?.id || shortid());
-  const [name, setName] = useState(props.name || "");
-  const [city, setCity] = useState(props.city || "");
-  const [age, setAge] = useState(props.age || "");
-  const [height, setHeight] = useState(props.height || "");
-  const [ntrp, setNtrp] = useState(props.ntrp || ntrpLevels[0]);
-  const [dominantHand, setDominantHand] = useState(
-    props.dominantHand || "right"
-  );
-  const [email, setEmail] = useState(props.email || "");
-  const [phone, setPhone] = useState(props.phone || "");
-  const [shortDescription, setShortDescription] = useState(
-    props.shortDescription || ""
-  );
   const [photo, setPhoto] = useState(
     props.photo ||
       "https://images.pexels.com/photos/6250895/pexels-photo-6250895.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -170,39 +172,38 @@ const PlayerProfileMenager = ({
       "https://images.pexels.com/photos/6250895/pexels-photo-6250895.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   );
 
-  const handleAgeChange = (e) => {
-    const min = 16;
-    const max = 99;
-    const value = Math.max(min, Math.min(max, Number(e.target.value)));
-    setAge(value);
-  };
-  const validateAge = (age) => {
-    if (age <= 0 || age > 100) return false;
-    return true;
-  };
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: props.name,
+      city: props.city,
+      age: props.age,
+      height: props.height,
+      email: props.email,
+      phone: props.phone,
+      ntrp: props.ntrp,
+      dominantHand: props.dominantHand || "right",
+      shortDescription: props.shortDescription || "",
+    },
+    criteriaMode: "all",
+  });
 
-  const handleHeightChange = (e) => {
-    const min = 120;
-    const max = 240;
-    const value = Math.max(
-      min,
-      Math.min(max, Number(e.target.value))
-    ).toString();
-    setHeight(value);
-  };
-
-  const handleConfirm = () => {
+  const handleConfirm = (data) => {
     action({
       id: id,
-      name: name,
-      city: city,
-      age: age,
-      height: height,
-      ntrp: ntrp,
-      dominantHand: dominantHand,
-      email: email,
-      phone: phone,
-      shortDescription: shortDescription,
+      name: data.name,
+      city: data.city,
+      age: data.age,
+      height: data.height,
+      ntrp: data.ntrp,
+      dominantHand: data.dominantHand,
+      email: data.email,
+      phone: data.phone,
+      shortDescription: data.shortDescription,
       photo: photo,
       profileOwner: userId,
     });
@@ -219,13 +220,13 @@ const PlayerProfileMenager = ({
       <Image>
         <img src={loadedPhoto}></img>
         <ModalHeader>Info</ModalHeader>
-        <Forms>
+        <Form>
           <p>
             To add your player's profile, fill in all fields and add a photo. If
             you are sure that all the data is correct, press the "confirm"
             button
           </p>
-        </Forms>
+        </Form>
       </Image>
       <FormWrapper>
         <ButtonsWrapper>
@@ -235,41 +236,136 @@ const PlayerProfileMenager = ({
           />
         </ButtonsWrapper>
         <ModalHeader>{actionText} your player profile</ModalHeader>
-        <Forms>
+        <Form onSubmit={handleSubmit(handleConfirm)}>
           <Input
-            maxLength="20"
             placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            {...register("name", {
+              required: "This field is required",
+              minLength: {
+                value: 2,
+                message: "Minimum 2 characters",
+              },
+              maxLength: {
+                value: 20,
+                message: "Maximum 20 characters",
+              },
+            })}
           />
+          <ErrorMessage
+            errors={errors}
+            name="name"
+            render={({ messages }) =>
+              messages &&
+              Object.entries(messages).map(([type, message]) => (
+                <span key={type} className="alert">
+                  {message}
+                </span>
+              ))
+            }
+          />
+
           <Input
-            maxLength="22"
+            className={errors.city && "alert"}
+            aria-invalid={errors.city ? "true" : "false"}
             placeholder="City"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
+            {...register("city", {
+              required: "This field is required",
+              minLength: {
+                value: 3,
+                message: "Minimum 3 characters",
+              },
+              maxLength: {
+                value: 22,
+                message: "Maximum 22 characters",
+              },
+            })}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="city"
+            render={({ messages }) =>
+              messages &&
+              Object.entries(messages).map(([type, message]) => (
+                <span key={type} className="alert">
+                  {message}
+                </span>
+              ))
+            }
           />
           <Input
             type="number"
             placeholder="Age"
-            value={age}
-            onChange={(e) => handleAgeChange(e)}
+            {...register("age", {
+              required: "This field is required",
+              minLength: {
+                value: 2,
+                message: "Minimum 2 characters"
+              },
+              maxLength: {
+                value: 2,
+                message: "Maximum 2 characters"
+              }
+            })}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="age"
+            render={({ messages }) =>
+              messages &&
+              Object.entries(messages).map(([type, message]) => (
+                <span key={type} className="alert">
+                  {message}
+                </span>
+              ))
+            }
           />
           <Input
             type="number"
             placeholder="Height in cm"
-            value={height}
-            onChange={(e) => handleHeightChange(e)}
+            {...register("height", {
+              minLength: {
+                value: 3,
+                message: "Minimum 3 characters"
+              },
+              maxLength: {
+                value: 3,
+                message: "Maximum 3 characters"
+              }
+            })}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="height"
+            render={({ messages }) =>
+              messages &&
+              Object.entries(messages).map(([type, message]) => (
+                <span key={type} className="alert">
+                  {message}
+                </span>
+              ))
+            }
           />
           <Input
             placeholder="Email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            aria-invalid={errors.email ? "true" : "false"}
+            {...register("email", { pattern: /^\S+@\S+$/i })}
           />
+          {errors.email && (
+            <span role="alert" className="alert">
+              e-mail address is invalid
+            </span>
+          )}
           <Input
+            type="number"
             placeholder="Phone number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            aria-invalid={errors.phone ? "true" : "false"}
+            {...register("phone", { minLength: 9, maxLength: 12 })}
           />
+          {errors.phone && (
+            <span role="alert" className="alert">
+              Minimum 9, maximum 12 characters
+            </span>
+          )}
           <PhotoURLInput>
             <Input
               placeholder="paste URL of your photo"
@@ -285,38 +381,55 @@ const PlayerProfileMenager = ({
               <Label>Dominant hand: </Label>
               <Label>
                 <input
+                  {...register("dominantHand", { required: true })}
                   type="radio"
                   value="left"
-                  onChange={(e) => setDominantHand(e.target.value)}
-                  checked={dominantHand === "left"}
                 />
                 <span>L</span>
               </Label>
               <Label>
                 <input
+                  {...register("dominantHand", { required: true })}
                   type="radio"
                   value="right"
-                  onChange={(e) => setDominantHand(e.target.value)}
-                  checked={dominantHand === "right"}
                 />
                 <span>R</span>
               </Label>
             </div>
             <div>
               <Label>NTRP</Label>
-              <Select onChange={(e) => setNtrp(e.target.value)}>
-                <option value={ntrp}>{ntrp}</option>
-                {ntrpLevels.map(
-                  (level) =>
-                    level !== ntrp && <option value={level}>{level}</option>
-                )}
+              <Select {...register("ntrp", { required: true })}>
+                {ntrpLevels.map((level) => (
+                  <option value={level} key={level}>{level}</option>
+                ))}
               </Select>
             </div>
           </FormItem>
           <TextArea
-            value={shortDescription}
+            {...register("shortDescription", { 
+              required: "This field is required. Minimum 50 characters", 
+              maxLength: {
+                value: 300,
+                message: "Maximum 300 characters"
+              },
+              minLength: {
+                value: 50,
+                message: "Minimum 50 characters"
+              }
+            })}
             placeholder="Write short description about yourself..."
-            onChange={(e) => setShortDescription(e.target.value)}
+          />
+           <ErrorMessage
+            errors={errors}
+            name="shortDescription"
+            render={({ messages }) =>
+              messages &&
+              Object.entries(messages).map(([type, message]) => (
+                <span key={type} className="alert">
+                  {message}
+                </span>
+              ))
+            }
           />
           <ButtonsWrapper>
             {remove && (
@@ -325,12 +438,11 @@ const PlayerProfileMenager = ({
                 onClick={() => handleRemove()}
               ></i>
             )}
-            <i
-              className="confirm fa fa-check"
-              onClick={() => handleConfirm()}
-            ></i>
+            <button type="submit">
+              <i className="confirm fa fa-check" />
+            </button>
           </ButtonsWrapper>
-        </Forms>
+        </Form>
       </FormWrapper>
     </FindAPartnerModal>
   );
@@ -338,7 +450,10 @@ const PlayerProfileMenager = ({
 
 PlayerProfileMenager.propTypes = {
   setShowModal: propTypes.func.isRequired,
-  name: propTypes.string,
+  action: propTypes.func.isRequired,
+  remove: propTypes.func,
+  actionText: propTypes.string.isRequired,
+  userId: propTypes.string,
 };
 
 export default PlayerProfileMenager;

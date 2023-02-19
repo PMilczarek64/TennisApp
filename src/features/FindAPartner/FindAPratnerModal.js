@@ -14,8 +14,7 @@ const ModalWrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  height: 95%;
-  max-height: 630px;
+  height: 630px; 
   width: 100%;
   max-width: 880px;
   background: white;
@@ -37,7 +36,7 @@ const ContentWrapper = styled.div`
 
 export const ModalHeader = styled.h3`
   width: 100%;
-  height: 40px;
+  padding-block: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,6 +61,10 @@ export const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  button {
+    border: none;
+    background: none;
+  }
 `;
 
 const FindAPartnerModal = (props) => {
