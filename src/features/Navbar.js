@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import Ball from '../assets/images/Ball.png';
-import { Link, NavLink } from 'react-router-dom';
+import Ball from "../assets/images/Ball.png";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { getLoggingInInfo } from "../Redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setLoggedIn } from "../Redux/store";
 
 const Wrapper = styled.div`
   height: 50px;
-  @media screen and (max-width: 1030px){
+  @media screen and (max-width: 1030px) {
     display: none;
   }
 `;
@@ -17,7 +17,7 @@ const Ul = styled.ul`
   display: flex;
   flex-direction: row;
   background-color: rgba(0, 0, 0, 0.719);
-  
+
   height: 100%;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
@@ -53,15 +53,15 @@ const Ul = styled.ul`
       color: white;
     }
     :hover {
-        .fa-sign-in {
-          color: ${({ theme }) => theme.colors.detailGreen};
-          transition: 0.2s ease-in-out;
-        }
-        .fa-power-off {
-          color: orangered;
-          transition: 0.2s ease-in-out;
-        }
+      .fa-sign-in {
+        color: ${({ theme }) => theme.colors.detailGreen};
+        transition: 0.2s ease-in-out;
       }
+      .fa-power-off {
+        color: orangered;
+        transition: 0.2s ease-in-out;
+      }
+    }
     img {
       object-fit: cover;
       max-height: 30px;
@@ -84,28 +84,55 @@ const NavIcon = styled.div`
   }
 `;
 
-const Navbar = ({action, pages}) => {
+const Navbar = ({ action, pages }) => {
   const userIsLogged = useSelector(getLoggingInInfo);
   const dispatch = useDispatch();
   const logOut = () => {
     dispatch(setLoggedIn({ setLogged: false, name: userIsLogged.userName }));
-  }
+  };
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <Ul>
-        <li><Link to="/" onClick={() => action(pages.home)}><img src={Ball}></img></Link></li>
-        <li><NavLink to="/"  onClick={() => action(pages.content)}>Book a court</NavLink></li>
+        <li>
+          <Link to="/" onClick={() => action(pages.home)}>
+            <img src={Ball}></img>
+          </Link>
+        </li>
+        <li>
+          <NavLink to="/" onClick={() => action(pages.content)}>
+            Book a court
+          </NavLink>
+        </li>
         <li>Find a partner</li>
         <li>Blog</li>
         <li>Contact</li>
-        {userIsLogged === undefined ?
-          <li><NavLink to="/login">Login  <NavIcon className="fa fa-sign-in"/></NavLink></li>
-          :
+        {userIsLogged === undefined ? (
+          <li
+            onClick={() => {
+              navigate('/login', {
+                state: {
+                  previousUrl: '/findapartner',
+                }
+              });
+            }}
+          >
+            Login
+            <NavIcon className="fa fa-sign-in" />
+          </li>
+        ) : (
           <>
-            <li><NavLink to={'/myaccount/' + userIsLogged.id}>My account</NavLink></li>
-            <li onClick={logOut}><NavLink to="/">{'Log Out'}<NavIcon className="fa fa-power-off"/></NavLink></li>
+            <li>
+              <NavLink to={"/myaccount/" + userIsLogged.id}>My account</NavLink>
+            </li>
+            <li onClick={logOut}>
+              <NavLink to="/">
+                {"Log Out"}
+                <NavIcon className="fa fa-power-off" />
+              </NavLink>
+            </li>
           </>
-        }
+        )}
       </Ul>
     </Wrapper>
   );

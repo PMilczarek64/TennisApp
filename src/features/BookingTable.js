@@ -140,7 +140,7 @@ const BookingTable = ({
   };
 
   return (
-    <Table>
+    <>
       <BookingForm
         showModal={showModal}
         setShowBookingForm={setShowBookingForm}
@@ -159,60 +159,62 @@ const BookingTable = ({
         setShowEditBooking={setShowEditBooking}
         userId={loggedUser.id}
       />
-      <thead>
-        <tr>
-          <th className="header">Hours</th>
-          {courts.map((court) => (
-            <th key={court.id} className="header">
-              Court {court.id}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {possibleHours.map(
-          (hour) =>
-            checkIfTermExpired(hour) && (
-              <tr key={hour}>
-                <td className="hour">{hour}</td>
-                {courts.map((court) =>
-                  checkIfBusy(court.id, hour)
-                    ? busyHours.push({ courtId: court.id, hour: hour }) &&
-                      (checkIfBusyByYou(court.id, hour) ? (
-                        <td
-                          className="yellow"
-                          key={shortid()}
-                          onClick={(e) => handleEdit()}
-                        >
-                          Booked by YOU
-                        </td>
-                      ) : (
-                        <td className="red" key={shortid()}>
-                          busy
-                        </td>
-                      ))
-                    : freeHours.push({ courtId: court.id, hour: hour }) && (
-                        <td
-                          className="green"
-                          key={shortid()}
-                          id={shortid()}
-                          onClick={(e) =>
-                            handleBooking(
-                              formatHourToNumber(hour),
-                              court.id,
-                              e.target.id
-                            )
-                          }
-                        >
-                          free
-                        </td>
-                      )
-                )}
-              </tr>
-            )
-        )}
-      </tbody>
-    </Table>
+      <Table>
+        <thead>
+          <tr>
+            <th className="header">Hours</th>
+            {courts.map((court) => (
+              <th key={court.id} className="header">
+                Court {court.id}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {possibleHours.map(
+            (hour) =>
+              checkIfTermExpired(hour) && (
+                <tr key={hour}>
+                  <td className="hour">{hour}</td>
+                  {courts.map((court) =>
+                    checkIfBusy(court.id, hour)
+                      ? busyHours.push({ courtId: court.id, hour: hour }) &&
+                        (checkIfBusyByYou(court.id, hour) ? (
+                          <td
+                            className="yellow"
+                            key={shortid()}
+                            onClick={(e) => handleEdit()}
+                          >
+                            Booked by YOU
+                          </td>
+                        ) : (
+                          <td className="red" key={shortid()}>
+                            busy
+                          </td>
+                        ))
+                      : freeHours.push({ courtId: court.id, hour: hour }) && (
+                          <td
+                            className="green"
+                            key={shortid()}
+                            id={shortid()}
+                            onClick={(e) =>
+                              handleBooking(
+                                formatHourToNumber(hour),
+                                court.id,
+                                e.target.id
+                              )
+                            }
+                          >
+                            free
+                          </td>
+                        )
+                  )}
+                </tr>
+              )
+          )}
+        </tbody>
+      </Table>
+    </>
   );
 };
 

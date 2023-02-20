@@ -84,7 +84,7 @@ const PriceListTable = (priceList) => {
             <p>{item.hours}</p>
           </GridItem>
           <GridItem key={shortid()} className={"grid-item " + "price" + item.id}>
-            <p>{item.price}</p>
+            <p>{item.price}PLN</p>
           </GridItem>
         </>
       )}
@@ -97,7 +97,7 @@ const PriceListTable = (priceList) => {
             <p>{item.hours}</p>
           </GridItem>
           <GridItem key={shortid()} className={"grid-item " + "price" + item.id}>
-            <p key={shortid()}>{item.price}</p>
+            <p key={shortid()}>{item.price}PLN</p>
           </GridItem>
         </>
       )}

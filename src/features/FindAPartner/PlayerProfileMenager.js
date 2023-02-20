@@ -11,7 +11,6 @@ import FindAPartnerModal, {
   ButtonsWrapper,
   ModalHeader,
 } from "./FindAPratnerModal";
-import { formatCmToMeters } from "../../utils";
 
 const FormWrapper = styled.div`
   max-height: 100%;
@@ -175,7 +174,6 @@ const PlayerProfileMenager = ({
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -218,7 +216,7 @@ const PlayerProfileMenager = ({
   return (
     <FindAPartnerModal>
       <Image>
-        <img src={loadedPhoto}></img>
+        <img src={loadedPhoto} alt="loaded link"></img>
         <ModalHeader>Info</ModalHeader>
         <Form>
           <p>

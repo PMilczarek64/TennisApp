@@ -4,7 +4,6 @@ import React from "react";
 import styled from "styled-components";
 import {
   ButtonRedOutline,
-  ButtonGrey,
   ButtonGreyOutline,
 } from "../common/Button";
 import { Label } from "../common/Inputs.styles";

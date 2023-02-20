@@ -102,6 +102,7 @@ const LoginForm = () => {
       dispatch(setLoggedIn({ setLogged: true, name: userName }));
       if (objectId === undefined) {
         navigate(location.state.previousUrl);
+        console.log('test location ', location);
       }
     } else {
       setError(true);

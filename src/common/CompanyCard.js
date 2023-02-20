@@ -40,7 +40,7 @@ const CompanyCard = ({ name, logo, city, id }) => {
     <ListItem>
       <NavLink to={"/courts/" + city + "/" + id + "/Info"}>
         <p>{name}</p>
-        <img src={`../../logos/${logo}`}></img>
+        <img src={`../../logos/${logo}`} alt={name}></img>
         <p>{city}</p>
       </NavLink>
     </ListItem>

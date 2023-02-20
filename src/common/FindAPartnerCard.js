@@ -89,7 +89,6 @@ const CardContent = styled.div`
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
->>>>>>> find-a-partner
 `;
 
 const LowBar = styled.div`
@@ -131,13 +130,13 @@ const FindAPartnerCard = ({ player, action, onlyPhoto, noMargin }) => {
     <Card onClick={action} className={noMargin && 'no-margin'}>
       {onlyPhoto ? (
         <Image>
-          <img src={player.photo}></img>
+          <img src={player.photo} alt={player.name}></img>
           <CityBar>{player.city}</CityBar>
         </Image>
       ) : (
         <>
           <Image>
-            <img src={player.photo}></img>
+            <img src={player.photo} alt={player.name}></img>
             <CityBar>{player.city}</CityBar>
           </Image>
           <CardContent>

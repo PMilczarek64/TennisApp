@@ -66,14 +66,16 @@ const Info = styled.div`
   .success {
     color: ${({ theme }) => theme.colors.success};
   }
-  a {
+  button {
+    background: none;
+    border: none;
+    font-size: 16px;
     color: ${({ theme }) => theme.colors.lightBlue};
     margin-top: 10px;
     cursor: pointer;
     :hover {
-      font-weight: 600;
-      
-      transition: 0.1s ease-in-out;
+      color: black;
+      transition: 0.3s ease-in-out;
     }
   }
 `;
@@ -91,7 +93,7 @@ const PlayerModal = ({ player, setShowPlayerModal }) => {
   return (
     <FindAPartnerModal>
       <Image>
-        <img src={player.photo}></img>
+        <img src={player.photo} alt="player avatar"></img>
       </Image>
       <InfoWrapper className={showQuill && "hide"}>
         <ButtonsWrapper>
@@ -115,7 +117,7 @@ const PlayerModal = ({ player, setShowPlayerModal }) => {
         <GreenyDetailLine />
         <Info>
           <p className="short">{player.shortDescription}</p>
-          <a onClick={() => setShowQuill(true)}>Show full description</a>
+          <button onClick={() => setShowQuill(true)}>Show full description</button>
         </Info>
         <GreenyDetailLine className="last" />
         <i className="fa fa-envelope" onClick={() => setShowQuill(true)}></i>

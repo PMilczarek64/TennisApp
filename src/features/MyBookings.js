@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getAllEvents, getEventsByUserId, getObjectById } from "../Redux/store";
+import { getAllEvents } from "../Redux/store";
 import RemoveBookingModal from "./RemoveBookingModal";
 import moment from "moment";
 import { useState } from "react";
+import shortid from "shortid";
 
 const Wrapper = styled.div`
   margin: 50px 50px 50px 50px;
@@ -72,9 +73,8 @@ const MyBookings = () => {
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [bookingId, setBookingId] = useState('');
   const [objectId, setObjectId] = useState('');
-  const [objectName, setObjectName] = useState('');
+  const [objectName] = useState('');
   const [eventStartDate, setEventStartDate] = useState('');
-  const [eventEndDate, setEventEndDate] = useState('');
   console.log("allObjects ", allObjects);
   console.log("myEvents ", myEvents);
 
@@ -100,11 +100,11 @@ const MyBookings = () => {
       <CardsWrapper>
         {myEvents.map((object) =>
           object.map((event) => (
-            <Card onClick={(e) => handleClick(event.id, event.objectId, event.startDate, )}>
+            <Card onClick={(e) => handleClick(event.id, event.objectId, event.startDate, )} key={event.id}>
               {allObjects.map(
                 (object) =>
                   object.id === event.objectId && 
-                    <h4>{object.name}</h4>
+                    <h4 key={shortid()}>{object.name}</h4>
               )}
               <p>Court: {event.court}</p>
               <p>Date: {moment(event.startDate).format("LL")}</p>

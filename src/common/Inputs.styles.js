@@ -8,7 +8,6 @@ export const Input = styled.input`
     font-size: 18px;
     height: 32px;
     width: 100%;
-
     :-webkit-autofill, :focus {
         box-shadow: 0 0 0px 1000px white inset !important;
         outline: none;

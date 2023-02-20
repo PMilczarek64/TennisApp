@@ -150,7 +150,6 @@ const CourtForm = () => {
               <option
                 value=""
                 key={shortid()}
-                selected={selectedCity === "" ? true : false}
               >
                 all cities
               </option>
@@ -180,6 +179,7 @@ const CourtForm = () => {
         <CourtsList>
           {objects.map((object) => (
             <CompanyCard
+              key={shortid()}
               city={object.city}
               name={object.name}
               logo={object.logo}
