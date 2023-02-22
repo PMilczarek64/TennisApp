@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { getObjectById } from "../Redux/store";
+import { getObjectById } from "../Redux/objectsRedux";
 import PriceListTable from "../features/PriceListTable";
 import CompanyHeader from "../common/CompanyHeader/CompanyHeader";
 

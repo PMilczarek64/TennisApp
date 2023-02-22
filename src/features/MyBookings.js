@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getAllEvents } from "../Redux/store";
+import { getAllEvents } from "../Redux/objectsRedux";
 import RemoveBookingModal from "./RemoveBookingModal";
 import moment from "moment";
 import { useState } from "react";

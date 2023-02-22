@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { ButtonGreen } from "../common/Button";
 import { Input, Label } from "../common/Inputs.styles";
-import { getUserName } from "../Redux/store";
+import { getUserName, setLoggedIn} from "../Redux/usersRedux";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { setLoggedIn } from "../Redux/store";
 import { Logo } from "../views/Home";
 import LogoImage from "../assets/images/Tennis.png";
 

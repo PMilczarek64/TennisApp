@@ -1,7 +1,8 @@
 import React from "react";
 import PlayerProfileMenager from "./PlayerProfileMenager";
 import { useDispatch, useSelector } from "react-redux";
-import { getPlayerByUserId, getLoggingInInfo, editPlayerProfile, removePlayerProfile } from "../../Redux/store";
+import { getPlayerByUserId, editPlayerProfile, removePlayerProfile } from "../../Redux/playersRedux";
+import { getLoggingInInfo } from "../../Redux/usersRedux";
 import propTypes from "prop-types";
 
 const EditPlayerProfile = ( { setShowModal } ) => {

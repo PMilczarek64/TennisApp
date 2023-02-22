@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getObjectById } from "../Redux/store";
+import { getObjectById } from "../Redux/objectsRedux";
 import styled from "styled-components";
 
 const Bar = styled.ul`

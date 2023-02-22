@@ -7,9 +7,9 @@ import CourtsBooking from "./CourtsBooking";
 import LoginForm from "./LoginForm";
 import {
   getFirstFacilityByCity,
-  getLoggingInInfo,
   getObjectById,
-} from "../Redux/store";
+} from "../Redux/objectsRedux";
+import { getLoggingInInfo } from "../Redux/usersRedux";
 import { useSelector } from "react-redux";
 import CourtsGallery from "./CourtsGallery/CourtsGallery";
 import NotFound from "../views/404NotFound";

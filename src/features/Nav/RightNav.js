@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import { getLoggingInInfo, setLoggedIn } from "../../Redux/store";
+import { getLoggingInInfo, setLoggedIn } from "../../Redux/usersRedux";
 import styled from "styled-components";
 import Ball from "../../assets/images/Ball.png";
 

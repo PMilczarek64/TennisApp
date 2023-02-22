@@ -1,7 +1,7 @@
 import React from "react";
 import PlayerProfileMenager from "./PlayerProfileMenager";
 import { useDispatch } from "react-redux";
-import { addPlayerProfile } from "../../Redux/store";
+import { addPlayerProfile } from "../../Redux/playersRedux";
 
 const AddPlayerProfile = ({userId, setShowModal}) => {
   const dispatch = useDispatch();

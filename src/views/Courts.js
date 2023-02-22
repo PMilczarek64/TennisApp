@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getObjectsByCity } from "../Redux/store";
+import { getObjectsByCity } from "../Redux/objectsRedux";
 import styled from "styled-components";
 import HeaderBar from "../common/HeaderBar";
 import { useNavigate } from "react-router-dom";
@@ -56,8 +56,6 @@ const Courts = () => {
   const navigate = useNavigate();
   console.log("objects test: ", objects);
 
-  const [courtType, setCourtType] = useState('');
-
   const handleClick = (id, city) => {
     navigate("/courts/" + city + "/" + id + "/Info");
   };
@@ -73,7 +71,7 @@ const Courts = () => {
             onClick={() => handleClick(object.id, object.city)}
           >
             <CompanyLogo>
-              <img src={`../../logos/${object.logo}`}></img>
+              <img src={`../../logos/${object.logo}`} alt="logo"></img>
             </CompanyLogo>
             <h3>
               <p><b>{object.name}</b> {object.city}, {object.address}</p>

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import CompanyHeader from "../common/CompanyHeader/CompanyHeader";
-import { getObjectById } from "../Redux/store";
+import { getObjectById } from "../Redux/objectsRedux";
 import BookingTable from "./BookingTable";
 import moment from "moment";
 

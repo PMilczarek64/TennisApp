@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { formatHourToNumber, formatNumberToHour } from "../utils";
 import BookingForm from "./BookingForm";
 import { useSelector } from "react-redux";
-import { getLoggingInInfo } from "../Redux/store";
+import { getLoggingInInfo } from "../Redux/usersRedux";
 import EditBooking from "./EditBooking";
 
 const Table = styled.table`

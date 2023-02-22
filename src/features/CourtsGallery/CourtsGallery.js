@@ -3,7 +3,7 @@ import Modal from "./Modal";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getObjectById } from "../../Redux/store";
+import { getObjectById } from "../../Redux/objectsRedux";
 
 const GalleryWrapper = styled.div`
   max-width: 95%;

@@ -5,9 +5,10 @@ import styled from "styled-components";
 import { ButtonGreenOutline, ButtonRedOutline } from "../common/Button";
 import { Label, Select } from "../common/Inputs.styles";
 import { formatHourToNumber, formatNumberToHour } from "../utils";
-import { addBooking, getLoggingInInfo } from "../Redux/store";
+import { addBooking } from "../Redux/objectsRedux";
+import { getLoggingInInfo } from "../Redux/usersRedux";
 import { useDispatch, useSelector } from "react-redux";
-import { getObjectById } from "../Redux/store";
+import { getObjectById } from "../Redux/objectsRedux";
 import { useParams } from "react-router-dom";
 
 const BorderWrapper = styled.div`
