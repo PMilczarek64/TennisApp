@@ -16,8 +16,8 @@ const ListItem = styled.div`
   justify-content: flex-start;
   box-shadow: 12px 12px 24px -22px ${({ theme }) => theme.colors.faded};
   border: 1px solid ${({ theme }) => theme.colors.strongFaded};
+  border-radius: 7px;
   cursor: pointer;
-  background-color: white;
   img {
     max-height: 50px;
   }

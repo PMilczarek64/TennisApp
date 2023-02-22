@@ -42,7 +42,7 @@ const LocationForm = styled.form`
     margin: 0;
     background: linear-gradient(90deg, #ddff00 0%, rgb(255, 231, 76) 100%);
     border: none;
-    border-radius: 10px;
+    border-radius: 7px;
     padding: 10px 15px;
     margin-block: 10px;
     font-size: 18px;

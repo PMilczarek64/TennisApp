@@ -321,6 +321,7 @@ const PlayerProfileMenager = ({
             type="number"
             placeholder="Height in cm"
             {...register("height", {
+              required: "This field is required",
               minLength: {
                 value: 3,
                 message: "Minimum 3 characters"

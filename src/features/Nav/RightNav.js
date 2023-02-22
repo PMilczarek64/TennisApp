@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { getLoggingInInfo, setLoggedIn } from "../../Redux/store";
 import styled from "styled-components";
-import Ball from '../../assets/images/Ball.png';
+import Ball from "../../assets/images/Ball.png";
 
 const Ul = styled.ul`
   list-style: none;
@@ -45,15 +45,15 @@ const Ul = styled.ul`
       color: white;
     }
     :hover {
-        .fa-sign-in {
-          color: ${({ theme }) => theme.colors.detailGreen};
-          transition: 0.2s ease-in-out;
-        }
-        .fa-power-off {
-          color: orangered;
-          transition: 0.2s ease-in-out;
-        }
+      .fa-sign-in {
+        color: ${({ theme }) => theme.colors.detailGreen};
+        transition: 0.2s ease-in-out;
       }
+      .fa-power-off {
+        color: orangered;
+        transition: 0.2s ease-in-out;
+      }
+    }
     img {
       object-fit: cover;
       max-height: 30px;
@@ -66,7 +66,7 @@ const Ul = styled.ul`
     background-color: ${({ theme }) => theme.colors.detailBlue};
     text-align: start;
     position: fixed;
-    transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(100%)'};
+    transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
     top: 0;
     right: 0;
     height: 100%;
@@ -101,31 +101,55 @@ const NavIcon = styled.div`
   }
 `;
 
-
-
 const RightNav = ({ open, action, pages }) => {
-
   const userIsLogged = useSelector(getLoggingInInfo);
   const dispatch = useDispatch();
   const logOut = () => {
     dispatch(setLoggedIn({ setLogged: false, name: userIsLogged.userName }));
-  }
+  };
 
   return (
     <Ul open={open}>
-      <li><Link to="/" onClick={() => action(pages.home)}><img src={Ball}></img></Link></li>
-        <li><NavLink to="/"  onClick={() => action(pages.content)}>Book a court</NavLink></li>
-        <li><NavLink to="/findapartner"  onClick={() => action(pages.content)}>Find a partner</NavLink></li>
-        <li>Blog</li>
-        <li>Contact</li>
-        {userIsLogged === undefined ?
-          <li><NavLink to="/login" onClick={() => action(pages.content)}>Login <NavIcon className="fa fa-sign-in"/></NavLink></li>
-          :
-          <>
-            <li><NavLink to={'/myaccount/' + userIsLogged.id}>My account</NavLink></li>
-            <li onClick={logOut}><NavLink to="/">{'Log Out'}<NavIcon className="fa fa-power-off"/></NavLink></li>
-          </>
-        }
+      <li>
+        <Link to="/" onClick={() => action(pages.home)}>
+          <img src={Ball} alt="ball"></img>
+        </Link>
+      </li>
+      <li>
+        <NavLink to="/" onClick={() => action(pages.content)}>
+          Book a court
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/findapartner" onClick={() => action(pages.content)}>
+          Find a partner
+        </NavLink>
+      </li>
+      <li>Contact</li>
+      {userIsLogged === undefined ? (
+        <li>
+          <NavLink to="/login" onClick={() => action(pages.content)}>
+            Login <NavIcon className="fa fa-sign-in" />
+          </NavLink>
+        </li>
+      ) : (
+        <>
+          <li>
+            <NavLink
+              to={"/myaccount/" + userIsLogged.id}
+              onClick={() => action(pages.content)}
+            >
+              My account
+            </NavLink>
+          </li>
+          <li onClick={logOut}>
+            <NavLink to="/">
+              {"Log Out"}
+              <NavIcon className="fa fa-power-off" />
+            </NavLink>
+          </li>
+        </>
+      )}
     </Ul>
   );
 };

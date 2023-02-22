@@ -111,12 +111,11 @@ const FindAPartnerCards = () => {
     }
   };
 
-  useEffect(() => {
     checkloggedUserId();
-  });
 
 
-  const playerProfile = useSelector(state => getPlayerByUserId(state, Number(loggedUserId)));
+
+  const playerProfile = useSelector(state => getPlayerByUserId(state, loggedUserId));
 
   const checkIfUserHasProfile = () => {
     if (loggedUserId !== null) {
