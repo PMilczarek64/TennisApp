@@ -1,3 +1,5 @@
+import initialState from "./initialState";
+
 //selectors
 export const getUserName = ({ users }, userName, password) =>
   users.find(
@@ -9,16 +11,15 @@ export const getLoggingInInfo = ({ users }) =>
 //actions
 export const setLoggedIn = (payload) => ({ type: "SET_LOGGED_IN", payload });
 
-const usersReducer = (statePart = [], action) => {
+const usersReducer = (statePart = initialState.users, action) => {
   switch (action.type) {
     case "SET_LOGGED_IN":
-      return {
-        users: statePart.map((user) =>
-          user.userName === action.payload.name
-            ? { ...user, loggedInfo: action.payload.setLogged }
-            : user
-        ),
-      };
+      return statePart.map((user) =>
+        user.userName === action.payload.name
+          ? { ...user, loggedInfo: action.payload.setLogged }
+          : user
+      );
+
     default:
       return statePart;
   }

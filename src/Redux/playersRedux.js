@@ -1,3 +1,4 @@
+import initialState from "./initialState";
 import { strContains } from "../utils";
 
 //selectors
@@ -18,16 +19,16 @@ export const addPlayerProfile = (payload) => ({type: "ADD_PLAYER_PROFILE", paylo
 export const editPlayerProfile = (payload) => ({type: "EDIT_PLAYER_PROFILE", payload});
 export const removePlayerProfile = (payload) => ({type: "REMOVE_PLAYER_PROFILE", payload});
 
-const playersReducer = (state = [], action) => {
+const playersReducer = (statePart = initialState.players, action) => {
   switch (action.type) {
     case "ADD_PLAYER_PROFILE":
-      return {...state, players: state.players.concat([action.payload])};
+      return  statePart.concat([action.payload]);
     case "EDIT_PLAYER_PROFILE":
-      return {...state, players: state.players.map(player => player.id === action.payload.id ? {...player, ...action.payload } : player)};
+      return statePart.map(player => player.id === action.payload.id ? {...player, ...action.payload } : player);
     case "REMOVE_PLAYER_PROFILE": 
-      return {...state, players: state.players.filter(player => player.id !== action.payload)};
+      return statePart.filter(player => player.id !== action.payload);
     default:
-      return state;
+      return statePart;
   }
 };
 

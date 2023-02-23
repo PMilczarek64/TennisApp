@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getAllCities } from "../Redux/store";
+import { getAllCities } from "../Redux/citiesRedux";
 import { getObjectsByCity } from "../Redux/objectsRedux";
 import { Select } from "../common/Inputs.styles";
 import HeaderBar from "../common/HeaderBar";

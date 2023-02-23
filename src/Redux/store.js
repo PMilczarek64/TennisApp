@@ -3,15 +3,17 @@ import initialState from "./initialState";
 import objectsReducer from "./objectsRedux";
 import usersReducer from "./usersRedux";
 import playersReducer from "./playersRedux";
+import ntrpLevelsReducer from "./ntrpLevelsRedux";
+import citiesReducer from "./citiesRedux";
 
 //selectors
-export const getAllCities = (state) => state.cities;
-export const getAllNtrpLevels = (state) => state.ntrpLevels;
 
 const subreducers = {
   objects: objectsReducer,
   users: usersReducer,
   players: playersReducer,
+  ntrpLevels: ntrpLevelsReducer,
+  cities: citiesReducer,
 }
 
 const reducer = combineReducers(subreducers);

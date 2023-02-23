@@ -1,3 +1,5 @@
+import initialState from "./initialState";
+
 //selectors
 export const getAllObjects = (state) => state.objects;
 export const getObjectsByCity = ({ objects }, city) =>
@@ -19,30 +21,27 @@ export const getAllEvents = ({ objects }) =>
 export const addBooking = (payload) => ({ type: "ADD_BOOKING", payload });
 export const deleteBooking = (payload) => ({ type: "DELETE_BOOKING", payload });
 
-const objectsReducer = (state, action) => {
+const objectsReducer = (statePart = initialState.objects, action) => {
   switch (action.type) {
     case "ADD_BOOKING":
-      const object = state.objects.find(
+      const object = statePart.find(
         (object) => object.id === action.payload.objectId
       );
-
       const newObjectItem = {
         ...object,
         events: object.events.concat([action.payload]),
       };
 
-      return {
-        ...state,
-        objects: state.objects.map((item) => {
+      return statePart.map((item) => {
           if (item.id === action.payload.objectId) {
             return newObjectItem;
           } else {
             return item;
           }
-        }),
-      };
+        });
+      
     case "DELETE_BOOKING":
-      const obj = state.objects.find(
+      const obj = statePart.find(
         (object) => object.id === action.payload.objectId
       );
       const newObjItem = {
@@ -51,19 +50,16 @@ const objectsReducer = (state, action) => {
           (event) => event.id !== action.payload.bookingId.toString()
         ),
       };
-      return {
-        ...state,
-        objects: state.objects.map((item) => {
+      return statePart.map((item) => {
           if (item.id === action.payload.objectId) {
             return newObjItem;
           } else {
             return item;
           }
-        }),
-      };
+        });
 
     default:
-      return state;
+      return statePart;
   }
 };
 

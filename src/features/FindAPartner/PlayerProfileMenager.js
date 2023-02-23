@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import shortid from "shortid";
 import styled from "styled-components";
 import { Input, Label, Select, TextArea } from "../../common/Inputs.styles";
-import { getAllNtrpLevels } from "../../Redux/store";
+import { getAllNtrpLevels } from "../../Redux/ntrpLevelsRedux";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import propTypes from "prop-types";

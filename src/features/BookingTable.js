@@ -89,6 +89,8 @@ const BookingTable = ({
   const [bookingId, setBookingId] = useState("");
   const [selectedEndHour, setSelectedEndHour] = useState();
 
+  console.log('test loggedUser');
+
   const handleBooking = (hour, court, bookingId) => {
     setSelectedHour(hour);
     setSelectedCourt(court);
