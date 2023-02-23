@@ -17,13 +17,18 @@ export const getEventsByObjectId = ({ objects }, objectId) =>
 export const getAllEvents = ({ objects }) =>
   objects.filter((object) => object.events && object.events);
 
+//action creators
+const createActionName = actionName => `${actionName}`;
+const ADD_BOOKING = createActionName("ADD_BOOKING");
+const DELETE_BOOKING = createActionName("DELETE_BOKING");
+
 // action
-export const addBooking = (payload) => ({ type: "ADD_BOOKING", payload });
-export const deleteBooking = (payload) => ({ type: "DELETE_BOOKING", payload });
+export const addBooking = (payload) => ({ type: ADD_BOOKING, payload });
+export const deleteBooking = (payload) => ({ type: DELETE_BOOKING, payload });
 
 const objectsReducer = (statePart = initialState.objects, action) => {
   switch (action.type) {
-    case "ADD_BOOKING":
+    case ADD_BOOKING:
       const object = statePart.find(
         (object) => object.id === action.payload.objectId
       );
@@ -40,7 +45,7 @@ const objectsReducer = (statePart = initialState.objects, action) => {
           }
         });
       
-    case "DELETE_BOOKING":
+    case DELETE_BOOKING:
       const obj = statePart.find(
         (object) => object.id === action.payload.objectId
       );
