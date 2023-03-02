@@ -101,7 +101,7 @@ const AccountSettings = () => {
   const currentNewPassword = watch("newPassword", "");
   return (
     <Wrapper>
-      <HeaderBar value="Account Settings" />
+      <HeaderBar value="Account Settings" undo/>
       <ContentWrapper>
         {passwordChanged ?
         <>

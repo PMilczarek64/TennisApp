@@ -85,7 +85,7 @@ const MyBookings = () => {
   };
   return (
     <>
-      <HeaderBar value="Your Bookings" />
+      <HeaderBar value="Your Bookings" undo/>
       <Wrapper>
         {isAnyBookings !== undefined ? (
           <h4>
