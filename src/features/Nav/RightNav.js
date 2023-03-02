@@ -1,11 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { getLoggingInInfo, setLoggedIn } from "../../Redux/usersRedux";
 import styled from "styled-components";
 import Ball from "../../assets/images/Ball.png";
 
 const Ul = styled.ul`
+position: fixed;
   list-style: none;
   display: flex;
   flex-flow: row;
@@ -25,6 +26,7 @@ const Ul = styled.ul`
     font-weight: 500;
     border-right: solid 1px rgba(0, 0, 0, 0.122);
     color: white;
+    cursor: pointer;
     :first-child {
       filter: blur(0.3px);
       :hover {
@@ -107,6 +109,16 @@ const RightNav = ({ open, action, pages }) => {
   const logOut = () => {
     dispatch(setLoggedIn({ setLogged: false, name: userIsLogged.userName }));
   };
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    action(pages.content);
+    navigate('/login', {
+      state: {
+        previousUrl: '/',
+      }
+    })
+  };
 
   return (
     <Ul open={open}>
@@ -127,10 +139,9 @@ const RightNav = ({ open, action, pages }) => {
       </li>
       <li>Contact</li>
       {userIsLogged === undefined ? (
-        <li>
-          <NavLink to="/login" onClick={() => action(pages.content)}>
-            Login <NavIcon className="fa fa-sign-in" />
-          </NavLink>
+        <li
+        onClick={handleLogin}>
+        Login <NavIcon className="fa fa-sign-in" />
         </li>
       ) : (
         <>

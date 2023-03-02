@@ -29,6 +29,17 @@ const strContains = (str1, str2) => {
   return callback;
 };
 
+export const checkIfUserHasProfile = (userId, playerProfile) => {
+  if (isNaN(Number(userId)) === false) {
+    if (playerProfile !== undefined) {
+      console.log('user has a profile ', playerProfile.id); 
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
 export const isLessThan24H = (eventDate) => {
   const currentDate = moment();
   const bookingDate = moment(eventDate);

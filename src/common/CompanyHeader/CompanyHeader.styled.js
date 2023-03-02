@@ -2,16 +2,20 @@ import styled from "styled-components";
 
 const HeaderWrapper = styled.div`
   display: flex;
-  margin-left: 30px;
   padding-block: 30px;
   justify-content: space-between;
-  background-position-y: 30%;
+  background-position-y: 55%;
   background-size: cover;
+  margin-left: 30px;
   h2 {
-    color: ${({ theme }) => theme.colors.detailBlue};
+    color: #1D1B15;
+    font-family: 'Audiowide', cursive;
   }
   h3 {
     color: black;
+    &.subHeader {
+      color: ${({ theme }) => theme.colors.detailBlue};
+    }
   }
   @media screen and (max-width: 820px) {
     flex-direction: column;
@@ -36,4 +40,4 @@ const Header = styled.div`
   margin-block: 30px;
 `;
 
-export default { Header, LogoWrapper, HeaderWrapper};
+export default { Header, LogoWrapper, HeaderWrapper };

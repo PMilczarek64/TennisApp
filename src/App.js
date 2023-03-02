@@ -5,19 +5,25 @@ import { Routes, Route } from "react-router-dom";
 import Courts from "./views/Courts";
 import ShowObject from "./features/ShowObject";
 import LoginForm from "./features/LoginForm";
-import MyAccount from "./features/MyAccount";
-import MyBookings from "./features/MyBookings";
+import MyAccount from "./features/MyAccount/MyAccount";
+import MyBookings from "./features/MyAccount/MyBookings";
 import NotFound from "./views/404NotFound";
 import Footer from "./views/Footer";
 import styled from "styled-components";
 import { useRef } from "react";
 import FindAPartnerCards from "./features/FindAPartner/FindAPartnerCards";
+import { getLoggingInInfo } from "./Redux/usersRedux";
+import { useSelector } from "react-redux";
+import AccountSettings from "./features/MyAccount/AccountSettings";
+
+const RoutesContainer = styled.div`
+margin: 0;
+padding: 0;
+`;
 
 function App() {
-  const RoutesContainer = styled.div`
-    margin: 0;
-    padding: 0;
-  `;
+
+  const userLogged = useSelector(getLoggingInInfo);
 
   const pages = {
     home: useRef(null),
@@ -43,8 +49,9 @@ function App() {
           <Route path="/courts/:city" element={<Courts />} />
           <Route path="/courts/:city/:objectId/*" element={<ShowObject />} />
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/myaccount/:userId" element={<MyAccount />} />
+          <Route path="/myaccount/:userId" element={<MyAccount userLogged={userLogged}/>} />
           <Route path="/myaccount/:userId/bookings" element={<MyBookings />} />
+          <Route path="/myaccount/:userId/settings" element={<AccountSettings />} />
           <Route path="/findapartner/*" element={<FindAPartnerCards />} />
         </Routes>
       </RoutesContainer>

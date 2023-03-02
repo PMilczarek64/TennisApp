@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   
   h4 {
     margin-bottom: 15px;
+    color: ${({ theme }) => theme.colors.detailBlue};
   }
   @media (max-width: 1110px){
     box-shadow: none;
@@ -52,13 +53,13 @@ const DetailLine = styled.span`
   margin-inline: 50px;
   margin-block: 20px;
   height: 3px;
-  border-bottom: 3px solid ${({ theme }) => theme.colors.detailBlue};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.strongFaded};
   &.first {
     margin-top: 0;
   }
   &.mobile {
     width: 130px;
-    border-bottom: 2px solid ${({ theme }) => theme.colors.detailBlue};
+    border-bottom: 2px solid ${({ theme }) => theme.colors.strongfaded};
     @media screen and (min-width: 670px){
       display: none;
     }

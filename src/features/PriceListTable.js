@@ -8,7 +8,7 @@ const Table = styled.div`
   display: grid;
   grid-gap: 1px;
   grid-row-gap: 1px;
-  background: linear-gradient(140deg, white 0%, rgba(2,101,146,1) 40%);
+  background: linear-gradient(140deg, white 0%, #4169e1 40%);
   grid-template-areas:
     'header header header header header header header header'
     'weekdays1 weekdays1 weekdays1 hours1 hours1 hours1 price1 price1'
@@ -33,11 +33,7 @@ const GridItem = styled.div`
   opacity: 0.9;
   &.header {
     grid-area: header;
-    background: linear-gradient(140deg, white 0%, rgba(2,101,146,1) 40%);
-    color: white;
-    p {
-      color: white;
-    }
+    color: ${({ theme }) => theme.colors.lightBlue};
   }
   &.weekdays1 {
   grid-area: weekdays1;
@@ -80,11 +76,11 @@ const PriceListTable = (priceList) => {
       </GridItem>
       {weekdaysPrices.map(item =>
         <>
-          <GridItem key={shortid()} className={"grid-item " + "hours" + item.id}>
+          <GridItem key={shortid()} className={`grid-item hours${item.id}`}>
             <p>{item.hours}</p>
           </GridItem>
-          <GridItem key={shortid()} className={"grid-item " + "price" + item.id}>
-            <p>{item.price}PLN</p>
+          <GridItem key={shortid()} className={`grid-item price${item.id}`}>
+            <p>{item.price} PLN</p>
           </GridItem>
         </>
       )}
@@ -93,11 +89,11 @@ const PriceListTable = (priceList) => {
       </GridItem>
       {weekendPrices.map(item =>
         <>
-          <GridItem key={shortid()} className={"grid-item " + "hours" + item.id}>
+          <GridItem key={shortid()} className={`grid-item hours${item.id}`}>
             <p>{item.hours}</p>
           </GridItem>
-          <GridItem key={shortid()} className={"grid-item " + "price" + item.id}>
-            <p key={shortid()}>{item.price}PLN</p>
+          <GridItem key={shortid()} className={`grid-item price${item.id}`}>
+            <p key={shortid()}>{item.price} PLN</p>
           </GridItem>
         </>
       )}

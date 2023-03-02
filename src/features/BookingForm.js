@@ -102,10 +102,12 @@ const BookingForm = ({
   tableDate,
   bookingId,
 }) => {
+  const dispatch = useDispatch();
+  const { objectId } = useParams();
+
   const freeHoursByCourt = freeHours.filter(
     (object) => object.courtId === selectedCourt
   );
-
   const busyHoursByCourt = busyHours.filter(
     (object) => object.courtId === selectedCourt
   );
@@ -115,8 +117,6 @@ const BookingForm = ({
 
   const loggedUser = useSelector(getLoggingInInfo);
   const [maxPossibleHours, setMaxPossibleHours] = useState([]);
-  const dispatch = useDispatch();
-  const { objectId } = useParams();
 
   const object = useSelector((state) => getObjectById(state, Number(objectId)));
   const closingHour = object.contentData[0].closingHour;
@@ -135,12 +135,12 @@ const BookingForm = ({
     }
     setMaxPossibleHours(preparedMaxPossibleHours);
   };
-
+  /* eslint-disable */
   useEffect(() => {
     countPossibleHours();
     setSelectedEndHour(fromHour + 0.5);
   }, [fromHour, tableDate]);
-
+  /* eslint-enable */
   const handleChange = (e) => {
     setSelectedHour(formatHourToNumber(e));
   };

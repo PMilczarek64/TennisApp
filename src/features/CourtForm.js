@@ -30,8 +30,8 @@ const ContentWrapper = styled.div`
 `;
 
 const LocationForm = styled.form`
-  min-width: 200px;
-  min-height: 100%;
+  width: 20%;
+  height: 100%;
   padding: 60px 100px;
   display: flex;
   flex-direction: column;
@@ -48,6 +48,7 @@ const LocationForm = styled.form`
     margin-block: 10px;
     font-size: 18px;
     cursor: pointer;
+    font-size: 18px;
   }
   h4 {
     margin-bottom: 10px;
@@ -56,17 +57,20 @@ const LocationForm = styled.form`
     font-size: 17px;
   }
   @media screen and (max-width: 770px){
+    width: 90%;
     flex-direction: row;
     align-items: flex-end;
     justify-content: flex-end;
     padding: 20px 0;
      button {
       margin-block: 0;
+      height: 33px;
     }
     h4 {
       display: none;
     }
   }
+
   @media screen and (max-width: 546px){
     flex-direction: column;
     width: 85%;
@@ -89,6 +93,7 @@ const CourtsList = styled.div`
     color: black;
   }
   @media screen and (max-width: 770px){
+    border: none;
     width: 90%;
     padding: 20px;
   }
@@ -175,7 +180,7 @@ const CourtForm = () => {
               ))}
             </Select>
           </FormItem>
-          <button onClick={handleSubmit}>Search</button>
+          <button onClick={handleSubmit}><i className="fa fa-search"> SEARCH</i></button>
         </LocationForm>
         <CourtsList>
           {objects.map((object) => (

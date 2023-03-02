@@ -13,7 +13,7 @@ const CompanyHeader = ({ logo, name, subHeader }) => {
       </CompanyLogo>
       <Styled.Header>
         <h2>{name}</h2>
-        <h3>{subHeader}</h3>
+        <h3 className="subHeader">{subHeader}</h3>
       </Styled.Header>
       <Styled.LogoWrapper>
         <Logo className="zi2">
