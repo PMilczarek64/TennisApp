@@ -80,6 +80,9 @@ const FormItem = styled.div`
   @media screen and (max-width: 990px) {
     flex-direction: column;
     margin: 0;
+    label {
+      text-align: center;
+    }
   }
 `;
 

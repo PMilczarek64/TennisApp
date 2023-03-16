@@ -1,6 +1,7 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import LogoImage from '../assets/images/Tennis.png';
+import LogoImage from "../assets/images/Tennis.png";
 
 const Container = styled.div`
   height: 25vh;
@@ -26,19 +27,18 @@ const Container = styled.div`
   }
 `;
 
-
 const Left = styled.div`
-padding: 40px 80px;
-max-width: 330px;
-text-align: left;
-i {
-  padding: 0 8px 8px 0;
-  font-size: 26px;
-  color: ${({theme}) => theme.colors.detailGreen};
-}
-@media (max-width: 820px) {
-  padding: 20px 0;
-}
+  padding: 40px 80px;
+  max-width: 330px;
+  text-align: left;
+  i {
+    padding: 0 8px 8px 0;
+    font-size: 26px;
+    color: ${({ theme }) => theme.colors.detailGreen};
+  }
+  @media (max-width: 820px) {
+    padding: 20px 0;
+  }
 `;
 
 const Right = styled.ul`
@@ -55,24 +55,28 @@ const Right = styled.ul`
     align-items: flex-start;
   }
   @media (max-width: 820px) {
-  padding: 20px 0;
-  display: none;
-}
+    padding: 20px 0;
+    display: none;
+  }
 `;
 
 const Footer = () => {
   return (
     <Container>
       <Left>
-        <i className="fa fa-copyright" aria-hidden="true"></i> 
+        <i className="fa fa-copyright" aria-hidden="true"></i>
         All Rights Reserved by Patryk Milczarek by tennismotion.com
       </Left>
       <Right>
-        <li><a href="/">Book a court</a></li>
-        <li><a href="/">Find a partner</a></li>
-        <li><a href="/">Blog</a></li>
-        <li><a href="/">Contact</a></li>
-        <li><a href="/">FAQ</a></li>
+        <li>
+        <NavLink to="/">Book a court</NavLink>
+        </li>
+        <li>
+          <NavLink to="/findapartner">Find a partner</NavLink>
+        </li>
+        <li>
+          <NavLink to="/contact">Contact</NavLink>
+        </li>
       </Right>
     </Container>
   );
