@@ -3,12 +3,11 @@ import styled from "styled-components";
 import HeaderBar from "../../common/HeaderBar";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { Input, Label } from "../../common/Inputs.styles";
+import { Input } from "../../common/Inputs.styles";
 import { RoundedIcon } from "../../common/RoundedIcon";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getLoggingInInfo,
-  getPassword,
   updatePassword,
 } from "../../Redux/usersRedux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -101,7 +100,7 @@ const AccountSettings = () => {
   const currentNewPassword = watch("newPassword", "");
   return (
     <Wrapper>
-      <HeaderBar value="Account Settings" undo/>
+      <HeaderBar value="Settings" undo/>
       <ContentWrapper>
         {passwordChanged ?
         <>
@@ -120,7 +119,7 @@ const AccountSettings = () => {
         <Form onSubmit={handleSubmit(handlePasswordChange)}>
           <Input
             type="password"
-            placeholder="Enter your current password"
+            placeholder="Current password"
             {...register("password", {
               required: "This field is required",
               validate: (value) => value === user.password || "Wrong password",
@@ -140,7 +139,7 @@ const AccountSettings = () => {
           />
           <Input
             type="password"
-            placeholder="Enter a new password"
+            placeholder="New password"
             {...register("newPassword", {
               required: "This field is required",
               minLength: {
@@ -189,7 +188,6 @@ const AccountSettings = () => {
           <ButtonGreen type="submit">Submit</ButtonGreen>
         </Form>
       </ContentWrapper>
-      
     </Wrapper>
   );
 };

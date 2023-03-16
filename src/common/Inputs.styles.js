@@ -27,6 +27,18 @@ export const Select = styled.select`
     }
 `;
 
+export const IconInput = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  border: solid 1px ${({ theme }) => theme.colors.faded};
+  border-radius: 5px;
+  input {
+    border: none;
+  }
+`;
+
 export const Label = styled.label`
   font-size: 18px;
   padding: 7px;
@@ -41,7 +53,7 @@ export const TextArea = styled.textarea`
   border-radius: 7px;
   margin-bottom: 5px;
   :-webkit-autofill, :focus {
-    box-shadow: 0 0 0px 1000px white inset !important;
+    box-shadow: 0 0 0px 1000px transparent inset !important;
     outline: none;
   }
 `;

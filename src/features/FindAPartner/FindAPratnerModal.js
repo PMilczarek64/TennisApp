@@ -17,7 +17,7 @@ const ContentWrapper = styled.div`
   height: 630px; 
   width: 100%;
   max-width: 880px;
-  background: white;
+  background: transparent;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
   overflow: hidden;
@@ -31,7 +31,9 @@ const ContentWrapper = styled.div`
   @media screen and (max-width: 990px) {
     width: 90%;
   }
- 
+  @media screen and (max-width: 490px) {
+    border-radius: 10px;
+  }
 `;
 
 export const ModalHeader = styled.h3`

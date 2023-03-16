@@ -33,6 +33,7 @@ const InfoWrapper = styled.div`
   align-items: center;
   min-width: 50%;
   flex-shrink: 1;
+  background-color: white;
   &.hide {
     display: none;
   }

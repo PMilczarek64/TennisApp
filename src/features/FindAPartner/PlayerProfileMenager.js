@@ -19,6 +19,7 @@ const FormWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   flex-shrink: 1;
+  background-color: white;
   i {
     font-size: 36px;
     color: ${({ theme }) => theme.colors.lightBlue};
@@ -53,6 +54,7 @@ const Image = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: white;
   img {
     height: 65%;
     width: 100%;

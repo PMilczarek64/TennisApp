@@ -111,9 +111,9 @@ const RightNav = ({ open, action, pages }) => {
   };
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const handleNavigate = (endpoint) => {
     action(pages.content);
-    navigate('/login', {
+    navigate(endpoint, {
       state: {
         previousUrl: '/',
       }
@@ -137,10 +137,12 @@ const RightNav = ({ open, action, pages }) => {
           Find a partner
         </NavLink>
       </li>
-      <li>Contact</li>
+      <li onClick={() => handleNavigate('/contact')}>
+        Contact  
+      </li>
       {userIsLogged === undefined ? (
         <li
-        onClick={handleLogin}>
+        onClick={() => handleNavigate('/login')}>
         Login <NavIcon className="fa fa-sign-in" />
         </li>
       ) : (

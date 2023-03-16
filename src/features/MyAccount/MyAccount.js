@@ -23,6 +23,9 @@ const WidgetsWrapper = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  @media screen and (max-width: 540px){
+    padding: 5px;
+  }
 `;
 
 const Widget = styled.li`
@@ -37,6 +40,9 @@ const Widget = styled.li`
   border-radius: 10px;
   box-shadow: 12px 12px 24px -2px ${({ theme }) => theme.colors.strongFaded};
   cursor: pointer;
+  @media screen and (max-width: 540px){
+    flex-direction: column;
+  }
 `;
 
 const WidgetContent = styled.div`
@@ -50,6 +56,12 @@ const WidgetContent = styled.div`
   }
   p {
     font-size: 19px;
+  }
+  @media screen and (max-width: 540px){
+    text-align: center;
+    h3 {
+      margin-bottom: 10px;
+    }
   }
 `;
 
