@@ -8,7 +8,6 @@ const HeaderWrapper = styled.div`
   background-size: cover;
   margin-left: 30px;
   h2 {
-    color: #1D1B15;
     font-family: 'Audiowide', cursive;
   }
   h3 {
@@ -28,9 +27,6 @@ const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  .zi2 {
-    z-index: 0;
-  }
   @media screen and (max-width: 820px) {
     display: none;
   }

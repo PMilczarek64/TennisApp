@@ -5,8 +5,7 @@ import { Input, Label } from "../common/Inputs.styles";
 import { getUserName, setLoggedIn} from "../Redux/usersRedux";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Logo } from "../views/Home";
-import LogoImage from "../assets/images/Tennis.png";
+import TennisMotionLogo from "../common/TennisMotionLogo";
 
 const Wrapper = styled.div`
   padding: 50px 100px;
@@ -111,10 +110,7 @@ const LoginForm = () => {
   console.log(checkUser);
   return (
     <Wrapper>
-      <Logo className="dark">
-        <h3>TENNIS MOTION</h3>
-        <img src={LogoImage} alt="logo"></img>
-      </Logo>
+      <TennisMotionLogo dark />
       <Form>
         <FormItem className="center">
           <h4>Log in to your account</h4>

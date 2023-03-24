@@ -1,17 +1,13 @@
-import React from "react";
 import styled from "styled-components";
-import HeaderImg from '../assets/images/Header.jpg';
-import LogoImage from '../assets/images/Tennis.png';
-import Navbar from "../features/Nav/Navbar";
-import { useNavigate } from "react-router-dom";
+import HeaderImg from "../../assets/images/Header.jpg"
 
-const Container = styled.div`
+export const Container = styled.div`
   max-width: 100%;
   margin: 0;
   padding: 0;
 `;
 
-const Header = styled.div`
+export const Header = styled.div`
   min-height: 90vh;
   max-width: 100%;
   background-image: url(${HeaderImg});
@@ -94,7 +90,7 @@ const Header = styled.div`
   }
 `;
 
-const TopHeader = styled.div`
+export const TopHeader = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -102,43 +98,3 @@ const TopHeader = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-
-export const Logo = styled.div`
-  max-height: 100px;
-  padding-left: 30px;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  object-fit: cover;
-  width: 220px;
-  height: 200px;
-  z-index: 3;
-  cursor: pointer;
-  img {
-    max-height: 100%;
-    transform: translate(-40%, -15%);
-  }
-`;
-
-const Home = ({passedRef, action, pages}) => {
-  const navigate = useNavigate();
-  return (
-    <Container ref={passedRef}>
-      <Header>
-        <TopHeader>
-          <Logo onClick={() => navigate('/')}>
-            <h3>TENNIS MOTION</h3>
-            <img src={LogoImage} alt="logo"></img>
-          </Logo>
-          <Navbar action={action} pages={pages}/>
-        </TopHeader>
-          <span className="left"><h3>BOOK A COURT, TRAININGS, BLOG</h3></span>
-          <span className="left2"><h1>Create our society!</h1></span>
-          <span className="right"><h2>Play tennis <i className="fa fa-play" aria-hidden="true"></i></h2></span>
-      </Header>
-    </Container>
-  );
-};
-
-export default Home;

@@ -1,6 +1,6 @@
 import { GlobalStyle } from "./assets/styles/GlobalStyle";
-import CourtForm from "./features/CourtForm";
-import Home from "./views/Home";
+import Home from "./pages/Home";
+import Hero from "./features/Hero/Hero";
 import { Routes, Route } from "react-router-dom";
 import Courts from "./views/Courts";
 import ShowObject from "./features/ShowObject";
@@ -41,11 +41,11 @@ function App() {
   return (
     <div>
       <GlobalStyle />
-      <Home action={scrollToSection} pages={pages} passedRef={pages.home} />
+      <Hero action={scrollToSection} pages={pages} passedRef={pages.home} />
       <RoutesContainer ref={pages.content}>
         <Routes>
           <Route path="*" element={<NotFound />} />
-          <Route path="/" element={<CourtForm />} />
+          <Route path="/" element={<Home />} />
           <Route path="/courts/" element={<Courts />} />
           <Route path="/courts/:city" element={<Courts />} />
           <Route path="/courts/:city/:objectId/*" element={<ShowObject />} />

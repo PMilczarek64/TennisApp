@@ -122,7 +122,6 @@ const RemoveBookingModal = ({
       ) : (
         <Wrapper>
           <Header>Do you want to cancel your booking? {objectName}</Header>
-
           <FormItem>
             <Label htmlFor="date">Date: </Label>
             <p>{moment(eventStartDate).format("YYYY/MM/DD")}</p>
