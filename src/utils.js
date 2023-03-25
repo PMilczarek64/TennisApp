@@ -10,6 +10,13 @@ const formatNumberToHour = (inputNumber) => {
   return `${hour}:${minutes ? "30" : "00"}`;
 };
 
+const concatDayAndHour = (date, hour) => {
+  const dayToConcat = moment(date).format().slice(0, 11);
+  const hourToConcat = formatNumberToHour(hour) + ':00';
+  const timeChange = moment(date).format().slice(-6);
+  return `${dayToConcat}${hourToConcat}${timeChange}`;
+}
+
 const formatCmToMeters = (cm) => {
   const formattedValue = cm.slice(0, 1) + '.' + cm.slice(1,4) + 'm';
     return formattedValue
@@ -57,4 +64,4 @@ export const isValidEmail = email =>
     email
   );
 
-export { formatHourToNumber, formatNumberToHour, strContains, formatCmToMeters, formatMetersStringToCm };
+export { formatHourToNumber, formatNumberToHour, strContains, formatCmToMeters, formatMetersStringToCm, concatDayAndHour };

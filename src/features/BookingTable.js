@@ -92,6 +92,7 @@ const BookingTable = ({
   console.log('test loggedUser');
 
   const handleBooking = (hour, court, bookingId) => {
+    console.log('testy godziny przy handle Booking: ', hour);
     setSelectedHour(hour);
     setSelectedCourt(court);
     setBookingId(bookingId);

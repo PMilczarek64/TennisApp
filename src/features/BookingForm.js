@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ButtonGreenOutline, ButtonRedOutline } from "../common/Button";
 import { Label, Select } from "../common/Inputs.styles";
-import { formatHourToNumber, formatNumberToHour } from "../utils";
+import { formatHourToNumber, formatNumberToHour, concatDayAndHour } from "../utils";
 import { addBooking } from "../Redux/objectsRedux";
 import { getLoggingInInfo } from "../Redux/usersRedux";
 import { useDispatch, useSelector } from "react-redux";
@@ -153,18 +153,8 @@ const BookingForm = ({
   };
 
   const handleBooking = () => {
-    const startHourFormmatedToDispatch = moment(
-      tableDate.toString().slice(0, 16) +
-        formatNumberToHour(fromHour) +
-        ":00 " +
-        tableDate.toString().slice(-46)
-    ).format();
-    const endHourFormattedToDispatch = moment(
-      tableDate.toString().slice(0, 16) +
-        formatNumberToHour(selectedEndHour - 0.5) +
-        ":00 " +
-        tableDate.toString().slice(-46)
-    ).format();
+    const startHourFormmatedToDispatch = concatDayAndHour(tableDate, fromHour);
+    const endHourFormattedToDispatch = concatDayAndHour(tableDate, selectedEndHour - 0.5);
     dispatch(
       addBooking({
         id: bookingId,
