@@ -3,7 +3,7 @@ import { Route, Routes, useParams } from "react-router-dom";
 import styled from "styled-components";
 import CourtInfo from "../pages/CourtInfo";
 import ContentNav from "./ContentNav";
-import CourtsBooking from "./CourtsBooking";
+import CourtsBooking from "./Booking/CourtsBooking";
 import LoginForm from "./LoginForm";
 import {
   getFirstFacilityByCity,

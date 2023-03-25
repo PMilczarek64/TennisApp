@@ -1,74 +1,12 @@
 import moment from "moment/moment";
 import React, { useState } from "react";
 import shortid from "shortid";
-import styled from "styled-components";
-import { formatHourToNumber, formatNumberToHour } from "../utils";
-import BookingForm from "./BookingForm";
+import { formatHourToNumber, formatNumberToHour } from "../../../utils";
+import BookingForm from "../BookingForm/BookingForm";
 import { useSelector } from "react-redux";
-import { getLoggingInInfo } from "../Redux/usersRedux";
-import EditBooking from "./EditBooking";
-
-const Table = styled.table`
-  width: 90%;
-  background: linear-gradient(90deg, #ddff00 0%, rgb(255, 231, 76) 100%);
-  box-shadow: 12px 12px 24px -18px ${({ theme }) => theme.colors.darkGrey};
-  margin-left: 20px;
-  &.red {
-    background: linear-gradient(90deg, rgb(247, 200, 200), rgb(255, 141, 141));
-  }
-  td,
-  th {
-    padding: 15px;
-    font-weight: 800;
-    background-color: white;
-    width: 25%;
-    &.green {
-      color: ${({ theme }) => theme.colors.darkGrey};
-      cursor: pointer;
-    }
-    &.red {
-      flex-grow: 2;
-      color: white;
-      cursor: not-allowed;
-      background: linear-gradient(
-        90deg,
-        rgb(247, 200, 200),
-        rgb(255, 141, 141)
-      );
-    }
-    &.hour {
-      opacity: 0.9;
-    }
-    &.header {
-      color: white;
-      font-weight: 800;
-      font-size: 24px;
-      background: transparent;
-      @media screen and (max-width: 450px) {
-        display: flex row;
-        justify-content: flex-start;
-        align-items: flex-start;
-      }
-    }
-    &.yellow {
-      background: linear-gradient(70deg, transparent, rgb(255, 255, 255));
-      color: rgba(156, 202, 27, 0.871);
-      cursor: pointer;
-    }
-    :hover {
-      opacity: 0.9;
-    }
-    @media screen and (max-width: 920px) {
-      padding: 15px 5px;
-    }
-    @media screen and (max-width: 620px) {
-      height: 38px;
-    }
-  }
-  @media screen and (max-width: 920px) {
-    margin-left: 0;
-  }
-`;
+import { getLoggingInInfo } from "../../../Redux/usersRedux";
+import EditBooking from "../EditBooking/EditBooking";
+import { Table } from "./BookingTable.styled";
 
 const BookingTable = ({
   courts,
@@ -89,10 +27,7 @@ const BookingTable = ({
   const [bookingId, setBookingId] = useState("");
   const [selectedEndHour, setSelectedEndHour] = useState();
 
-  console.log('test loggedUser');
-
   const handleBooking = (hour, court, bookingId) => {
-    console.log('testy godziny przy handle Booking: ', hour);
     setSelectedHour(hour);
     setSelectedCourt(court);
     setBookingId(bookingId);
@@ -165,11 +100,11 @@ const BookingTable = ({
       <Table>
         <thead>
           <tr>
-            <th className="header">Hours</th>
+            <td className="header">Hours</td>
             {courts.map((court) => (
-              <th key={court.id} className="header">
+              <td key={court.id} className="header">
                 Court {court.id}
-              </th>
+              </td>
             ))}
           </tr>
         </thead>
@@ -184,20 +119,20 @@ const BookingTable = ({
                       ? busyHours.push({ courtId: court.id, hour: hour }) &&
                         (checkIfBusyByYou(court.id, hour) ? (
                           <td
-                            className="yellow"
+                            className="busyByYou"
                             key={shortid()}
                             onClick={(e) => handleEdit()}
                           >
                             Booked by YOU
                           </td>
                         ) : (
-                          <td className="red" key={shortid()}>
+                          <td className="busy" key={shortid()}>
                             busy
                           </td>
                         ))
                       : freeHours.push({ courtId: court.id, hour: hour }) && (
                           <td
-                            className="green"
+                            className="free"
                             key={shortid()}
                             id={shortid()}
                             onClick={(e) =>
