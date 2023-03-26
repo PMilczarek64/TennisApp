@@ -126,7 +126,7 @@ const BookingForm = ({
       </FormItem>
       <FormItem>
         <Label htmlFor="to-hour">To hour: </Label>
-        <Select  onChange={(e) => setSelectedEndHour(e.target.value)}>
+        <Select onChange={(e) => setSelectedEndHour(e.target.value)}>
           {maxPossibleHours.map((hour) =>
               <option value={hour} key={hour}>
                 {formatNumberToHour(hour)}
@@ -149,12 +149,12 @@ BookingForm.propTypes = {
   showModal: propTypes.bool.isRequired,
   freeHours: propTypes.array.isRequired,
   busyHours: propTypes.array.isRequired,
-  fromHour: propTypes.number.isRequired,
+  fromHour: propTypes.number,
   setSelectedHour: propTypes.func.isRequired,
-  selectedEndHour: propTypes.number.isRequired,
+  selectedEndHour: propTypes.number,
   setSelectedEndHour: propTypes.func.isRequired,
   selectedCourt: propTypes.number.isRequired,
-  tableDate: propTypes.string.isRequired,
+  tableDate: propTypes.instanceOf(Date),
   bookingId: propTypes.string.isRequired,
 };
 

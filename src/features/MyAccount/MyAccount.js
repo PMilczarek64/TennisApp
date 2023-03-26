@@ -4,8 +4,8 @@ import styled from "styled-components";
 import HeaderBar from "../../common/HeaderBar";
 import { useSelector } from "react-redux";
 import { getPlayerByUserId } from "../../Redux/playersRedux";
-import EditPlayerProfile from "../FindAPartner/EditPlayerProfile";
-import AddPlayerProfile from "../FindAPartner/AddPlayerProfile";
+import EditPlayerProfile from "../FindAPartner/Modals/PlayerProfileMenager/EditPlayerProfile";
+import AddPlayerProfile from "../FindAPartner/Modals/PlayerProfileMenager/AddPlayerProfile";
 import { checkIfUserHasProfile } from "../../utils";
 import { RoundedIcon } from "../../common/RoundedIcon";
 

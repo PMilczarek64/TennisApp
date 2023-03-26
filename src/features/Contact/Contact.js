@@ -1,5 +1,5 @@
 import React from "react";
-import FindAPartnerModal from "../FindAPartner/FindAPratnerModal";
+import FindAPartnerModal from "../../common/ContentModal";
 import styled from "styled-components";
 import { Input, TextArea } from "../../common/Inputs.styles";
 import { useNavigate } from "react-router-dom";

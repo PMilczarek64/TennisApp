@@ -1,80 +1,18 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useCallback, useState } from "react";
 import HeaderBar from "../../common/HeaderBar";
 import FindAPartnerCard from "../../common/FindAPartnerCard";
 import { useSelector } from "react-redux";
 import { getAllPlayers, getPlayerByUserId } from "../../Redux/playersRedux";
 import { getLoggingInInfo } from "../../Redux/usersRedux";
-import { ButtonGreenHighlited } from "../../common/Button";
-import { Input } from "../../common/Inputs.styles";
 import { strContains } from "../../utils";
-import PlayerModal from "./PlayerModal";
-import AddPlayerProfile from "./AddPlayerProfile";
-import EditPlayerProfile from "./EditPlayerProfile";
+import PlayerModal from "./Modals/PlayerModal/PlayerModal";
+import AddPlayerProfile from "./Modals/PlayerProfileMenager/AddPlayerProfile";
+import EditPlayerProfile from "./Modals/PlayerProfileMenager/EditPlayerProfile";
 import { useNavigate } from "react-router-dom";
+import MenagementBar from "./MenagementBar/MenagementBar";
+import { Wrapper, CardsWrapper } from "./FindAPartner.styled";
 
-const Wrapper = styled.div`
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
-const CardsWrapper = styled.div`
-  max-width: 100%;
-  padding: 50px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  @media (max-width: 530px) {
-    padding-inline: 0;
-  }
-`;
-
-const MenagementBar = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 70px;
-  width: 100%;
-  color: black;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  i {
-    color: #4169e1;
-  }
-`;
-
-const Inputs = styled.div`
-  width: 60%;
-  display: flex;
-  margin: 20px;
-  justify-content: space-around;
-  input {
-    max-width: 30%;
-  }
-  @media (max-width: 1200px) {
-    width: 80%;
-  }
-  @media (max-width: 750px) {
-    flex-direction: column;
-    align-items: center;
-    input {
-      max-width: 70%;
-      margin: 5px;
-    }
-  }
-  @media (max-width: 450px) {
-    input {
-      transform: scale(1.4);
-      margin: 15px;
-    }
-  }
-`;
-
-const FindAPartnerCards = () => {
+const FindAPartner = () => {
   const [city, setCity] = useState("");
   const [name, setName] = useState("");
   const [ntrp, setNtrp] = useState("");
@@ -99,7 +37,7 @@ const FindAPartnerCards = () => {
   };
 
   const loggedUserId = useSelector(getLoggingInInfo)?.id;
-  const checkloggedUserId = () => {
+  const checkloggedUserId = useCallback(() => {
     if (loggedUserId !== undefined) {
       return true;
     } else {
@@ -108,13 +46,9 @@ const FindAPartnerCards = () => {
           previousUrl: '/findapartner',
         }
       });
-      return false
+      return false;
     }
-  };
-
-    checkloggedUserId();
-
-
+  }, [loggedUserId, navigate]);
 
   const playerProfile = useSelector(state => getPlayerByUserId(state, loggedUserId));
 
@@ -140,28 +74,15 @@ const FindAPartnerCards = () => {
       {showAddProfileModal && <AddPlayerProfile userId={loggedUserId} setShowModal={setShowAddProfileModal} />}
       {showEditProfileModal && <EditPlayerProfile userId={loggedUserId} setShowModal={setShowEditProfileModal} player={playerProfile}/>}
       <HeaderBar value="Find a partner"></HeaderBar>
-      <MenagementBar>
-        <h4>
-          Fill the fields below to search <i className="fa fa-search"></i>
-        </h4>
-        <Inputs>
-          <Input
-            placeholder="City"
-            onChange={(e) => setCity(e.target.value)}
-          ></Input>
-          <Input
-            placeholder="Player's name"
-            onChange={(e) => setName(e.target.value)}
-          ></Input>
-          <Input
-            placeholder="NTRP level"
-            onChange={(e) => setNtrp(e.target.value)}
-          ></Input>
-        </Inputs>
-        <ButtonGreenHighlited onClick={() => checkIfUserHasProfile() === false ? setShowAddProfileModal(true) : setShowEditProfileModal(true)} >
-          {checkloggedUserId() === false ? `Log in and add your player profile` : `Click to add or edit your profile`} <i className="fa fa-users"></i>
-        </ButtonGreenHighlited>
-      </MenagementBar>
+      <MenagementBar setCity={setCity}
+        setName={setName}
+        setNtrp={setNtrp}
+        checkIfUserHasProfile={checkIfUserHasProfile}
+        checkloggedUserId={checkloggedUserId}
+        setShowAddProfileModal={setShowAddProfileModal}
+        setShowEditProfileModal={setShowEditProfileModal}
+
+      />
       <CardsWrapper>
         {players.map((player) => (
           <FindAPartnerCard 
@@ -175,4 +96,4 @@ const FindAPartnerCards = () => {
   );
 };
 
-export default FindAPartnerCards;
+export default FindAPartner;

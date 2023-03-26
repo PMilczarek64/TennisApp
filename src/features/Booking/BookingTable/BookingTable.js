@@ -1,4 +1,3 @@
-import moment from "moment/moment";
 import React, { useState } from "react";
 import shortid from "shortid";
 import { formatHourToNumber, formatNumberToHour } from "../../../utils";
@@ -7,6 +6,7 @@ import { useSelector } from "react-redux";
 import { getLoggingInInfo } from "../../../Redux/usersRedux";
 import EditBooking from "../EditBooking/EditBooking";
 import { Table } from "./BookingTable.styled";
+import { checkIfBusy, checkIfBusyByYou, checkIfTermExpired } from "./helpers";
 
 const BookingTable = ({
   courts,
@@ -36,45 +36,6 @@ const BookingTable = ({
 
   const handleEdit = () => {
     setShowEditBooking(true);
-  };
-
-  const checkIfBusy = (courtId, hour) =>
-    events.some(
-      (event) =>
-        (event.court === courtId &&
-          moment(event.startDate).format("HH:mm") <= hour &&
-          moment(event.endDate).format("HH:mm") >= hour &&
-          moment(event.startDate).format("YYYY/MM/DD") ===
-            moment(tableDate).format("YYYY/MM/DD")) ||
-        (event.court === courtId &&
-          moment(event.startDate).format("HH:mm") <= hour &&
-          moment(event.endDate).format("HH:mm") >= hour &&
-          event.repeat === true)
-    );
-
-  const checkIfBusyByYou = (courtId, hour) =>
-    events.some(
-      (event) =>
-        event.court === courtId &&
-        moment(event.startDate).format("HH:mm") <= hour &&
-        moment(event.endDate).format("HH:mm") >= hour &&
-        moment(event.startDate).format("YYYY/MM/DD") ===
-          moment(tableDate).format("YYYY/MM/DD") &&
-        Number(event.bookedByUser) === Number(loggedUser.id) &&
-        event.bookedByUser !== undefined
-    );
-
-  const checkIfTermExpired = (hour) => {
-    if (
-      moment(tableDate).format("L") === moment().format("L") &&
-      formatNumberToHour(hour) > moment(tableDate).format("HH:mm")
-    ) {
-      return true;
-    } else if (moment(tableDate).format("L") !== moment().format("L")) {
-      return true;
-    } else {
-      return false;
-    }
   };
 
   return (
@@ -115,9 +76,9 @@ const BookingTable = ({
                 <tr key={hour}>
                   <td className="hour">{hour}</td>
                   {courts.map((court) =>
-                    checkIfBusy(court.id, hour)
+                    checkIfBusy(events, court.id, tableDate, hour)
                       ? busyHours.push({ courtId: court.id, hour: hour }) &&
-                        (checkIfBusyByYou(court.id, hour) ? (
+                        (checkIfBusyByYou(events, court.id, tableDate, loggedUser, hour) ? (
                           <td
                             className="busyByYou"
                             key={shortid()}

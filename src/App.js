@@ -11,11 +11,11 @@ import NotFound from "./views/404NotFound";
 import Footer from "./views/Footer";
 import styled from "styled-components";
 import { useRef } from "react";
-import FindAPartnerCards from "./features/FindAPartner/FindAPartnerCards";
 import { getLoggingInInfo } from "./Redux/usersRedux";
 import { useSelector } from "react-redux";
 import AccountSettings from "./features/MyAccount/AccountSettings";
 import Contact from "./features/Contact/Contact";
+import FindAPartnerPage from "./pages/FindAPartner";
 
 const RoutesContainer = styled.div`
 margin: 0;
@@ -53,7 +53,7 @@ function App() {
           <Route path="/myaccount/:userId" element={<MyAccount userLogged={userLogged}/>} />
           <Route path="/myaccount/:userId/bookings" element={<MyBookings />} />
           <Route path="/myaccount/:userId/settings" element={<AccountSettings />} />
-          <Route path="/findapartner/*" element={<FindAPartnerCards />} />
+          <Route path="/findapartner/*" element={<FindAPartnerPage />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </RoutesContainer>

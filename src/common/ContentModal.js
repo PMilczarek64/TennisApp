@@ -69,7 +69,7 @@ export const ButtonsWrapper = styled.div`
   }
 `;
 
-const FindAPartnerModal = (props) => {
+const ContentModal = (props) => {
   return (
     <ModalWrapper>
       <ContentWrapper>
@@ -79,4 +79,4 @@ const FindAPartnerModal = (props) => {
   );
 };
 
-export default FindAPartnerModal;
+export default ContentModal;
