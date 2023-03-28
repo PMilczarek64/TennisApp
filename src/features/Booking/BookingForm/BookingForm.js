@@ -151,7 +151,10 @@ BookingForm.propTypes = {
   busyHours: propTypes.array.isRequired,
   fromHour: propTypes.number,
   setSelectedHour: propTypes.func.isRequired,
-  selectedEndHour: propTypes.number,
+  selectedEndHour: propTypes.oneOfType([
+    propTypes.string,
+    propTypes.number
+  ]),
   setSelectedEndHour: propTypes.func.isRequired,
   selectedCourt: propTypes.number.isRequired,
   tableDate: propTypes.instanceOf(Date),

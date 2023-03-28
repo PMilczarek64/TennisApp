@@ -4,7 +4,7 @@ import styled from "styled-components";
 import CourtInfo from "../pages/CourtInfo";
 import ContentNav from "./ContentNav";
 import CourtsBooking from "./Booking/CourtsBooking";
-import LoginForm from "./LoginForm";
+import LoginForm from "./Auth/LoginForm/LoginForm";
 import {
   getFirstFacilityByCity,
   getObjectById,

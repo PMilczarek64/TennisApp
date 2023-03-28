@@ -4,8 +4,8 @@ import Hero from "./features/Hero/Hero";
 import { Routes, Route } from "react-router-dom";
 import Courts from "./views/Courts";
 import ShowObject from "./features/ShowObject";
-import LoginForm from "./features/LoginForm";
-import MyAccount from "./features/MyAccount/MyAccount";
+import LoginForm from "./features/Auth/LoginForm/LoginForm";
+import MyAccountPage from "./pages/MyAccount";
 import MyBookings from "./features/MyAccount/MyBookings";
 import NotFound from "./views/404NotFound";
 import Footer from "./views/Footer";
@@ -50,7 +50,7 @@ function App() {
           <Route path="/courts/:city" element={<Courts />} />
           <Route path="/courts/:city/:objectId/*" element={<ShowObject />} />
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/myaccount/:userId" element={<MyAccount userLogged={userLogged}/>} />
+          <Route path="/myaccount/:userId" element={<MyAccountPage userLogged={userLogged}/>} />
           <Route path="/myaccount/:userId/bookings" element={<MyBookings />} />
           <Route path="/myaccount/:userId/settings" element={<AccountSettings />} />
           <Route path="/findapartner/*" element={<FindAPartnerPage />} />
