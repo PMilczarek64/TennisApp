@@ -25,7 +25,7 @@ export const Logo = styled.div`
 `;
 
 
-const TennisMotionLogo = ({dark, isNav}) => {
+const TennisMotionLogo = ({dark}) => {
   return (
       <Logo className={dark && "dark" }>
           <h3>TENNIS MOTION</h3>

@@ -14,6 +14,7 @@ export const theme = {
     darkPurple: '#C0C7D6',
     lightPurple: '#ECEFF7',
     detailGreen: '#dfff4f',
+    pureGreen: '#00ac56',
     detailBlue: '#026592',
     lightBlue: '#4169e1',
     greenTransparent: 'rgba(35, 238, 174, 0.376)',
@@ -27,6 +28,10 @@ export const theme = {
     l: '18px',
     m: '12px',
     s: '11px',
+  },
+
+  gradients: {
+    shadyWhite: `linear-gradient(180deg, rgba(221,230,235,1) 48%, rgba(255,255,255,1) 100%)`,
   },
 
   gridAreas: {

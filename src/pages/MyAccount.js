@@ -1,9 +1,9 @@
 import React from "react";
-import MyAccount from "../features/MyAccount/MyAccount";
+import MyAccount from "../features/MyAccount/MyAccount/MyAccount";
 
-const MyAccountPage = () => {
+const MyAccountPage = ({userLogged}) => {
   return (
-    <MyAccount />
+    <MyAccount userLogged={userLogged}/>
   );
 };
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const HeaderWrapper = styled.div`
+export const HeaderWrapper = styled.div`
   display: flex;
   padding-block: 30px;
   justify-content: space-between;
@@ -23,7 +23,7 @@ const HeaderWrapper = styled.div`
   }
 `;
 
-const LogoWrapper = styled.div`
+export const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,8 +32,7 @@ const LogoWrapper = styled.div`
   }
 `;
 
-const Header = styled.div`
+export const Header = styled.div`
   margin-block: 30px;
 `;
 
-export default { Header, LogoWrapper, HeaderWrapper };

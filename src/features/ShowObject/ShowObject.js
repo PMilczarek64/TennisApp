@@ -1,18 +1,15 @@
 import React from "react";
 import { Route, Routes, useParams } from "react-router-dom";
 import styled from "styled-components";
-import CourtInfo from "../pages/CourtInfo";
+import CourtInfo from "../CourtInfo/CourtInfo";
 import ContentNav from "./ContentNav";
-import CourtsBooking from "./Booking/CourtsBooking";
-import LoginForm from "./Auth/LoginForm/LoginForm";
-import {
-  getFirstFacilityByCity,
-  getObjectById,
-} from "../Redux/objectsRedux";
-import { getLoggingInInfo } from "../Redux/usersRedux";
+import CourtsBooking from "../Booking/CourtsBooking";
+import LoginForm from "../Auth/LoginForm/LoginForm";
+import { getFirstFacilityByCity, getObjectById } from "../../Redux/objectsRedux";
+import { getLoggingInInfo } from "../../Redux/usersRedux";
 import { useSelector } from "react-redux";
-import CourtsGallery from "./CourtsGallery/CourtsGallery";
-import NotFound from "../views/404NotFound";
+import CourtsGallery from "../CourtsGallery/CourtsGallery";
+import NotFound from "../../pages/404NotFound";
 
 const Wrapper = styled.div``;
 
@@ -21,10 +18,10 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media screen and (max-width: 1260px){
+  @media screen and (max-width: 1260px) {
     margin: 0 50px 50px 50px;
   }
-  @media screen and (max-width: 1110px){
+  @media screen and (max-width: 1110px) {
     margin: 0 0 50px 0;
   }
 `;
@@ -44,8 +41,9 @@ const ShowObject = () => {
 
   return (
     <Wrapper>
-      { checkCityURL === undefined || checkObjectIdURL === undefined ?
-      <NotFound message="uncorrect URL!" /> :
+      {checkCityURL === undefined || checkObjectIdURL === undefined ? (
+        <NotFound message="uncorrect URL!" />
+      ) : (
         <>
           <ContentNav objectId={Number(objectId)} city={city} />
           <Content>
@@ -69,7 +67,7 @@ const ShowObject = () => {
             </Routes>
           </Content>
         </>
-      }
+      )}
     </Wrapper>
   );
 };

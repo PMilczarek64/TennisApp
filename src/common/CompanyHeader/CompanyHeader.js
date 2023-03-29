@@ -1,23 +1,23 @@
 import React from "react";
 import TennisMotionLogo from "../TennisMotionLogo";
 import { CompanyLogo } from "../CompanyLogo";
-import Styled from './CompanyHeader.styled.js';
+import  { HeaderWrapper, Header, LogoWrapper,  } from "./CompanyHeader.styled";
 
 const CompanyHeader = ({ logo, name, subHeader }) => {
   console.log("logo in header test ", logo);
   return (
-    <Styled.HeaderWrapper>
+    <HeaderWrapper>
       <CompanyLogo>
         <img src={`/logos/${logo}`} alt={name}></img>
       </CompanyLogo>
-      <Styled.Header>
+      <Header>
         <h2>{name}</h2>
         <h3 className="subHeader">{subHeader}</h3>
-      </Styled.Header>
-      <Styled.LogoWrapper>
+      </Header>
+      <LogoWrapper>
         <TennisMotionLogo  />
-      </Styled.LogoWrapper>
-    </Styled.HeaderWrapper>
+      </LogoWrapper>
+    </HeaderWrapper>
   );
 };
 
