@@ -99,7 +99,7 @@ const BookingForm = ({
 
   return (
     <ActionModal
-      headerText={`Book tennis court num. ${selectedCourt}`}
+      headerText={`Book a court ${selectedCourt}`}
       showModal={showModal}
     >
       <FormItem>

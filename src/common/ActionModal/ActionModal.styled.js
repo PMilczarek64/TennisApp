@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Modal = styled.div`
-  padding: 20px;
+  padding: 25px ;
+  border-radius: 15px;
   max-width: 100%;
   height: auto;
   background: linear-gradient(90deg, #ddff00 0%, rgb(255, 231, 76) 100%);
@@ -37,4 +38,5 @@ export const Header = styled.h2`
   border-color: ${({ theme }) => theme.colors.faded};
   border-style: none none solid none;
   padding: 20px;
+  font-size: ${({ theme }) => theme.fontSize.xl2};
 `;

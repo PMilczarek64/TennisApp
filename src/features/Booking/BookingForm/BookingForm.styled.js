@@ -28,11 +28,8 @@ export const FormItem = styled.div`
     margin-bottom: 10px;
   }
   @media screen and (max-width: 990px) {
-    flex-direction: column;
     margin: 0;
-    label {
-      text-align: center;
-    }
+    
   }
 `;
 

@@ -28,7 +28,7 @@ export const Header = styled.div`
     margin-block: 10px;
     background-color: rgba(0, 0, 0, 0.719);
     font-weight: 100;
-    color: ${({ theme }) => theme.colors.detalGreen};
+    color: ${({ theme }) => theme.colors.detailGreen};
     &.left {
       margin-top: 130px;
       text-align: right;
@@ -41,7 +41,7 @@ export const Header = styled.div`
         color: ${({ theme }) => theme.colors.detailGreen};
       }
       @media screen and (max-width: 1100px) {
-        margin-top: 20px;
+        
       }
       @media screen and (max-width: 720px) {
         width: 100%;
@@ -92,7 +92,6 @@ export const Header = styled.div`
 
 export const TopHeader = styled.div`
   width: 100%;
-  display: flex;
   flex-direction: row;
   padding-block: 30px;
   align-items: center;

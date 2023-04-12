@@ -7,7 +7,6 @@ import { getObjectById } from "../../Redux/objectsRedux";
 
 const GalleryWrapper = styled.div`
   max-width: 95%;
-  
   margin: 50px auto;
   display: flex;
   flex-wrap: wrap;

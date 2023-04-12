@@ -9,8 +9,8 @@ import AuthWrapper from "../AuthWrapper/AuthWrapper";
 import { LoginInput, FormItem, Icon } from "./LoginForm.styled";
 
 const LoginForm = () => {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("user");
+  const [password, setPassword] = useState("user");
   const { objectId } = useParams();
   const checkUser = useSelector((state) =>
     getUserName(state, userName, password)

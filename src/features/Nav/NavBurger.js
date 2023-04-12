@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import RightNav from './RightNav';
+import RightNav from './RightNav/RightNav';
 import clsx from 'clsx';
 
 const StyledBurger = styled.div`
@@ -41,7 +41,7 @@ const NavBurger = ({action, pages}) => {
         <i className={clsx(open === false ? "fa fa-bars" : "fa fa-times")}></i>
         </div>
       </StyledBurger>
-      <RightNav open={open} action={action} pages={pages} />
+      <RightNav open={open} setOpen={setOpen} action={action} pages={pages} />
     </>
   );
 };

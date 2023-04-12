@@ -10,6 +10,7 @@ const Overlay = styled.div`
   background: rgba(27, 27, 27, 0.541);
   display: flex;
   align-items: center;
+  z-index: 99;
   i {
     font-size: 36px;
   }

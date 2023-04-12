@@ -5,7 +5,7 @@ import NavBurger from "./NavBurger";
 const Nav = styled.nav`
   position: absolute;
   width: 100%;
-  height: 55px;
+  height: 80px;
   display: flex;
   justify-content: flex-end;
   align-items: center;

@@ -1,18 +1,27 @@
 import React from "react";
 import {Container, Header, TopHeader} from "./Hero.styled"
 import Navbar from "../Nav/Navbar";
-import { useNavigate } from "react-router-dom";
 import TennisMotionLogo from "../../common/TennisMotionLogo";
+import { useState, useEffect,  } from "react";
 
+const Hero = ({action, pages, passedRef}) => {
+  const [isScrolled, setIsScrolled] = useState(false);
 
+  const handleScrollStatus = () => {
+    if (window.scrollY > 0) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  };
 
-const Hero = ({passedRef, action, pages}) => {
-  const navigate = useNavigate();
+  window.addEventListener('scroll', handleScrollStatus);
+
   return (
-    <Container ref={passedRef}>
+    <Container ref={passedRef}> 
       <Header>
-        <TopHeader>
-          <TennisMotionLogo onClick={() => navigate('/')} />
+        <TopHeader isScrolled={isScrolled}>
+          <TennisMotionLogo isNav isScrolled={isScrolled} />
           <Navbar action={action} pages={pages}/>
         </TopHeader>
           <span className="left"><h3>BOOK A COURT, TRAININGS, BLOG</h3></span>

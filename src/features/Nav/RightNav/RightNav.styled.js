@@ -1,12 +1,7 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { getLoggingInInfo, setLoggedIn } from "../../Redux/usersRedux";
 import styled from "styled-components";
-import Ball from "../../assets/images/Ball.png";
 
-const Ul = styled.ul`
-position: fixed;
+export const Ul = styled.ul`
+  position: fixed;
   list-style: none;
   display: flex;
   flex-flow: row;
@@ -82,6 +77,9 @@ position: fixed;
       font-size: ${({ theme }) => theme.fontSize.l};
       padding-left: 30px;
       padding-block: 30px;
+      &.mobileHide {
+        display: none;
+      }
     }
   }
   @media (max-width: 600px) {
@@ -89,7 +87,7 @@ position: fixed;
   }
 `;
 
-const NavIcon = styled.div`
+export const NavIcon = styled.div`
   height: 25px;
   width: 25px;
   font-size: 23px;
@@ -102,69 +100,3 @@ const NavIcon = styled.div`
     color: ${({ theme }) => theme.colors.detailGreen};
   }
 `;
-
-const RightNav = ({ open, action, pages }) => {
-  const userIsLogged = useSelector(getLoggingInInfo);
-  const dispatch = useDispatch();
-  const logOut = () => {
-    dispatch(setLoggedIn({ setLogged: false, name: userIsLogged.userName }));
-  };
-  const navigate = useNavigate();
-
-  const handleNavigate = (endpoint) => {
-    action(pages.content);
-    navigate(endpoint, {
-      state: {
-        previousUrl: '/',
-      }
-    })
-  };
-
-  return (
-    <Ul open={open}>
-      <li>
-        <Link to="/" onClick={() => action(pages.home)}>
-          <img src={Ball} alt="ball"></img>
-        </Link>
-      </li>
-      <li>
-        <NavLink to="/" onClick={() => action(pages.content)}>
-          Book a court
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/findapartner" onClick={() => action(pages.content)}>
-          Find a partner
-        </NavLink>
-      </li>
-      <li onClick={() => handleNavigate('/contact')}>
-        Contact  
-      </li>
-      {userIsLogged === undefined ? (
-        <li
-        onClick={() => handleNavigate('/login')}>
-        Login <NavIcon className="fa fa-sign-in" />
-        </li>
-      ) : (
-        <>
-          <li>
-            <NavLink
-              to={"/myaccount/" + userIsLogged.id}
-              onClick={() => action(pages.content)}
-            >
-              My account
-            </NavLink>
-          </li>
-          <li onClick={logOut}>
-            <NavLink to="/">
-              {"Log Out"}
-              <NavIcon className="fa fa-power-off" />
-            </NavLink>
-          </li>
-        </>
-      )}
-    </Ul>
-  );
-};
-
-export default RightNav;
