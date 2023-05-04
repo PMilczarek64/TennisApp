@@ -13,7 +13,7 @@ import {
   formatHourToNumber,
   formatNumberToHour,
   concatDayAndHour,
-} from "../../../utils";
+} from "../../../utils/utils";
 
 const BookingForm = ({
   showModal,

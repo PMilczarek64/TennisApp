@@ -1,5 +1,5 @@
 import moment from "moment";
-import { formatNumberToHour } from "../../../utils";
+import { formatNumberToHour } from "../../../utils/utils";
 
 export const checkIfBusy = (events, courtId, tableDate, hour) =>
 events.some(

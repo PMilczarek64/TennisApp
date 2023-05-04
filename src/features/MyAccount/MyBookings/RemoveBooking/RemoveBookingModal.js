@@ -5,7 +5,7 @@ import { ButtonRedOutline, ButtonGreyOutline } from "../../../../common/Button";
 import { Label } from "../../../../common/Inputs.styles";
 import { deleteBooking } from "../../../../Redux/objectsRedux";
 import { useDispatch } from "react-redux";
-import { isLessThan24H } from "../../../../utils";
+import { isLessThan24H } from "../../../../utils/utils";
 import { BorderWrapper, Wrapper, Header, FormItem, ButtonsWrapper } from "./RemoveBookingModal.styled";
 
 const RemoveBookingModal = ({

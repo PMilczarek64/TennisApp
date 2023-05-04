@@ -4,7 +4,7 @@ import { Input, TextArea } from "../../common/Inputs.styles";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { isValidEmail } from "../../utils";
+import { isValidEmail } from "../../utils/utils";
 import {
   ContactWrapper,
   LeftSideWrapper,

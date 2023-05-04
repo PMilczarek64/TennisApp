@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { getPlayerByUserId } from "../../../Redux/playersRedux";
 import EditPlayerProfile from "../../FindAPartner/Modals/PlayerProfileMenager/EditPlayerProfile";
 import AddPlayerProfile from "../../FindAPartner/Modals/PlayerProfileMenager/AddPlayerProfile";
-import { checkIfUserHasProfile } from "../../../utils";
+import { checkIfUserHasProfile } from "../../../utils/utils";
 import { RoundedIcon } from "../../../common/RoundedIcon";
 import { Wrapper, WidgetsWrapper, Widget, WidgetContent } from "./MyAccount.styled";
 

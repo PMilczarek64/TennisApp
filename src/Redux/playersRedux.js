@@ -1,5 +1,5 @@
 import initialState from "./initialState";
-import { strContains } from "../utils";
+import { strContains } from "../utils/utils";
 
 //selectors
 

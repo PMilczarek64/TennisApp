@@ -4,7 +4,7 @@ import FindAPartnerCard from "../../common/FindAPartnerCard";
 import { useSelector } from "react-redux";
 import { getAllPlayers, getPlayerByUserId } from "../../Redux/playersRedux";
 import { getLoggingInInfo } from "../../Redux/usersRedux";
-import { strContains } from "../../utils";
+import { strContains } from "../../utils/utils";
 import PlayerModal from "./Modals/PlayerModal/PlayerModal";
 import AddPlayerProfile from "./Modals/PlayerProfileMenager/AddPlayerProfile";
 import EditPlayerProfile from "./Modals/PlayerProfileMenager/EditPlayerProfile";
@@ -55,7 +55,6 @@ const FindAPartner = () => {
   const checkIfUserHasProfile = () => {
     if (loggedUserId !== null) {
       if (playerProfile !== undefined) {
-        console.log('user has a profile ', playerProfile.id); 
         return true;
       } else {
         return false;

@@ -5,7 +5,7 @@ import FindAPartnerModal, {
   GreenyDetailLine,
   ModalHeader,
 } from "../../../../common/ContentModal";
-import { formatCmToMeters } from "../../../../utils";
+import { formatCmToMeters } from "../../../../utils/utils";
 import { TextArea } from "../../../../common/Inputs.styles";
 import { Image, InfoWrapper, Info } from "./PlayerModal.styled";
 

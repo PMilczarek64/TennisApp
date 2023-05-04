@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { formatCmToMeters } from "../utils";
+import { formatCmToMeters } from "../utils/utils";
 
 const Card = styled.div`
   width: 330px;
