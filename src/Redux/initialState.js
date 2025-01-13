@@ -24,7 +24,7 @@ const initialState = {
       age: 28,
       height: '172',
       email: 'barbara@example.com',
-      shortDescription: 'I work in corpo on a daily basis, I am looking for a training partner',
+      shortDescription: 'Sample description of a service user',
       photo: "https://images.pexels.com/photos/1772724/pexels-photo-1772724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
